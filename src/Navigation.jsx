@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Navigation(){
     return(
-    <header className="navbar fixed top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
+    <header className="navbar z-40 fixed top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">
             <p className="font-bold text-lg max-sm:text-sm">Kuchiha Store</p>
             <div className="hamburger">

@@ -1,4 +1,4 @@
-import { brands } from "./Products/Brands";
+import { brands } from "../../Products/Brands";
 
 export default function Brands(){
     return(

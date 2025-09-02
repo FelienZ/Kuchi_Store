@@ -6,7 +6,7 @@ export default function CheckoutForm({product, onClose, onCheckout}){
     return(
         <form className={`fixed z-40 inset-0 bg-black/50 justify-center items-center transition-opacity duration-300 ${product ? 'flex' : 'hidden'}`}>
             <div className="container flex bg-white flex-col items-center justify-center p-3 rounded-md w-fit">
-                <p className="text-lg self-end rounded-sm" onClick={onClose}><FontAwesomeIcon icon={faClose}/></p>
+                <p className="text-lg self-end rounded-sm hover:cursor-pointer" onClick={onClose}><FontAwesomeIcon icon={faClose}/></p>
                 <p className="text-lg font-medium">Detail Barang</p>
                 <div className="image">
                     <img src={product.url} alt={`Item-${product.name}`} className="size-50"/>

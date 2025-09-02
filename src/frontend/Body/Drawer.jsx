@@ -1,7 +1,13 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
-export default function Drawer(){
+export default function Drawer({sendFilter}){
+    const price = {
+        min: '',
+        max: ''
+    }
+    const [filterPrice, setFilterPrice] = useState(price)
     return(
         <div className="flex flex-col text-base-300 gap-3">
             <p className="font-bold">Filter Item</p>
@@ -18,11 +24,11 @@ export default function Drawer(){
             <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
                 <div className="head flex justify-between items-center">
                     <p className="font-medium">Harga</p>
-                    <button className="btn btn-ghost">Terapkan</button>
+                    <button className="btn btn-ghost" onClick={()=>sendFilter(filterPrice)}>Terapkan</button>
                 </div>
                 <div className="item-content flex flex-col gap-2 items-center">
-                    <input type="number" name="minPrice" id="hargaMin" placeholder="Minimal" className="input input-neutral bg-transparent"/>
-                    <input type="number" name="maxPrice" id="hargaMax" placeholder="Maksimal" className="input input-neutral bg-transparent"/>
+                    <input type="number" value={filterPrice.min} onChange={(e)=>setFilterPrice({...filterPrice, min: Number(e.target.value)})} name="minPrice" id="hargaMin" placeholder="Minimal" className="input input-neutral bg-transparent"/>
+                    <input type="number" value={filterPrice.max} onChange={(e)=>setFilterPrice({...filterPrice, max: Number(e.target.value)})} name="maxPrice" id="hargaMax" placeholder="Maksimal" className="input input-neutral bg-transparent"/>
                 </div>
             </div>
 

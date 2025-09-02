@@ -1,34 +1,27 @@
-import samsung from "./img/Brands/Samsung_Logo.png"
-import apple from "./img/Brands/apple.png"
-import xiaomi from "./img/Brands/xiaomi.png"
-import asus from "./img/Brands/Asus.png"
-import acer from "./img/Brands/Acer-Logo.png"
-import lenovo from "./img/Brands/Lenovo_Global_Corporate_Logo.png"
-
 
 export const brands = [
     {
         id:1,
-        url:samsung
+        url:'/Brands/Samsung_Logo.png'
     },
     {
         id:2,
-        url:apple
+        url:'/Brands/apple.png'
     },
     {
         id:3,
-        url:xiaomi
+        url:'/Brands/xiaomi.png'
     },
     {
         id:4,
-        url:asus
+        url:'/Brands/Asus.png'
     },
     {
         id:5,
-        url:acer
+        url:'/Brands/Acer-Logo.png'
     },
     {
         id:6,
-        url:lenovo
+        url:'/Brands/Lenovo_Global_Corporate_Logo.png'
     }
 ]

@@ -7,7 +7,7 @@ export default function Navigation(){
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">
             <p className="font-bold text-lg max-sm:text-sm">Kuchiha Store</p>
             <details className="hamburger dropdown">
-                <summary className="btn btn-ghost bg-neutral m-1 p-2">
+                <summary className="btn bg-neutral m-1 p-2">
                     <FontAwesomeIcon icon={faBars} />
                 </summary>
                 <ul className="menu dropdown-content gap-2 bg-neutral rounded-box z-1 w-52 mt-3 p-5 shadow-sm">
@@ -37,9 +37,9 @@ export default function Navigation(){
                 </button>
             </div>
         </div>
-        <div className="right flex gap-5 items-center text-nowrap w-fit">
+        <div className="right flex max-sm:hidden gap-5 items-center text-nowrap w-fit">
             <FontAwesomeIcon icon={faCartShopping}/>
-            <div className="auth flex gap-2 max-sm:hidden">
+            <div className="auth flex gap-2">
                |  <p>Daftar</p> |
                 <p>Masuk</p> |
             </div>

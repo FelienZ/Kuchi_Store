@@ -22,10 +22,11 @@ export default function StoreLayout(){
         },
         status: ''
     })
-    // console.log('tes: ', store.product)
+    console.log('tes: ', store)
+    const filteredProduct = store.product.filter(i => i.name.trim().toLowerCase().includes(store.filter.keyword.trim().toLowerCase()))
     return(
         <div className ='min-h-screen flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
-            <ProductList.Provider value={store.product}>
+            <ProductList.Provider value={filteredProduct}>
                 <ProductReducerContext.Provider value={dispatch}>
                     <Navigation />
                     <div>

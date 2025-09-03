@@ -12,7 +12,7 @@ export default function Navigation(){
             type: 'SET_FILTER',
             text: keyword
         })
-        setKeyword('')
+        // setKeyword('')
     }
     return(
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
@@ -23,6 +23,10 @@ export default function Navigation(){
                     <FontAwesomeIcon icon={faBars} />
                 </summary>
                 <ul className="menu dropdown-content gap-2 bg-neutral rounded-box z-1 w-52 mt-3 p-5 shadow-sm">
+                    <div className="flex gap-2">
+                    <Link to={'/'}><li>Home</li></Link>
+                </div>
+                <hr className="text-gray-400"/>
                 <div className="flex gap-2">
                     <li>Daftar</li>
                     <p>|</p>
@@ -30,7 +34,7 @@ export default function Navigation(){
                 </div>
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
-                    <li>Bantuan</li>
+                    <Link to={'/help'}><li>Bantuan</li></Link>
                     <p>|</p>
                     <Link to={'/checkout'}><li>Pemesanan</li></Link>
                 </div>
@@ -43,7 +47,7 @@ export default function Navigation(){
             </ul>
             </details>
             <div className="searching flex items-center md:gap-3 gap-1 text-white">
-                <input type="text" name="SearchInput" onChange={(e)=>setKeyword(e.target.value)} id="keywords" placeholder="Cari Barang" className="input border border-base-100 input-ghost w-full"/>
+                <input type="text" value={keyword} name="SearchInput" onChange={(e)=>setKeyword(e.target.value)} id="keywords" placeholder="Cari Barang" className="input border border-base-100 input-ghost w-full"/>
                 <button className="magnifying btn btn-ghost hover:bg-neutral border border-base-100 max-sm:p-2">
                     <FontAwesomeIcon onClick={handleSendKeyword} icon={faMagnifyingGlass}/>
                 </button>

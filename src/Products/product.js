@@ -4,6 +4,7 @@ export const product = [
         name: "Iphone 7 Plus - Rose gold",
         url: "/IPhone_7_Plus.png",
         price: 3000000,
+        type: 'smartphone',
         stock: 8
     },
     {
@@ -11,6 +12,7 @@ export const product = [
         name: "Iphone X - White",
         url: '/iphone-x-silver.png',
         price: 4000000,
+        type: 'smartphone',
         stock: 10
     },
     {
@@ -18,6 +20,7 @@ export const product = [
         name: "Samsung Galaxy S8+ - Silver Gray",
         url: '/samsung-galaxy-s8-plus.png',
         price: 3000000,
+        type: 'smartphone',
         stock: 5
     },
     {
@@ -25,6 +28,7 @@ export const product = [
         name: "Samsung Galaxy Note 8+ - Black",
         url: '/samsung_samsung-galaxy-note-8.png',
         price: 4000000,
+        type: 'smartphone',
         stock: 5
     },
     {
@@ -32,6 +36,7 @@ export const product = [
         name: "Iphone 8 Plus - Gold",
         url: '/iphone-8-plus-gold.png',
         price: 4500000,
+        type: 'smartphone',
         stock: 4
     },
     {
@@ -39,6 +44,7 @@ export const product = [
         name: "Samsung Galaxy S7 Edge - Silver",
         url: '/carousel-samsung-galaxy-s7-edge.png',
         price: 3500000,
+        type: 'smartphone',
         stock: 2
     },
     {
@@ -46,6 +52,7 @@ export const product = [
         name: "Xiaomi Redmi Note 4 - Black",
         url: '/redmi_note4.png',
         price: 2300000,
+        type: 'smartphone',
         stock: 1
     },
     {
@@ -53,6 +60,7 @@ export const product = [
         name: "Xiaomi Mi 6 - Black",
         url: '/Mi6.png',
         price: 4000000,
+        type: 'smartphone',
         stock: 1
     }
 ]

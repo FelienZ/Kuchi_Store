@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { ProductReducerContext } from "../../storeContext";
 import { Link } from "react-router";
 
-export default function Navigation(){
+export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const dispatch = useContext(ProductReducerContext)
     const [keyword, setKeyword] = useState('')
     function handleSendKeyword(){
@@ -56,8 +56,8 @@ export default function Navigation(){
         <div className="right flex max-sm:hidden gap-5 items-center text-nowrap w-fit">
             <Link to={'/checkout'}><FontAwesomeIcon icon={faCartShopping}/></Link>
             <div className="auth flex gap-2">
-               |  <p>Daftar</p> |
-                <p>Masuk</p> |
+               |  <p onClick={sendTriggerRegister}>Daftar</p> |
+                <p onClick={sendTriggerLogin}>Masuk</p> |
             </div>
         </div>
     </header>

@@ -1,7 +1,8 @@
 import { faBars, faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
-import { ProductReducerContext } from "../storeContext";
+import { ProductReducerContext } from "../../storeContext";
+import { Link } from "react-router";
 
 export default function Navigation(){
     const dispatch = useContext(ProductReducerContext)
@@ -31,7 +32,7 @@ export default function Navigation(){
                 <div className="flex gap-2">
                     <li>Bantuan</li>
                     <p>|</p>
-                    <li>Pemesanan</li>
+                    <Link to={'/checkout'}><li>Pemesanan</li></Link>
                 </div>
                 <hr className="text-gray-400"/>
                 <li>SmartPhone</li>
@@ -49,7 +50,7 @@ export default function Navigation(){
             </div>
         </div>
         <div className="right flex max-sm:hidden gap-5 items-center text-nowrap w-fit">
-            <FontAwesomeIcon icon={faCartShopping}/>
+            <Link to={'/checkout'}><FontAwesomeIcon icon={faCartShopping}/></Link>
             <div className="auth flex gap-2">
                |  <p>Daftar</p> |
                 <p>Masuk</p> |

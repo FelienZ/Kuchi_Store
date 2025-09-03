@@ -1,7 +1,7 @@
 export default function WishlistItem(){
     return(
-        <section>
-            
+        <section className="mt-20">
+            <p>This is Wishlist Page!</p>
         </section>
     )
 }

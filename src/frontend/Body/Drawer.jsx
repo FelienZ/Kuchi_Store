@@ -1,13 +1,22 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductReducerContext } from "../../storeContext";
 
 export default function Drawer({sendFilter}){
+    const dispatch = useContext(ProductReducerContext)
     const price = {
-        min: '',
-        max: ''
+        min: null,
+        max: null
     }
     const [filterPrice, setFilterPrice] = useState(price)
+    function handleSendFilter(){
+        // dispatch({
+        //     type: 'SET_FILTER',
+        //     price: filterPrice
+        // })
+        sendFilter(filterPrice)
+    }
     return(
         <div className="flex flex-col text-base-300 gap-3">
             <p className="font-bold">Filter Item</p>
@@ -24,11 +33,11 @@ export default function Drawer({sendFilter}){
             <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
                 <div className="head flex justify-between items-center">
                     <p className="font-medium">Harga</p>
-                    <button className="btn btn-ghost" onClick={()=>sendFilter(filterPrice)}>Terapkan</button>
+                    <button className="btn btn-ghost" onClick={handleSendFilter}>Terapkan</button>
                 </div>
                 <div className="item-content flex flex-col gap-2 items-center">
-                    <input type="number" value={filterPrice.min} onChange={(e)=>setFilterPrice({...filterPrice, min: Number(e.target.value)})} name="minPrice" id="hargaMin" placeholder="Minimal" className="input input-neutral bg-transparent"/>
-                    <input type="number" value={filterPrice.max} onChange={(e)=>setFilterPrice({...filterPrice, max: Number(e.target.value)})} name="maxPrice" id="hargaMax" placeholder="Maksimal" className="input input-neutral bg-transparent"/>
+                    <input type="number" onChange={(e)=>setFilterPrice({...filterPrice, min: Number(e.target.value)})} name="minPrice" id="hargaMin" placeholder="Minimal" className="input input-neutral bg-transparent"/>
+                    <input type="number" onChange={(e)=>setFilterPrice({...filterPrice, max: Number(e.target.value)})} name="maxPrice" id="hargaMax" placeholder="Maksimal" className="input input-neutral bg-transparent"/>
                 </div>
             </div>
 

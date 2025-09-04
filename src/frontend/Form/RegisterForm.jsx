@@ -7,7 +7,6 @@ export default function Register({istriggered, sendRegister, sendClose}){
         confirmPassword: ''
     }
     const [account, setAccount] = useState(data)
-    console.log('triger?: ', istriggered)
     function handleSendRegister(e){
         e.preventDefault();
         /* if(account.password.trim().toLowerCase() === account.confirmPassword.trim().toLowerCase()){

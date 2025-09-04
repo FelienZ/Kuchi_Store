@@ -9,7 +9,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [keyword, setKeyword] = useState('')
     function handleSendKeyword(){
         dispatch({
-            type: 'SET_FILTER',
+            type: 'SET_KEYWORD',
             text: keyword
         })
         // setKeyword('')
@@ -28,9 +28,9 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                 </div>
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
-                    <li>Daftar</li>
+                    <li className="hover:cursor-pointer" onClick={sendTriggerRegister}>Daftar</li>
                     <p>|</p>
-                    <li>Masuk</li>
+                    <li className="hover:cursor-pointer" onClick={sendTriggerLogin}>Masuk</li>
                 </div>
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
@@ -56,8 +56,8 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
         <div className="right flex max-sm:hidden gap-5 items-center text-nowrap w-fit">
             <Link to={'/checkout'}><FontAwesomeIcon icon={faCartShopping}/></Link>
             <div className="auth flex gap-2">
-               |  <p onClick={sendTriggerRegister}>Daftar</p> |
-                <p onClick={sendTriggerLogin}>Masuk</p> |
+               |  <p className="hover:cursor-pointer" onClick={sendTriggerRegister}>Daftar</p> |
+                <p className="hover:cursor-pointer" onClick={sendTriggerLogin}>Masuk</p> |
             </div>
         </div>
     </header>

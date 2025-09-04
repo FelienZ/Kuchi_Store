@@ -1,15 +1,21 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductReducerContext } from "../../storeContext";
 
-export default function Drawer({sendFilter}){
+export default function Drawer(){
     const price = {
         min: null,
         max: null
     }
+    const dispatch = useContext(ProductReducerContext)
     const [filterPrice, setFilterPrice] = useState(price)
     function handleSendFilter(){
-        sendFilter(filterPrice)
+        dispatch({
+            type: 'SET_PRICE',
+            min: filterPrice.min,
+            max: filterPrice.max
+        })
     }
     return(
         <div className="flex flex-col text-base-300 gap-3 max-sm:hidden">

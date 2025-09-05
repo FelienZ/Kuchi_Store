@@ -6,7 +6,6 @@ import { ProductList, ProductReducerContext } from "../../storeContext";
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
-import Hero from "../Body/Hero";
 
 function StoreReducer(list, action){
     switch(action.type){
@@ -58,7 +57,6 @@ export default function StoreLayout(){
                     <Register istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
                     <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin}/>
                     <div className="my-15">
-                        <Hero/>
                         <Outlet/>
                     </div>
                     <Footer/>

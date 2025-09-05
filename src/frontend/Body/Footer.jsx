@@ -1,7 +1,7 @@
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons/faLocationDot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CardPayment from "../Productlist/CardPayment";
+import CardPayment from "../../Products/Productlist/CardPayment";
 
 export default function Footer(){
     return(

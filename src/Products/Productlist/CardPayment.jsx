@@ -1,4 +1,4 @@
-import { payment } from "../../Products/payment";
+import { payment } from "../payment";
 
 export default function CardPayment(){
     return(

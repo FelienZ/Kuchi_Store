@@ -1,10 +1,11 @@
 import Brands from './Body/BrandSlide'
 import './App.css'
 import Drawer from './Body/Drawer'
-import ProductCard from './Productlist/ProductCard'
+import ProductCard from '../Products/Productlist/ProductCard'
 import CheckoutForm from './Form/CheckoutForm'
 import {useContext, useState } from 'react'
 import { ProductList } from '../storeContext'
+import Hero from './Body/Hero'
 
 function App() {
   
@@ -28,6 +29,7 @@ function App() {
   return (
     <div className='h-full flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
       <CheckoutForm product={selectedItem} onClose={()=> handleClose()} onCheckout={handleCheckout}/>
+        <Hero/>
         <Brands/>
       <div className="content w-[80%] my-20">
         <div className="item-content flex flex-col lg:grid lg:grid-cols-3 gap-5">

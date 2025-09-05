@@ -28,11 +28,14 @@ export default function Register({istriggered, sendRegister, sendClose}){
                 </div>
                 <div className="name flex flex-col w-full">
                     <p>Password</p>
-                    <input type="password" value={account.password} onChange={e=> setAccount({...account, password: e.target.value})} placeholder="Make Password" className="input w-full bg-transparent border border-neutral-500"/>
+                    <input type="password" value={account.password} onChange={e=> setAccount({...account, password: e.target.value})} placeholder="Create Password" className="input w-full bg-transparent border border-neutral-500"/>
                 </div>
                 <div className="name flex flex-col w-full">
                     <p>Confirm Password</p>
                     <input type="password" value={account.confirmPassword} onChange={e=> setAccount({...account, confirmPassword: e.target.value})} placeholder="Enter Confirm Password" className="input w-full bg-transparent border border-neutral-500"/>
+                </div>
+                <div className="addition flex items-center w-full justify-end">
+                    <p className="hover:cursor-pointer">Sudah Memiliki Akun?</p>
                 </div>
                 <button className="btn btn-neutral w-full">Login</button>
             </form>

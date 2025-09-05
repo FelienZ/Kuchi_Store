@@ -17,7 +17,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     return(
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">
-            <p className="font-bold text-lg max-sm:text-sm">Kuchiha Store</p>
+            <Link to={'/'}><p className="font-bold font-[Outfit] text-lg max-sm:text-sm">Kuchiha Store</p></Link>
             <details className="hamburger dropdown">
                 <summary className="btn bg-neutral m-1 p-3">
                     <FontAwesomeIcon icon={faBars} />

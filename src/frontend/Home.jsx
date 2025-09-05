@@ -26,8 +26,9 @@ function App() {
     setCheckOutItem(item => [...item, product ])
   }
   return (
-    <div className='min-h-screen flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
+    <div className='h-full flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
       <CheckoutForm product={selectedItem} onClose={()=> handleClose()} onCheckout={handleCheckout}/>
+        <Brands/>
       <div className="content w-[80%] my-20">
         <div className="item-content flex flex-col lg:grid lg:grid-cols-3 gap-5">
             <Drawer/>
@@ -40,7 +41,6 @@ function App() {
           </div>
         </div>
       </div>
-      <Brands/>
     </div>
       
   )

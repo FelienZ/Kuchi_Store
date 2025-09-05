@@ -6,6 +6,7 @@ import { ProductList, ProductReducerContext } from "../../storeContext";
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
+import Hero from "../Body/Hero";
 
 function StoreReducer(list, action){
     switch(action.type){
@@ -48,15 +49,16 @@ export default function StoreLayout(){
         const findMin = store.filter.min !== null ? i.price >= store.filter.min : i
         return matchKeyword && findMax && findMin
     })
-    console.log('match: ', filteredProduct)
+    // console.log('match: ', filteredProduct)
     return(
-        <div className ='min-h-screen flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
+        <div className ='min-h-screen font-[Roboto] flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
             <ProductList.Provider value={filteredProduct}>
                 <ProductReducerContext.Provider value={dispatch}>
                     <Navigation sendTriggerRegister={handleTriggerFormRegister} sendTriggerLogin={handleTriggerFormLogin}/>
                     <Register istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
                     <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin}/>
-                    <div>
+                    <div className="my-15">
+                        <Hero/>
                         <Outlet/>
                     </div>
                     <Footer/>

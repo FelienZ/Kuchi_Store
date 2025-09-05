@@ -27,6 +27,10 @@ export default function Login({istriggered, sendLogin, sendClose}){
                     <p>Password</p>
                     <input type="password" value={account.password} onChange={e=> setAccount({...account, password: e.target.value})} placeholder="Enter Your Password" className="input w-full bg-transparent border border-neutral-500"/>
                 </div>
+                <div className="addition flex items-center w-full justify-between">
+                    <p className="hover:cursor-pointer">Lupa Password?</p>
+                    <p className="hover:cursor-pointer">Belum Memiliki Akun?</p>
+                </div>
                 <button className="btn btn-neutral w-full">Login</button>
             </form>
         </section>

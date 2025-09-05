@@ -39,7 +39,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     <Link to={'/checkout'}><li>Pemesanan</li></Link>
                 </div>
                 <hr className="text-gray-400"/>
-                <li>SmartPhone</li>
+                <Link to={'/products'}><li>SmartPhone</li></Link>
                 <hr className="text-gray-400"/>
                 <li>Laptop/PC</li>
                 <hr className="text-gray-400"/>

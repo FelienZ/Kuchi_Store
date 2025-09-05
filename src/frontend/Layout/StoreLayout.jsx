@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import Navigation from "../Body/Navigation";
 import { useReducer, useState } from "react";
-import { product } from "../../Products/product";
+import { product } from "../Products/product";
 import { ProductList, ProductReducerContext } from "../../storeContext";
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";

@@ -5,6 +5,9 @@ export const product = [
         url: "/IPhone_7_Plus.png",
         price: 2800000,
         type: 'smartphone',
+        popular: true,
+        new: false,
+        recommended: false,
         stock: 8
     },
     {
@@ -13,6 +16,9 @@ export const product = [
         url: '/iphone-x-silver.png',
         price: 4200000,
         type: 'smartphone',
+        popular: true,
+        new: false,
+        recommended: true,
         stock: 10
     },
     {
@@ -21,6 +27,9 @@ export const product = [
         url: '/samsung-galaxy-s8-plus.png',
         price: 3250000,
         type: 'smartphone',
+        popular: true,
+        new: false,
+        recommended: true,
         stock: 5
     },
     {
@@ -29,6 +38,9 @@ export const product = [
         url: '/samsung_samsung-galaxy-note-8.png',
         price: 3800000,
         type: 'smartphone',
+        popular: true,
+        new: false,
+        recommended: true,
         stock: 5
     },
     {
@@ -37,6 +49,9 @@ export const product = [
         url: '/iphone-8-plus-gold.png',
         price: 3500000,
         type: 'smartphone',
+        popular: true,
+        new: false,
+        recommended: true,
         stock: 4
     },
     {
@@ -45,6 +60,9 @@ export const product = [
         url: '/carousel-samsung-galaxy-s7-edge.png',
         price: 3000000,
         type: 'smartphone',
+        popular: false,
+        new: false,
+        recommended: false,
         stock: 2
     },
     {
@@ -53,6 +71,9 @@ export const product = [
         url: '/redmi_note4.png',
         price: 2300000,
         type: 'smartphone',
+        popular: true,
+        new: false,
+        recommended: false,
         stock: 1
     },
     {
@@ -61,6 +82,53 @@ export const product = [
         url: '/Mi6.png',
         price: 3600000,
         type: 'smartphone',
+        popular: false,
+        new: false,
+        recommended: true,
         stock: 1
+    },
+    {
+        id:9,
+        name: "Lenovo LOQ 15 - RTX 3050 6GB",
+        url: '/lenovo-loq.png',
+        price: 11800000,
+        type: 'computer',
+        popular: true,
+        new: true,
+        recommended: true,
+        stock: 2
+    },
+    {
+        id:10,
+        name: "Acer Nitro V15 - RTX 3050 6GB",
+        url: '/Acer-nitro.png',
+        price: 9800000,
+        type: 'computer',
+        popular: true,
+        new: true,
+        recommended: true,
+        stock: 1
+    },
+    {
+        id:11,
+        name: "Asus TUF F16 - RTX 3050",
+        url: '/asus-tuf.png',
+        price: 10000000,
+        type: 'computer',
+        popular: true,
+        new: true,
+        recommended: true,
+        stock: 5
+    },
+    {
+        id:12,
+        name: "HP Victus 15 - RTX 3050",
+        url: '/hp-victus.png',
+        price: 10000000,
+        type: 'computer',
+        popular: false,
+        new: true,
+        recommended: false,
+        stock: 2
     }
 ]

@@ -15,7 +15,7 @@ function ProdocutMain() {
   const [checkOutItem, setCheckOutItem] = useState([]);
 
   const keyword = searchParams.get('keyword') || ''
-  const category = searchParams.get('category')
+  const category = searchParams.get('category') || ''
   const minPrice = Number(searchParams.get('min'))
   const maxPrice = Number(searchParams.get('max'))
 
@@ -30,7 +30,6 @@ function ProdocutMain() {
   function handleCheckout(product){
     setCheckOutItem(item => [...item, product ])
   }
-
   const filterProduct = product.filter(i => {
     const matchKeyword = i.name.trim().toLowerCase().includes(keyword.trim().toLowerCase());
     const matchCategory = i.type.trim().toLowerCase() === category.trim().toLowerCase();

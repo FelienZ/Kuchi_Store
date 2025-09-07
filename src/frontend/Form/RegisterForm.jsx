@@ -20,7 +20,7 @@ export default function Register({istriggered, sendRegister, sendClose}){
     }
     return(
         <section className={`${istriggered === true ? 'flex' : 'hidden'} fixed z-40 backdrop-blur-sm inset-0 bg-black/20 justify-center items-center`}>
-            <form action="" onSubmit={handleSendRegister} className="bg-white w-[25%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
+            <form action="" onSubmit={handleSendRegister} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">Register Account</p>
                 <div className="name flex flex-col w-full">
                     <p>Your Email</p>
@@ -34,8 +34,8 @@ export default function Register({istriggered, sendRegister, sendClose}){
                     <p>Confirm Password</p>
                     <input type="password" value={account.confirmPassword} onChange={e=> setAccount({...account, confirmPassword: e.target.value})} placeholder="Enter Confirm Password" className="input w-full bg-transparent border border-neutral-500"/>
                 </div>
-                <div className="addition flex items-center w-full justify-end">
-                    <p className="hover:cursor-pointer">Sudah Memiliki Akun?</p>
+                <div className="addition flex items-center text-sm w-full justify-end">
+                    <p className="hover:cursor-pointer text-right">Sudah Memiliki Akun?</p>
                 </div>
                 <button className="btn btn-neutral w-full">Register Now</button>
             </form>

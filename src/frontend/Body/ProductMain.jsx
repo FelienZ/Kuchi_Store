@@ -53,7 +53,7 @@ function ProdocutMain() {
                 <ProductCard key={item.id} products={item} onCheckout={handleOnclick}/>
               ))}
             </section>) : (
-              <section className='grid border border-neutral rounded-md place-content-center h-full'>
+              <section className='grid md:border border-neutral rounded-md place-content-center h-screen'>
                 <p>Produk Tidak Tersedia!</p>
               </section>
             )}

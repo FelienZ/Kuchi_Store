@@ -17,7 +17,7 @@ export default function Login({istriggered, sendLogin, sendClose}){
     }
     return(
         <section className={`fixed z-40 backdrop-blur-sm inset-0 bg-black/20 justify-center items-center ${istriggered ? 'flex': 'hidden'}`}>
-            <form action="" onSubmit={handleSendLogin} className="bg-white w-[25%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
+            <form action="" onSubmit={handleSendLogin} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">Login</p>
                 <div className="name flex flex-col w-full">
                     <p>Your Email</p>
@@ -27,9 +27,9 @@ export default function Login({istriggered, sendLogin, sendClose}){
                     <p>Password</p>
                     <input type="password" value={account.password} onChange={e=> setAccount({...account, password: e.target.value})} placeholder="Enter Your Password" className="input w-full bg-transparent border border-neutral-500"/>
                 </div>
-                <div className="addition flex items-center w-full justify-between">
-                    <p className="hover:cursor-pointer">Lupa Password?</p>
-                    <p className="hover:cursor-pointer">Belum Memiliki Akun?</p>
+                <div className="addition text-sm flex items-center w-full justify-between">
+                    <p className="hover:cursor-pointer text-left">Lupa Password?</p>
+                    <p className="hover:cursor-pointer text-right">Belum Memiliki Akun?</p>
                 </div>
                 <button className="btn btn-neutral w-full">Login</button>
             </form>

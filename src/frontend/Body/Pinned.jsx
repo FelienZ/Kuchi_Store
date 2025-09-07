@@ -28,11 +28,11 @@ export default function Pinned({title, item, triggerInfo}){
                 {filterNewProducts.map(i=> 
                         <div key={i.id} className="flex bg-neutral-300 items-center p-5 border flex-col gap-2">
                         <div className="image">
-                            <img src={i.url} className="size-40"/>
+                            <img src={i.url} className="max-sm:size-30 size-40"/>
                         </div>
                         <p className="h-12 text-center flex items-center">{i.name}</p>
                         <p className="font-bold">{i.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
-                        <button onClick={()=>triggerInfo(i.id)} className="btn btn-neutral w-full text-nowrap">Check It Out</button>
+                        <button onClick={()=>triggerInfo(i.id)} className="btn btn-neutral w-full text-nowrap">Check</button>
                     </div>
                 )}
 

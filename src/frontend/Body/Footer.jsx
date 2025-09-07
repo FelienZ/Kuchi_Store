@@ -2,10 +2,12 @@ import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons/faLocationDot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CardPayment from "../Products/Productlist/CardPayment";
+import { faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer(){
     return(
-        <footer className="footer mt-10 sm:footer-horizontal bg-neutral text-base-content p-10">
+        <footer className="flex flex-col gap-20 w-full mt-10 bg-neutral text-base-content">
+            <section className="footer sm:footer-horizontal p-10">
             <nav className="flex flex-col gap-2">
                 <h6 className="footer-title">Tentang Kami</h6>
                 <a className="link link-hover"><FontAwesomeIcon icon={faLocationDot}/> Sako, Palembang, Sumatera Selatan</a>
@@ -29,6 +31,15 @@ export default function Footer(){
                 </div>
                 </fieldset>
             </form>
-            </footer>
+            </section>
+            <section className="flex flex-col items-center gap-5 border-t py-5 border-neutral-500/30">
+                <div className="pt-5 logo flex w-full gap-5 justify-center">
+                    <FontAwesomeIcon icon={faGithub} className="text-2xl"/>
+                    <FontAwesomeIcon icon={faInstagram} className="text-2xl"/>
+                    <FontAwesomeIcon icon={faLinkedin} className="text-2xl"/>
+                </div>
+                <p className="font-bold">2025 © Kuchiha Store By FelienZ</p>
+            </section>
+        </footer>
     )
 }

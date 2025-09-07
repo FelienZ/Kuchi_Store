@@ -1,21 +1,23 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useState } from "react";
-import { ProductReducerContext } from "../../storeContext";
+import {useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
+import { updateQueryParams } from "../../queryParams";
 
 export default function Drawer(){
     const price = {
         min: null,
         max: null
     }
-    const dispatch = useContext(ProductReducerContext)
+    // const dispatch = useContext(ProductReducerContext)
     const [filterPrice, setFilterPrice] = useState(price)
+    const [searchParams] = useSearchParams()
+    const navigate = useNavigate()
     function handleSendFilter(){
-        dispatch({
-            type: 'SET_PRICE',
-            min: filterPrice.min,
-            max: filterPrice.max
-        })
+        updateQueryParams(filterPrice, navigate, searchParams)
+    }
+    function handleSendCategories(category){
+        updateQueryParams({category}, navigate, searchParams)
     }
     return(
         <div className="flex flex-col text-base-300 gap-3 max-sm:hidden">
@@ -23,10 +25,10 @@ export default function Drawer(){
             <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
                 <p className="font-medium">Kategori</p>
                 <div className="item-content flex flex-col gap-2">
-                    <a className="w-full flex justify-between"><p>SmartPhone</p> <FontAwesomeIcon icon={faArrowRight}/></a>
-                    <a className="w-full flex justify-between"><p>Laptop/PC</p> <FontAwesomeIcon icon={faArrowRight}/></a>
-                    <a className="w-full flex justify-between"><p>Aksesoris</p> <FontAwesomeIcon icon={faArrowRight}/></a>
-                    <a className="w-full flex items-center"><p className="text-primary font-medium">Lihat Lainnya ...</p></a>
+                    <a onClick={()=> handleSendCategories('smartphone')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>SmartPhone</p> <FontAwesomeIcon icon={faArrowRight}/></a>
+                    <a onClick={()=> handleSendCategories('computer')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>Laptop/PC</p> <FontAwesomeIcon icon={faArrowRight}/></a>
+                    <a onClick={()=> handleSendCategories('accessories')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>Aksesoris</p> <FontAwesomeIcon icon={faArrowRight}/></a>
+                    <a onClick={()=> handleSendCategories('')} className="w-full flex items-center hover:cursor-pointer hover:underline underline-offset-4 hover:text-primary"><p className="text-primary font-medium">Lihat Lainnya ...</p></a>
                 </div>
             </div>
 

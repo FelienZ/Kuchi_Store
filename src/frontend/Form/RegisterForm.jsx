@@ -37,7 +37,7 @@ export default function Register({istriggered, sendRegister, sendClose}){
                 <div className="addition flex items-center w-full justify-end">
                     <p className="hover:cursor-pointer">Sudah Memiliki Akun?</p>
                 </div>
-                <button className="btn btn-neutral w-full">Login</button>
+                <button className="btn btn-neutral w-full">Register Now</button>
             </form>
         </section>
     )

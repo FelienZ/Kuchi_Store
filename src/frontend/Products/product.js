@@ -29,7 +29,7 @@ export const product = [
         type: 'smartphone',
         popular: true,
         new: false,
-        recommended: true,
+        recommended: false,
         stock: 5
     },
     {
@@ -40,7 +40,7 @@ export const product = [
         type: 'smartphone',
         popular: true,
         new: false,
-        recommended: true,
+        recommended: false,
         stock: 5
     },
     {
@@ -84,7 +84,7 @@ export const product = [
         type: 'smartphone',
         popular: false,
         new: false,
-        recommended: true,
+        recommended: false,
         stock: 1
     },
     {

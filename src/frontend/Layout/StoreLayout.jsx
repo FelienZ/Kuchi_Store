@@ -44,7 +44,7 @@ export default function StoreLayout(){
                     <Navigation sendTriggerRegister={handleTriggerFormRegister} sendTriggerLogin={handleTriggerFormLogin}/>
                     <Register istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
                     <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin}/>
-                    <div className="my-15">
+                    <div className="my-15 w-full">
                         <Outlet/>
                     </div>
                     <Footer/>

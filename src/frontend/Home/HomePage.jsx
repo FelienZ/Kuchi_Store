@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import Brands from "../Body/BrandSlide";
 import Hero from "../Body/Hero";
-import Pinned from "../Body/Pinned";
 import { ProductList } from "../../storeContext";
 import CheckoutForm from "../Form/CheckoutForm";
+import Pinned from "./Pinned";
 
 export default function HomePage(){
   const product = useContext(ProductList);

@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate, useRoutes, useSearchParams } from 'react-router'
 
 export default function ProductCard({products, onCheckout}){
-
+    const navigate = useNavigate()
     return(
     <section id='list'>
-          <div className='flex flex-col items-center border border-base-300 p-3 rounded-sm'>
+          <div onClick={()=> navigate(`/products/${products.id}`)} className='flex flex-col items-center border border-base-300 p-3 rounded-sm'>
             <div className="picture">
               <img src={products.url} alt={`Gambar-${products.name}`} className='max-sm:size-30 size-40 rounded-md' />
             </div>
@@ -14,9 +15,9 @@ export default function ProductCard({products, onCheckout}){
                 <p className='font-bold text-md h-15 flex items-center '>{products.name}</p>
                 <p>{products.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
               </div>
-              <div className="buttons flex justify-center">
+              {/* <div className="buttons flex justify-center">
                 <button className='btn' onClick={()=> onCheckout(products)}><FontAwesomeIcon icon={faCartShopping}/> Checkout</button>
-              </div>
+              </div> */}
             </div>
           </div>
       </section>

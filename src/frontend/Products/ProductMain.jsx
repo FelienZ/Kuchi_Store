@@ -1,6 +1,6 @@
 import '../App.css'
-import Drawer from './Drawer'
-import ProductCard from '../Products/Productlist/ProductCard'
+import Drawer from '../Body/Drawer'
+import ProductCard from './Productlist/ProductCard'
 import CheckoutForm from '../Form/CheckoutForm'
 import {useContext, useState } from 'react'
 import { ProductList } from '../../storeContext'
@@ -39,7 +39,6 @@ function ProdocutMain() {
 
     return matchKeyword && matchCategory && matchMin && matchMax
   })
-  console.log(filterProduct)
   return (
     <div className='h-full flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
       <CheckoutForm product={selectedItem} onClose={()=> handleClose()} onCheckout={handleCheckout}/>
@@ -47,7 +46,7 @@ function ProdocutMain() {
         <div className="item-content flex flex-col lg:grid lg:grid-cols-3 gap-5">
             <Drawer/>
           <div className={`product flex flex-col ${filterProduct.length ? '':'place-content-center'} col-span-2`}>
-            <p className={`font-bold ${filterProduct.length ? 'flex justify-end' : 'hidden'}`}>{category.trim() !== '' ? category.toUpperCase() : 'Pencocokan Produk'}</p>
+            <p className={`font-bold ${filterProduct.length ? 'flex justify-end' : 'hidden'}`}>{category.trim() !== '' ? category.toUpperCase() : 'Halaman Produk'}</p>
             {filterProduct.length > 0 ? 
             (<section className='grid grid-cols-2 md:grid-cols-4 gap-2'>
                 {filterProduct.map(item => (

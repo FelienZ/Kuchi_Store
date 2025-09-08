@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate, useRoutes, useSearchParams } from 'react-router'
+import { useNavigate } from 'react-router'
 
 export default function ProductCard({products, onCheckout}){
     const navigate = useNavigate()

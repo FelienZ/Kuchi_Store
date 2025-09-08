@@ -18,6 +18,8 @@ function ProdocutMain() {
   const category = searchParams.get('category') || ''
   const minPrice = Number(searchParams.get('min'))
   const maxPrice = Number(searchParams.get('max'))
+  const stats = searchParams.get('status') || ''
+
 
   function handleOnclick(items){
     setSelectItem(items)
@@ -34,9 +36,11 @@ function ProdocutMain() {
     const matchKeyword = i.name.trim().toLowerCase().includes(keyword.trim().toLowerCase());
     const matchCategory = category? i.type.trim().toLowerCase() === category.trim().toLowerCase() : i.type;
     const matchMin = minPrice ? i.price >= minPrice : true;
-    const matchMax = maxPrice ? i.price <= maxPrice : true
-
-    return matchKeyword && matchCategory && matchMin && matchMax
+    const matchMax = maxPrice ? i.price <= maxPrice : true;
+    const matchNew = stats.trim() === 'new' ? i.new === true : true;
+    const matchPopular = stats.trim() === 'popular' ? i.popular === true : true;
+    const matchRecommended = stats.trim() === 'recommended' ? i.recommended === true : true;
+    return matchKeyword && matchCategory && matchMin && matchMax && matchNew && matchPopular && matchRecommended
   })
   return (
     <div className='h-full flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>

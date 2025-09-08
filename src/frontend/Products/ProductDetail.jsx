@@ -15,9 +15,9 @@ export default function ProductDetail(){
     }
     return (
         <section className="container min-h-screen grid mt-20 w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
-            <div className="left p-3 flex w-full flex-col gap-5">
-                <div className="image">
-                    <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 self-center border border-gray-400"/>
+            <div className="left max-[768px]:order-2 p-3 flex w-full flex-col gap-5">
+                <div className="image max-[768px]:hidden">
+                    <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 p-3 self-center border border-gray-400"/>
                 </div>
                 <div className="content flex flex-col gap-3">
                     <p className="font-bold text-xl">Detail Produk</p>
@@ -37,7 +37,10 @@ export default function ProductDetail(){
                 </div>
             </div>
             <div className="right relative p-3">
-                <div className="divide-y flex flex-col gap-4 p-3 sticky top-[128px]">
+                <div className="divide-y max-[768px]:order-1 flex flex-col gap-4 p-3 sticky top-[128px]">
+                    <div className="image max-[768px]:flex justify-center hidden p-2">
+                        <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 p-3 self-center border border-gray-400"/>
+                    </div>
                     <div className="items flex flex-col gap-3">
                         <p className="font-black md:text-2xl">{matchProduct.name.toUpperCase()}</p>
                         <p className="font-bold md:text-xl text-lime-500">{matchProduct.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
@@ -48,7 +51,7 @@ export default function ProductDetail(){
                         <p>Stok: {matchProduct.stock}</p>
                     </div>
                     <div className="checkout flex flex-col gap-3">
-                        <div className="qty flex flex-col gap-4">
+                        <div className="qty flex max-[768px]:items-end flex-col gap-4">
                         <p>Qty: </p>
                         <div className="flex items-center gap-4">
                             <button className="btn btn-neutral size-8"><FontAwesomeIcon icon={faMinus}/></button>

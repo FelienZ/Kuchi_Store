@@ -24,9 +24,9 @@ export default function HomePage(){
       <Brands/>
       <CheckoutForm product={selectedItem} onClose={handleClose}/>
       <div className="items flex flex-col gap-30 w-[80%]">
-        <Pinned title={"New Products"} item={newProducts} triggerInfo={showFormCheckout}/>
-        <Pinned title={"Popular Products"} item={popularProducts} triggerInfo={showFormCheckout}/>
-        <Pinned title={"Recommended For You"} item={recommended} triggerInfo={showFormCheckout}/>
+        <Pinned title={"New Products"} item={newProducts} triggerInfo={showFormCheckout} stats='new'/>
+        <Pinned title={"Popular Products"} item={popularProducts} triggerInfo={showFormCheckout} stats='popular'/>
+        <Pinned title={"Recommended For You"} item={recommended} triggerInfo={showFormCheckout} stats='recommended'/>
       </div>
     </section>
   )

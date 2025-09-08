@@ -28,7 +28,7 @@ export default function Drawer(){
                     <a onClick={()=> handleSendCategories('smartphone')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>SmartPhone</p> <FontAwesomeIcon icon={faArrowRight}/></a>
                     <a onClick={()=> handleSendCategories('computer')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>Laptop/PC</p> <FontAwesomeIcon icon={faArrowRight}/></a>
                     <a onClick={()=> handleSendCategories('accessories')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>Aksesoris</p> <FontAwesomeIcon icon={faArrowRight}/></a>
-                    <a onClick={()=> handleSendCategories('')} className="w-full flex items-center hover:cursor-pointer hover:underline underline-offset-4 hover:text-primary"><p className="text-primary font-medium">Lihat Lainnya ...</p></a>
+                    <a onClick={()=> navigate('/products')} className="w-full flex items-center hover:cursor-pointer hover:underline underline-offset-4 hover:text-primary"><p className="text-primary font-medium">Lihat semua</p></a>
                 </div>
             </div>
 

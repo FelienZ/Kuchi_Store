@@ -1,13 +1,30 @@
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
-export default function Pinned({title, item, triggerInfo}){
+export default function Pinned({title, item, stats}){
     const limit = {
         min: 1,
         max:4
     }
     const [show, setShow] = useState(limit)
+    const navigate = useNavigate()
+
+    function checkStatus(status){
+        switch(status){
+            case "new":
+                navigate('/products?status=new')
+                break;
+            case "popular":
+                navigate('/products?status=popular')
+                break;
+            case "recommended":
+                navigate('/products?status=popular')
+                break;
+        }
+    }
+
     const filterNewProducts = item.filter((i,idx) => idx + 1 >= show.min && idx + 1 <= show.max)
     const isPrevDisabled = show.min < 2
     const isNextDisabled = show.max >= item.length
@@ -16,7 +33,7 @@ export default function Pinned({title, item, triggerInfo}){
             <div className="top flex justify-between items-center">
                 <p className="font-black text-nowrap lg:text-2xl md:text-xl">{title}</p>
                 <div className="navi flex items-center gap-3">
-                    <p className="text-nowrap hover:cursor-pointer">Lihat Semua</p>
+                    <p className="text-nowrap hover:cursor-pointer" onClick={()=>checkStatus(stats)}>Lihat Semua</p>
                     <p className={`${isNextDisabled && isPrevDisabled ? 'hidden' : 'flex'}`}> | </p>
                     <div className={`buttons ${isNextDisabled && isPrevDisabled ? 'hidden' : 'flex'} items-center gap-3`}>
                         <button disabled={isPrevDisabled} onClick={()=> setShow({...show, max: show.max - 1, min: show.min -1})} className={`btn btn-neutral size-10 ${isPrevDisabled ? 'hidden' : 'flex'}`}><FontAwesomeIcon icon={faAngleLeft}/></button>
@@ -31,8 +48,8 @@ export default function Pinned({title, item, triggerInfo}){
                             <img src={i.url} className="max-sm:size-30 size-40"/>
                         </div>
                         <p className="h-12 text-center flex items-center">{i.name}</p>
-                        <p className="font-bold">{i.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
-                        <button onClick={()=>triggerInfo(i.id)} className="btn btn-neutral w-full text-nowrap">Check</button>
+                        <p className="font-bold text-lime-700">{i.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
+                        <button onClick={()=> navigate(`/products/${i.id}`)} className="btn btn-neutral w-full text-nowrap">Check</button>
                     </div>
                 )}
 

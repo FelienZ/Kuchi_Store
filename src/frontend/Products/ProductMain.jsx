@@ -30,7 +30,6 @@ function ProdocutMain() {
   function handleCheckout(product){
     setCheckOutItem(item => [...item, product ])
   }
-  console.log(category)
   const filterProduct = product.filter(i => {
     const matchKeyword = i.name.trim().toLowerCase().includes(keyword.trim().toLowerCase());
     const matchCategory = category? i.type.trim().toLowerCase() === category.trim().toLowerCase() : i.type;

@@ -14,10 +14,10 @@ export default function ProductDetail(){
         mapData.push({key, data: data[key]})
     }
     return (
-        <section className="container min-h-screen grid mt-20 w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
-            <div className="left max-[768px]:order-2 p-3 flex w-full flex-col gap-5">
-                <div className="image max-[768px]:hidden">
-                    <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 p-3 self-center border border-gray-400"/>
+        <section className="min-h-screen grid mt-20 w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
+            <div className="left max-md:order-2 p-3 flex w-full flex-col gap-5">
+                <div className="image max-md:hidden">
+                    <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 max-sm:size-50 p-3 self-center border border-gray-400"/>
                 </div>
                 <div className="content flex flex-col gap-3">
                     <p className="font-bold text-xl">Detail Produk</p>
@@ -29,7 +29,7 @@ export default function ProductDetail(){
                         {mapData.map((i, idx) => (
                             <div key={idx} className="description max-sm:max-w-[90%] grid p-2 grid-cols-2">
                                 <p className="font-bold text-sm">{i.key.toUpperCase()}</p>
-                                <p className="text-wrap">{i.data}</p>
+                                <p className="text-wrap overflow-x-auto">{i.data}</p>
                             </div>
                         ))}
                         </div>
@@ -37,21 +37,21 @@ export default function ProductDetail(){
                 </div>
             </div>
             <div className="right relative p-3">
-                <div className="divide-y max-[768px]:order-1 flex flex-col gap-4 p-3 sticky top-[128px]">
-                    <div className="image max-[768px]:flex justify-center hidden p-2">
-                        <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 p-3 self-center border border-gray-400"/>
+                <div className="divide-y max-md:order-1 flex flex-col gap-4 p-3 sticky top-[128px]">
+                    <div className="image max-md:flex justify-center hidden p-2">
+                        <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 max-sm:size-50 p-3 self-center border border-gray-400"/>
                     </div>
                     <div className="items flex flex-col gap-3">
                         <p className="font-black md:text-2xl">{matchProduct.name.toUpperCase()}</p>
                         <p className="font-bold md:text-xl text-lime-500">{matchProduct.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
                     </div>
                     <div className="items-detail text-sm flex flex-col gap-3">
-                        <p>Kategori: {matchProduct.category}</p>
+                        <p>Kategori: {matchProduct.type}</p>
                         <p>Brand: {matchProduct.specifications.brand}</p>
                         <p>Stok: {matchProduct.stock}</p>
                     </div>
                     <div className="checkout flex flex-col gap-3">
-                        <div className="qty flex max-[768px]:items-end flex-col gap-4">
+                        <div className="qty flex max-md:items-end flex-col gap-4">
                         <p>Qty: </p>
                         <div className="flex items-center gap-4">
                             <button className="btn btn-neutral size-8"><FontAwesomeIcon icon={faMinus}/></button>

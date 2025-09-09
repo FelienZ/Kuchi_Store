@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export default function Register({istriggered, sendRegister, sendClose}){
     const data = {
@@ -7,6 +7,16 @@ export default function Register({istriggered, sendRegister, sendClose}){
         confirmPassword: ''
     }
     const [account, setAccount] = useState(data)
+    const modalRef = useRef();
+    useEffect(()=> {
+        function handleClickOutside(event){
+            if(modalRef.current && !modalRef.current.contains(event.target)){
+                handleClose()
+                }
+            }
+            document.addEventListener('mousedown', handleClickOutside)
+            return()=> document.removeEventListener('mousedown', handleClickOutside)
+    }, [sendClose])
     function handleSendRegister(e){
         e.preventDefault();
         /* if(account.password.trim().toLowerCase() === account.confirmPassword.trim().toLowerCase()){
@@ -20,7 +30,7 @@ export default function Register({istriggered, sendRegister, sendClose}){
     }
     return(
         <section className={`${istriggered === true ? 'flex' : 'hidden'} fixed z-40 backdrop-blur-sm inset-0 bg-black/20 justify-center items-center`}>
-            <form action="" onSubmit={handleSendRegister} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
+            <form ref={modalRef} action="" onSubmit={handleSendRegister} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">Register Account</p>
                 <div className="name flex flex-col w-full">
                     <p>Your Email</p>

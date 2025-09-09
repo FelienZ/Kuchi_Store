@@ -20,7 +20,7 @@ export default function Drawer(){
         updateQueryParams({category}, navigate, searchParams)
     }
     return(
-        <div className="flex flex-col text-base-300 gap-3 max-sm:hidden">
+        <div className="flex flex-col text-base-300 gap-3 max-lg:hidden">
             <p className="font-bold">Filter Item</p>
             <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
                 <p className="font-medium">Kategori</p>

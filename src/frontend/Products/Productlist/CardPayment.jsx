@@ -2,7 +2,7 @@ import { payment } from "../payment";
 
 export default function CardPayment(){
     return(
-        <section className='grid grid-cols-2 md:grid-cols-4 gap-2'>
+        <section className='grid grid-cols-2 max-sm:grid-cols-3 lg:grid-cols-4 gap-2'>
             {payment.map(item => (
                 <div key={item.id}>
                     <img src={item.url} alt={`payment-${item.id}`} className="w-20 h-10 rounded-xs"/>

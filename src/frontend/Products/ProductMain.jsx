@@ -51,7 +51,7 @@ function ProdocutMain() {
           <div className={`product flex flex-col ${filterProduct.length ? '':'place-content-center'} col-span-2`}>
             <p className={`font-bold ${filterProduct.length ? 'flex justify-end' : 'hidden'}`}>{category.trim() !== '' ? category.toUpperCase() : 'Halaman Produk'}</p>
             {filterProduct.length > 0 ? 
-            (<section className='grid grid-cols-2 md:grid-cols-4 gap-2'>
+            (<section className='grid max-sm:grid-cols-2 max-xl:grid-cols-3 grid-cols-4 gap-2'>
                 {filterProduct.map(item => (
                 <ProductCard key={item.id} products={item} onCheckout={handleOnclick}/>
               ))}

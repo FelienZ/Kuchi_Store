@@ -1,11 +1,21 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export default function Login({istriggered, sendLogin, sendClose}){
     const data = {
         email: '',
         password: ''
     }
+    const modalRef = useRef()
     const [account, setAccount] = useState(data)
+    useEffect(()=> {
+        function handleClickOutside(event){
+            if(modalRef.current && !modalRef.current.contains(event.target)){
+                handleClose()
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return()=> document.removeEventListener('mousedown', handleClickOutside)
+    })
     function handleSendLogin(e){
         e.preventDefault();
         // sendLogin(account)
@@ -17,7 +27,7 @@ export default function Login({istriggered, sendLogin, sendClose}){
     }
     return(
         <section className={`fixed z-40 backdrop-blur-sm inset-0 bg-black/20 justify-center items-center ${istriggered ? 'flex': 'hidden'}`}>
-            <form action="" onSubmit={handleSendLogin} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
+            <form ref={modalRef} action="" onSubmit={handleSendLogin} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">Login</p>
                 <div className="name flex flex-col w-full">
                     <p>Your Email</p>

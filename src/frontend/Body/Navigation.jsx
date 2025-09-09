@@ -1,6 +1,6 @@
 import { faBars, faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { updateQueryParams } from "../../queryParams";
 
@@ -9,6 +9,18 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [keyword, setKeyword] = useState('')
     const [searchParams] = useSearchParams()
     const navigate = useNavigate();
+    const modalRef = useRef()
+    const [isActive, setisActive] = useState(false)
+    useEffect(()=>{
+        function handleClickOutside(e){
+            if(modalRef.current && !modalRef.current.contains(e.target)){
+                setisActive(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return()=>document.removeEventListener('mousedown', handleClickOutside)
+    }, [isActive])
+
     function handleSendKeyword(){
         updateQueryParams({keyword}, navigate, searchParams)
     }
@@ -19,11 +31,11 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">
             <Link to={'/'}><p className="font-bold font-[Outfit] text-lg max-sm:text-sm">Kuchiha Store</p></Link>
-            <details className="hamburger dropdown">
-                <summary className="btn bg-neutral m-1 p-3">
+            <div ref={modalRef} className={` relative hamburger dropdown`}>
+                <button onClick={()=>setisActive(true)} className="btn bg-neutral m-1 p-3">
                     <FontAwesomeIcon icon={faBars} />
-                </summary>
-                <ul className="menu dropdown-content gap-2 bg-neutral rounded-box z-1 w-52 mt-3 p-5 shadow-sm">
+                </button>
+                <ul className={` ${isActive ? 'menu dropdown-content' : 'hidden'} gap-2 bg-neutral rounded-box z-1 w-52 mt-3 p-5 shadow-sm`}>
                     <div className="flex gap-2">
                     <Link to={'/'}><li>Home</li></Link>
                 </div>
@@ -46,7 +58,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                 <hr className="text-gray-400"/>
                 <li className="hover:cursor-pointer" onClick={()=> handleSendCategories('accessories')}>Aksesoris</li>
             </ul>
-            </details>
+            </div>
             <div className="searching flex items-center md:gap-3 gap-1 text-white">
                 <input type="text" value={keyword} name="SearchInput" onChange={(e)=>setKeyword(e.target.value)} id="keywords" placeholder="Cari Barang" className="input border border-base-100 input-ghost w-full"/>
                 <button onClick={handleSendKeyword}  className="magnifying btn btn-ghost hover:bg-neutral border border-base-100 max-sm:p-2">

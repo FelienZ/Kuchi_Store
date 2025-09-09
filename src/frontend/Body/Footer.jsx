@@ -34,9 +34,9 @@ export default function Footer(){
             </section>
             <section className="flex flex-col items-center gap-5 border-t py-5 border-neutral-500/30">
                 <div className="pt-5 logo flex w-full gap-5 justify-center">
-                    <FontAwesomeIcon icon={faGithub} className="text-2xl"/>
-                    <FontAwesomeIcon icon={faInstagram} className="text-2xl"/>
-                    <FontAwesomeIcon icon={faLinkedin} className="text-2xl"/>
+                    <FontAwesomeIcon icon={faGithub} href="https://github.com/FelienZ" className="text-2xl hover:text-lime-500 transition-colors duration-500"/>
+                    <FontAwesomeIcon icon={faInstagram} href="https://www.instagram.com/rajabfadh/" className="text-2xl hover:text-lime-500 transition-colors duration-500"/>
+                    <FontAwesomeIcon icon={faLinkedin} href="https://www.linkedin.com/in/muhammad-rajab-fadhly" className="text-2xl hover:text-lime-500 transition-colors duration-500"/>
                 </div>
                 <p className="font-bold">2025 © Kuchiha Store By FelienZ</p>
             </section>

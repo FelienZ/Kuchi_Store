@@ -1,7 +1,7 @@
 import { faBars, faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router";
+import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { updateQueryParams } from "../../queryParams";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
@@ -35,7 +35,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                 </div>
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
-                    <Link to={'/help'}><li>Bantuan</li></Link>
+                    <NavLink to={'/information/help'}><li>Bantuan</li></NavLink>
                     <p>|</p>
                     <Link to={'/checkout'}><li>Pemesanan</li></Link>
                 </div>

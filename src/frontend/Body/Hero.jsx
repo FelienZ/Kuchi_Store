@@ -10,7 +10,7 @@ export default function Hero(){
             content: 'Toko Elektronik Digital Terbaik di Kota Palembang',
             addition: <button className="btn rounded-r-full text-xl glass text-white max-sm:self-center max-sm:rounded-full">Get Started</button>,
             picture: '/Hero/Headphone.png',
-            background: 'bg-gradient-to-br from-neutral-600 via-zinc-500 to-neutral-700'
+            background: 'bg-gradient-to-br from-neutral-700 via-zinc-800 to-neutral-900'
         },
         {
             id:2,
@@ -18,7 +18,7 @@ export default function Hero(){
             content: 'Kami menyediakan berbagai promo menarik setiap Bulan',
             addition: <button className="btn rounded-r-full text-xl glass text-white max-sm:self-center max-sm:rounded-full">Check it Out!</button>,
             picture: '/Hero/Samsungs24U.png',
-            background: 'bg-gradient-to-br from-blue-900 via coral-400 to-blue-200'
+            background: 'bg-gradient-to-br from-blue-900 via coral-400 to-blue-300'
         },
         {
             id:3,
@@ -26,7 +26,7 @@ export default function Hero(){
             content: 'Promo pada Bulan ini - dapatkan potongan hingga 75%',
             addition: <button className="btn rounded-r-full text-xl glass text-white max-sm:self-center max-sm:rounded-full">Check it Out!</button>,
             picture: 'Hero/Nitro.png',
-            background: 'bg-gradient-to-br from-neutral-700 via orange-400 to-red-500'
+            background: 'bg-gradient-to-br from-red-900 via orange-300 to-red-400'
         }
     ]
     const [pages, setPages] = useState(1)

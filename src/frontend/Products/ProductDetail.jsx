@@ -37,7 +37,7 @@ export default function ProductDetail(){
                 </div>
             </div>
             <div className="right relative p-3">
-                <div className="divide-y max-md:order-1 flex flex-col gap-4 p-3 sticky top-[128px]">
+                <div className="divide-y max-md:order-1 flex flex-col gap-4 p-3 top-[128px]">
                     <div className="image max-md:flex justify-center hidden p-2">
                         <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 max-sm:size-50 p-3 self-center border border-gray-400"/>
                     </div>

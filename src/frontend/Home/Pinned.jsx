@@ -48,7 +48,7 @@ export default function Pinned({title, item, stats}){
                             <img src={i.url} className="max-sm:size-30 size-40"/>
                         </div>
                         <p className="h-12 text-center flex items-center">{i.name}</p>
-                        <p className="font-bold text-lime-700">{i.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
+                        <p className="font-bold text-neutral-800">{i.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
                         <button onClick={()=> navigate(`/products/${i.id}`)} className="btn btn-neutral w-full text-nowrap">Check</button>
                     </div>
                 )}

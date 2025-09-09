@@ -3,10 +3,13 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import StoreLayout from './frontend/Layout/StoreLayout.jsx'
 import CheckoutPage from './frontend/CheckoutPage.jsx'
-import HelpPage from './frontend/HelpPage.jsx'
 import HomePage from './frontend/Home/HomePage.jsx'
 import ProdocutMain from './frontend/Products/ProductMain.jsx'
 import ProductDetail from './frontend/Products/ProductDetail.jsx'
+import HelpPage from './frontend/Information/HelpPage.jsx'
+import Help from './frontend/Information/Help.jsx'
+import About from './frontend/Information/About.jsx'
+import Contact from './frontend/Information/Contact.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,7 +20,11 @@ createRoot(document.getElementById('root')).render(
           <Route path='/products' element={<ProdocutMain/>}/>
           <Route path='/products/:id' element={<ProductDetail/>}/>
           <Route path='/checkout' element={<CheckoutPage/>}/>
-          <Route path='/help' element={<HelpPage/>}/>
+          <Route path='/information' element={<HelpPage/>}>
+            <Route path='help' element={<Help/>}/>
+            <Route path='about' element={<About/>}/>
+            <Route path='contact' element={<Contact/>}/>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,26 +1,13 @@
 import { faBars, faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { updateQueryParams } from "../../queryParams";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
-    // const dispatch = useContext(ProductReducerContext)
     const [keyword, setKeyword] = useState('')
     const [searchParams] = useSearchParams()
     const navigate = useNavigate();
-    // const modalRef = useRef()
-    // const [isActive, setisActive] = useState(false)
-    /* useEffect(()=>{
-        function handleClickOutside(e){
-            console.log(modalRef.current.contains(e.target))
-            if(modalRef.current && !modalRef.current.contains(e.target)){
-                requestAnimationFrame(()=>setisActive(false))
-            }
-        }
-        document.addEventListener('click', handleClickOutside)
-        return()=>document.removeEventListener('click', handleClickOutside)
-    }, [isActive]) */
 
     function handleSendKeyword(){
         updateQueryParams({keyword}, navigate, searchParams)
@@ -33,14 +20,14 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">
             <Link to={'/'}><p className="font-bold font-[Outfit] text-lg max-sm:text-sm">Kuchiha Store</p></Link>
-            <details /* ref={modalRef} */ className={` relative hamburger dropdown`}>
-                <summary /* onClick={()=>setisActive(!isActive)} */ className="btn bg-neutral m-1 p-3">
+            <details className={` relative hamburger dropdown`}>
+                <summary role="button" className="btn bg-neutral m-1 p-3">
                     <FontAwesomeIcon icon={faBars} />
                 </summary>
                 <ul className={`menu dropdown-content gap-2 bg-neutral rounded-box z-1 w-52 mt-3 p-5 shadow-sm`}>
                     <div className="flex gap-2">
                     <Link to={'/'}><li>Home</li></Link>
-                </div>
+                    </div>
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
                     <li className="hover:cursor-pointer" onClick={sendTriggerRegister}>Daftar</li>
@@ -54,10 +41,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     <Link to={'/checkout'}><li>Pemesanan</li></Link>
                 </div>
                 <hr className="text-gray-400"/>
-                <li className="hover:cursor-pointer" onClick={()=> {
-                    console.log('tes')
-                    handleSendCategories('smartphone')
-                }}>SmartPhone</li>
+                <li className="hover:cursor-pointer" onClick={()=> {handleSendCategories('smartphone')}}>SmartPhone</li>
                 <hr className="text-gray-400"/>
                 <li className="hover:cursor-pointer" onClick={()=> handleSendCategories('computer')}>Laptop/PC</li>
                 <hr className="text-gray-400"/>

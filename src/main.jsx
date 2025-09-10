@@ -10,6 +10,9 @@ import HelpPage from './frontend/Information/HelpPage.jsx'
 import Help from './frontend/Information/Help.jsx'
 import About from './frontend/Information/About.jsx'
 import Contact from './frontend/Information/Contact.jsx'
+import Partner from './frontend/Information/Partner.jsx'
+import Tutorials from './frontend/Information/Tutorials.jsx'
+import Services from './frontend/Information/Services.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -24,6 +27,9 @@ createRoot(document.getElementById('root')).render(
             <Route path='help' element={<Help/>}/>
             <Route path='about' element={<About/>}/>
             <Route path='contact' element={<Contact/>}/>
+            <Route path='partnership' element={<Partner/>}/>
+            <Route path='tutorials' element={<Tutorials/>}/>
+            <Route path='services' element={<Services/>}/>
           </Route>
         </Route>
       </Routes>

@@ -11,9 +11,9 @@ export default function HelpPage(){
                         <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'help'}><p>Bantuan</p></NavLink>
                         <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'about'}><p>Tentang Kami</p></NavLink>
                         <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'contact'}><p>Hubungi Kami</p></NavLink>
-                        <p>Partnership</p>
-                        <p>Cara Berbelanja</p>
-                        <p>Services</p>
+                        <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'partnership'}><p>Partnership</p></NavLink>
+                        <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'tutorials'}><p>Cara Berbelanja</p></NavLink>
+                        <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'services'}><p>Services</p></NavLink>
                     </div>
                 </div>
                 <div tabIndex={0} className="left hidden max-md:collapse collapse-arrow border-gray-400 border max-md:rounded-none">
@@ -21,10 +21,10 @@ export default function HelpPage(){
                 <div className="navigation collapse-content flex flex-col gap-4">
                     <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'help'}><p>Bantuan</p></NavLink>
                     <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'about'}><p>Tentang Kami</p></NavLink>
-                    <p>Hubungi Kami</p>
-                    <p>Partnership</p>
-                    <p>Cara Berbelanja</p>
-                    <p>Services</p>
+                    <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'contact'}><p>Hubungi Kami</p></NavLink>
+                    <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'partnership'}><p>Partnership</p></NavLink>
+                    <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'tutorials'}><p>Cara Berbelanja</p></NavLink>
+                    <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'services'}><p>Services</p></NavLink>
                 </div>
                 </div>
                 <div className="right md:col-span-2 flex flex-col gap-8">

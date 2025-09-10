@@ -296,7 +296,7 @@ export const product = [
             resolution: '115.6-inch FHD (1920 x 1080) 16:9 144Hz Adaptive-Sync Value',
             os: 'Windows 11 Home + Office Home and Student 2021',
             prosesor: 'AMD Ryzen™ 5 7535HS Processor 3.3GHz (19MB Cache, up to 4.55 GHz, 6 cores, 12 Threads)',
-            gpu: 'NVIDIA® GeForce RTX™ 3050 6GB GDDR6',
+            gpu: 'NVIDIA® GeForce RTX™ 3050 4GB GDDR6',
             memory: '16GB DDR5-5600 SO-DIMM, 2x SO-DIMM slots, Max 32GB',
             storage: '512GB NVMe',
             network: 'Wi-Fi 6(802.11ax) (Dual band) 2*2 + Bluetooth® 5.3 Wireless Card (*Bluetooth® version may change with OS version different.)',

@@ -35,7 +35,7 @@ export default function Pinned({title, item, stats}){
         <section className="flex w-full max-sm:text-sm gap-3 flex-col">
             <div className="top flex justify-between items-center">
                 <p className="font-black text-nowrap lg:text-2xl md:text-xl">{title}</p>
-                <div className="navi flex items-center gap-3">
+                <div className="navi flex items-center max-sm:gap-1 gap-3">
                     <p className="text-nowrap hover:cursor-pointer" onClick={()=>checkStatus(stats)}>Lihat Semua</p>
                     <p className={`${isNextDisabled && isPrevDisabled ? 'hidden' : 'flex'}`}> | </p>
                     <div className={`buttons ${isNextDisabled && isPrevDisabled ? 'opacity-50 cursor-not-allowed' : 'flex'} items-center gap-3`}>

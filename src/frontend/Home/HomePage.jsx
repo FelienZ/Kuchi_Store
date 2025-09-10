@@ -23,7 +23,7 @@ export default function HomePage(){
       <Hero/>
       <Brands/>
       <CheckoutForm product={selectedItem} onClose={handleClose}/>
-      <div className="items flex flex-col gap-30 w-[80%]">
+      <div className="items flex flex-col gap-30 max-sm:w-full max-sm:px-3 w-[80%]">
         <Pinned title={"New Products"} item={newProducts} triggerInfo={showFormCheckout} stats='new'/>
         <Pinned title={"Popular Products"} item={popularProducts} triggerInfo={showFormCheckout} stats='popular'/>
         <Pinned title={"Recommended For You"} item={recommended} triggerInfo={showFormCheckout} stats='recommended'/>

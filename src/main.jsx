@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import StoreLayout from './frontend/Layout/StoreLayout.jsx'
 import CheckoutPage from './frontend/CheckoutPage.jsx'
 import HomePage from './frontend/Home/HomePage.jsx'
-import ProdocutMain from './frontend/Products/ProductMain.jsx'
+import ProductMain from './frontend/Products/ProductMain.jsx'
 import ProductDetail from './frontend/Products/ProductDetail.jsx'
 import HelpPage from './frontend/Information/HelpPage.jsx'
 import Help from './frontend/Information/Help.jsx'
@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path='' element={<StoreLayout/>}>
           <Route path='/' element={<HomePage/>}/>
-          <Route path='/products' element={<ProdocutMain/>}/>
+          <Route path='/products' element={<ProductMain/>}/>
           <Route path='/products/:id' element={<ProductDetail/>}/>
           <Route path='/checkout' element={<CheckoutPage/>}/>
           <Route path='/information' element={<HelpPage/>}>

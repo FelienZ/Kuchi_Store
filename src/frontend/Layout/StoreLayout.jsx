@@ -39,7 +39,7 @@ export default function StoreLayout(){
 
     return(
         <div className ='min-h-screen font-[Roboto] flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
-            <ProductList.Provider value={product}>
+            <ProductList.Provider value={store.product}>
                 <ProductReducerContext.Provider value={dispatch}>
                     <Navigation sendTriggerRegister={handleTriggerFormRegister} sendTriggerLogin={handleTriggerFormLogin}/>
                     <Register istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>

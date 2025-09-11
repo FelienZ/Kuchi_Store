@@ -26,7 +26,7 @@ export default function Footer(){
                     <input
                     type="text"
                     placeholder="username@gmail.com"
-                    className="input input-ghost border border-base-100 join-item" />
+                    className="input input-ghost max-sm:max-w-[60%] border border-base-100 join-item" />
                     <button className="btn btn-ghost hover:bg-neutral border border-base-100 max-sm:p-2 join-item">Subscribe</button>
                 </div>
                 </fieldset>

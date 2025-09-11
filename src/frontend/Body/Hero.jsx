@@ -1,14 +1,16 @@
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 
 export default function Hero(){
+    const navigate = useNavigate()
     const items = [
         {
             id:1,
             title: 'Welcome to Kuchiha Store !',
             content: 'Toko Elektronik Digital Terbaik di Kota Palembang',
-            addition: <button className="btn rounded-r-full text-xl glass text-white max-sm:self-center max-sm:rounded-full">Get Started</button>,
+            addition: <button className="btn rounded-r-full md:text-xl glass text-white max-sm:self-center max-sm:rounded-full">Get Started</button>,
             picture: '/Hero/Headphone.png',
             background: 'bg-gradient-to-br from-neutral-700 via-zinc-800 to-neutral-900'
         },
@@ -16,7 +18,7 @@ export default function Hero(){
             id:2,
             title: 'Temukan Berbagai Promo Menarik!',
             content: 'Kami menyediakan berbagai promo menarik setiap Bulan',
-            addition: <button className="btn rounded-r-full text-xl glass text-white max-sm:self-center max-sm:rounded-full">Check it Out!</button>,
+            addition: <button className="btn rounded-r-full md:text-xl glass text-white max-sm:self-center max-sm:rounded-full">Check it Out!</button>,
             picture: '/Hero/Samsungs24U.png',
             background: 'bg-gradient-to-br from-blue-900 via coral-400 to-blue-300'
         },
@@ -24,7 +26,7 @@ export default function Hero(){
             id:3,
             title: 'September Sakti',
             content: 'Promo pada Bulan ini - dapatkan potongan hingga 75%',
-            addition: <button className="btn rounded-r-full text-xl glass text-white max-sm:self-center max-sm:rounded-full">Check it Out!</button>,
+            addition: <button className="btn rounded-r-full md:text-xl glass text-white max-sm:self-center max-sm:rounded-full">Check it Out!</button>,
             picture: 'Hero/Nitro.png',
             background: 'bg-gradient-to-br from-red-900 via orange-300 to-red-400'
         }
@@ -53,9 +55,11 @@ export default function Hero(){
                     <button onClick={handleNext} className="btn rounded-full glass"><FontAwesomeIcon icon={faArrowRight}/></button>
                 </div>
                 <div className="content-text items-end max-sm:items-center max-sm:order-2 flex flex-col gap-5 p-5 w-[80%]">
-                    <p className="font-black text-xl md:text-4xl glass text-nowrap font-[Outfit] bg- p-2 rounded-full sm:rounded-r-none md:self-end px-5">{items[pages].title}</p>
+                    <p className="font-black text-xl md:text-4xl glass max-sm:text-lg text-nowrap  font-[Outfit] bg- p-2 rounded-full sm:rounded-r-none md:self-end px-5">{items[pages].title}</p>
                     <p className="font-bold text-justify max-sm:text-center md:text-lg">{items[pages].content}</p>
-                    {items[pages].addition}
+                    <div onClick={()=> navigate('/products')}>
+                        {items[pages].addition}
+                    </div>
                 </div>
                 <div className="image max-sm:order-1 max-sm:size-[60%] size-[30%] drop-shadow-md drop-shadow-white">
                     <img src={items[pages].picture}/>

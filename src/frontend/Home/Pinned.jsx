@@ -38,7 +38,7 @@ export default function Pinned({title, item, stats}){
                 <div className="navi flex items-center max-sm:gap-1 gap-3">
                     <p className="text-nowrap hover:cursor-pointer" onClick={()=>checkStatus(stats)}>Lihat Semua</p>
                     <p className={`${isNextDisabled && isPrevDisabled ? 'hidden' : 'flex'}`}> | </p>
-                    <div className={`buttons ${isNextDisabled && isPrevDisabled ? 'opacity-50 cursor-not-allowed' : 'flex'} items-center gap-3`}>
+                    <div className={`buttons ${isNextDisabled && isPrevDisabled ? 'opacity-50 cursor-not-allowed' : 'flex'} items-center max-sm:gap-1 gap-3`}>
                         <button disabled={isPrevDisabled} onClick={()=> setShow({...show, max: show.max - 1, min: show.min -1})} className={`btn btn-neutral size-10 ${isPrevDisabled ? 'opacity-40  text-neutral cursor-not-allowed' : 'flex'}`}><FontAwesomeIcon icon={faAngleLeft}/></button>
                         <button disabled={isNextDisabled} onClick={()=> setShow({...show, max: show.max + 1, min:show.min +1})} className={`btn btn-neutral size-10 ${isNextDisabled ? 'opacity-40 text-neutral cursor-not-allowed' : 'flex'}`}><FontAwesomeIcon icon={faAngleRight}/></button>
                     </div>
@@ -46,13 +46,13 @@ export default function Pinned({title, item, stats}){
             </div>
             <div className="down grid grid-cols-2 md:grid-cols-4 gap-3">
                 {filterNewProducts.map(i=> 
-                        <div key={i.id} className="flex bg-neutral-300 items-center p-5 border flex-col gap-2">
+                        <div key={i.id} className="flex items-center max-lg:p-2 p-5 border-neutral rounded-sm border flex-col gap-2">
                         <div className="image">
-                            <img src={i.url} className="max-sm:size-30 size-40"/>
+                            <img src={i.url} className="max-lg:size-30 size-40"/>
                         </div>
                         <p className="h-12 text-center flex items-center">{i.name}</p>
                         <p className="font-bold text-neutral-800">{i.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
-                        <button onClick={()=> navigate(`/products/${i.id}`)} className="btn btn-neutral w-full text-nowrap">Check</button>
+                        <button onClick={()=> navigate(`/products/${i.id}`)} className="btn max-md:px-3 btn-neutral w-full text-nowrap">Check</button>
                     </div>
                 )}
 

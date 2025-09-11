@@ -6,7 +6,7 @@ import {useContext, useState } from 'react'
 import { ProductList } from '../../storeContext'
 import { useSearchParams } from 'react-router'
 
-function ProdocutMain() {
+function ProductMain() {
   
   const product = useContext(ProductList);
   const [searchParams] = useSearchParams()
@@ -19,7 +19,6 @@ function ProdocutMain() {
   const minPrice = Number(searchParams.get('min'))
   const maxPrice = Number(searchParams.get('max'))
   const stats = searchParams.get('status') || ''
-
 
   function handleOnclick(items){
     setSelectItem(items)
@@ -68,4 +67,4 @@ function ProdocutMain() {
   )
 }
 
-export default ProdocutMain
+export default ProductMain

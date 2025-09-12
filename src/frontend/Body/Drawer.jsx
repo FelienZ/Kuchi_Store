@@ -20,11 +20,11 @@ export default function Drawer(){
         updateQueryParams({category}, navigate, searchParams)
     }
     return(
-        <div className="flex flex-col text-base-300 gap-3 max-lg:hidden">
+        <div className="flex flex-col text-base-300 gap-3">
             <p className="font-bold">Filter Item</p>
-            <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
+            <div className="flex flex-col max-lg:hidden category border border-gray-500 p-4 rounded-sm gap-5">
                 <p className="font-medium">Kategori</p>
-                <div className="item-content flex flex-col gap-2">
+                <div className="item-content flex flex-col gap-2 ">
                     <a onClick={()=> handleSendCategories('smartphone')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>SmartPhone</p> <FontAwesomeIcon icon={faArrowRight}/></a>
                     <a onClick={()=> handleSendCategories('computer')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>Laptop/PC</p> <FontAwesomeIcon icon={faArrowRight}/></a>
                     <a onClick={()=> handleSendCategories('accessories')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>Aksesoris</p> <FontAwesomeIcon icon={faArrowRight}/></a>
@@ -32,18 +32,43 @@ export default function Drawer(){
                 </div>
             </div>
 
-            <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
+            <div className="flex flex-col max-lg:hidden category border border-gray-500 p-4 rounded-sm gap-5">
                 <div className="head flex justify-between items-center">
                     <p className="font-medium">Harga</p>
                     <button className="btn btn-ghost" onClick={handleSendFilter}>Terapkan</button>
                 </div>
                 <div className="item-content flex flex-col gap-2 items-center">
-                    <input type="number" onChange={(e)=>setFilterPrice({...filterPrice, min: Number(e.target.value)})} name="minPrice" id="hargaMin" placeholder="Minimal" className="input input-neutral bg-transparent"/>
-                    <input type="number" onChange={(e)=>setFilterPrice({...filterPrice, max: Number(e.target.value)})} name="maxPrice" id="hargaMax" placeholder="Maksimal" className="input input-neutral bg-transparent"/>
+                    <input type="number" onChange={(e)=>setFilterPrice({...filterPrice, min: Number(e.target.value)})} name="minPrice" id="hargaMin" placeholder="Minimal" className="input w-full input-neutral bg-transparent"/>
+                    <input type="number" onChange={(e)=>setFilterPrice({...filterPrice, max: Number(e.target.value)})} name="maxPrice" id="hargaMax" placeholder="Maksimal" className="input w-full input-neutral bg-transparent"/>
                 </div>
             </div>
 
-            <div className="flex flex-col items-center category border border-gray-500 p-4 rounded-sm gap-5">
+            <div tabIndex={0} className="collapse lg:hidden collapse-arrow border-neutral rounded-none border">
+            <div className="collapse-title font-semibold">Filter</div>
+            <div className="collapse-content flex flex-col gap-3 text-sm">
+                <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
+                <p className="font-medium">Kategori</p>
+                <div className="item-content flex flex-col gap-2 ">
+                    <a onClick={()=> handleSendCategories('smartphone')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>SmartPhone</p> <FontAwesomeIcon icon={faArrowRight}/></a>
+                    <a onClick={()=> handleSendCategories('computer')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>Laptop/PC</p> <FontAwesomeIcon icon={faArrowRight}/></a>
+                    <a onClick={()=> handleSendCategories('accessories')} className="w-full flex justify-between hover:cursor-pointer items-center"><p>Aksesoris</p> <FontAwesomeIcon icon={faArrowRight}/></a>
+                    <a onClick={()=> navigate('/products')} className="w-full flex items-center hover:cursor-pointer hover:underline underline-offset-4 hover:text-primary"><p className="text-primary font-medium">Lihat semua</p></a>
+                </div>
+                </div>
+                <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
+                <div className="head flex justify-between items-center">
+                    <p className="font-medium">Harga</p>
+                    <button className="btn btn-ghost" onClick={handleSendFilter}>Terapkan</button>
+                </div>
+                <div className="item-content flex flex-col gap-2 items-center">
+                    <input type="number" onChange={(e)=>setFilterPrice({...filterPrice, min: Number(e.target.value)})} name="minPrice" id="hargaMin" placeholder="Minimal" className="input w-full input-neutral bg-transparent"/>
+                    <input type="number" onChange={(e)=>setFilterPrice({...filterPrice, max: Number(e.target.value)})} name="maxPrice" id="hargaMax" placeholder="Maksimal" className="input w-full input-neutral bg-transparent"/>
+                </div>
+            </div>  
+            </div>
+            </div>
+
+            <div className="flex flex-col items-center max-lg:hidden category border border-gray-500 p-4 rounded-sm gap-5">
                 <p className="font-medium">Our Technologies</p>
                 <div className="logo grid grid-cols-3 gap-5">
                     <div className="group size-15 justify-center p-1 flex items-center border border-base-200 rounded-md">

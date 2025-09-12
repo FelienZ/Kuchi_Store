@@ -11,7 +11,9 @@ function StoreReducer(list, action){
         case "GET_DATA":
             return {...list, product: action.payload}
         case "SET_STATUS":
-            return {...list, }
+            return {...list, status: action.status }
+        case "RESET_STATUS":
+            return {...list, status: ''}
     }
 }
 
@@ -22,17 +24,44 @@ export default function StoreLayout(){
     })
     useEffect(()=> {
         async function FetchData() {
-            const response = await fetch('http://localhost:3000/api/products')
-            const data = await response.json();
-            dispatch({
-                type: 'GET_DATA',
-                payload: data
-            })
+            try {
+                const response = await fetch('http://localhost:3000/api/products')
+                const result = await response.json();
+                console.log(result)
+                if(result.type === 'success'){
+                    dispatch({
+                    type: 'GET_DATA',
+                    payload: result.payload
+                })
+                }
+            } catch (error) {
+                dispatch({
+                    type: 'SET_STATUS',
+                    status: 'fetch_fail'
+                })
+            }
         }
         FetchData()
     },[])
     // console.log('tes : ', store.filter)
     const [triggerRegister, setTriggerRegister] = useState(false)
+    const [message, setMessage] = useState(null)
+    function setAlert(value){
+        setMessage(value)
+        setTimeout(() => {
+            setMessage(null)
+        }, 1100);
+    }
+    useEffect(()=> {
+        if(store.status.trim() === 'fetch_fail'){
+            setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'})
+        }
+        if(store.status){
+            dispatch({
+                type: 'RESET_STATUS'
+            })
+        }
+    }, [store.status])
     function handleTriggerFormRegister(){
         setTriggerRegister(true)
     }
@@ -57,6 +86,11 @@ export default function StoreLayout(){
                     <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin}/>
                     <div className="my-15 w-full">
                         <Outlet/>
+                        {message ? (
+                        <div className={`${message.type.trim()==='fail' ? 'alert-error' : 'alert-success'} fixed inset-0 text-white z-40 alert place-self-end m-4`}>
+                            {message.text}
+                        </div>
+                    ) : ''}
                     </div>
                     <Footer/>
                 </ProductReducerContext.Provider>

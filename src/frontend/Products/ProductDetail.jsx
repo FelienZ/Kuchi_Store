@@ -7,14 +7,16 @@ import { faMinus, faPlus, faShoppingCart } from "@fortawesome/free-solid-svg-ico
 export default function ProductDetail(){
     const { id } = useParams()
     const product = useContext(ProductList)
-    const matchProduct = product.find(i => i.id === Number(id))
-    const data = matchProduct.specifications
+    const matchProduct = product.find(i => i.id === id)
     const mapData = []
+    if(matchProduct){
+    const data = matchProduct.specifications
     for( let key in data){
         mapData.push({key, data: data[key]})
     }
+    }
     return (
-        <section className="min-h-screen grid mt-20 w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
+        mapData.length? (<section className="min-h-screen grid mt-20 w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
             <div className="left max-md:order-2 p-3 flex w-full flex-col gap-5">
                 <div className="image max-md:hidden">
                     <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-80 max-sm:size-50 p-3 self-center border border-gray-400"/>
@@ -66,6 +68,10 @@ export default function ProductDetail(){
                     </div>
                 </div>
             </div>
-        </section>
+        </section>) : (
+            <section className="min-h-screen grid mt-20 place-content-center">
+                <span className="loading loading-bars loading-xl text-lime-500"></span>
+            </section>
+        )
     )
 }

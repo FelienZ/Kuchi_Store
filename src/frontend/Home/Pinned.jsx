@@ -17,7 +17,7 @@ export default function Pinned({title, item, stats}){
     function checkStatus(status){
         switch(status){
             case "new":
-                navigate('/products?status=new')
+                navigate('/products?status=_new')
                 break;
             case "popular":
                 navigate('/products?status=popular')

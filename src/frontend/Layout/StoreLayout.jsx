@@ -1,7 +1,6 @@
 import { Outlet } from "react-router";
 import Navigation from "../Body/Navigation";
-import { useReducer, useState } from "react";
-import { product } from "../Products/product";
+import { useEffect, useReducer, useState } from "react";
 import { ProductList, ProductReducerContext } from "../../storeContext";
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
@@ -9,17 +8,29 @@ import Register from "../Form/RegisterForm";
 
 function StoreReducer(list, action){
     switch(action.type){
+        case "GET_DATA":
+            return {...list, product: action.payload}
         case "SET_STATUS":
             return {...list, }
-        
     }
 }
 
 export default function StoreLayout(){
     const [store, dispatch] = useReducer(StoreReducer, {
-        product: product,
+        product: [],
         status: ''
     })
+    useEffect(()=> {
+        async function FetchData() {
+            const response = await fetch('http://localhost:3000/api/products')
+            const data = await response.json();
+            dispatch({
+                type: 'GET_DATA',
+                payload: data
+            })
+        }
+        FetchData()
+    },[])
     // console.log('tes : ', store.filter)
     const [triggerRegister, setTriggerRegister] = useState(false)
     function handleTriggerFormRegister(){

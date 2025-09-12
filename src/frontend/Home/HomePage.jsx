@@ -7,7 +7,7 @@ import Pinned from "./Pinned";
 
 export default function HomePage(){
   const product = useContext(ProductList);
-  const newProducts = product.filter(i => i.new === true);
+  const newProducts = product.filter(i => i._new === true);
   const popularProducts = product.filter(i=> i.popular === true);
   const recommended = product.filter(i=> i.recommended === true);
   const [selectedItem, setSelectItem] = useState(null)

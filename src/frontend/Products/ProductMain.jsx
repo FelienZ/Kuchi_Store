@@ -36,7 +36,7 @@ function ProductMain() {
     const matchCategory = category? i.type.trim().toLowerCase() === category.trim().toLowerCase() : i.type;
     const matchMin = minPrice ? i.price >= minPrice : true;
     const matchMax = maxPrice ? i.price <= maxPrice : true;
-    const matchNew = stats.trim() === 'new' ? i.new === true : true;
+    const matchNew = stats.trim() === '_new' ? i._new === true : true;
     const matchPopular = stats.trim() === 'popular' ? i.popular === true : true;
     const matchRecommended = stats.trim() === 'recommended' ? i.recommended === true : true;
     return matchKeyword && matchCategory && matchMin && matchMax && matchNew && matchPopular && matchRecommended

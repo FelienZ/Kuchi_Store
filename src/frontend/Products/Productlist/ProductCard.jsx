@@ -10,8 +10,8 @@ export default function ProductCard({products, onCheckout}){
               <img src={products.url} alt={`Gambar-${products.name}`} className='max-sm:size-30 size-40 rounded-md' />
             </div>
             <div className="content flex flex-col gap-2 items-center">
-              <div className="detail max-sm:text-sm text-center h-20">
-                <p className='font-bold text-md h-15 flex items-center '>{products.name}</p>
+              <div className="detail max-sm:text-sm text-center h-full">
+                <p className='font-bold text-md h-25 flex items-center '>{products.name}</p>
                 <p>{products.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
               </div>
               {/* <div className="buttons flex justify-center">

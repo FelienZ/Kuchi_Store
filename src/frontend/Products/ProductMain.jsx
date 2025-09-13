@@ -48,7 +48,7 @@ function ProductMain() {
         <div className="item-content flex flex-col lg:grid lg:grid-cols-3 gap-5">
             <Drawer/>
           <div className={`product flex flex-col ${filterProduct.length ? '':'place-content-center'} col-span-2`}>
-            <p className={`font-bold ${filterProduct.length ? 'flex justify-end' : 'hidden'}`}>{category.trim() !== '' ? category.toUpperCase() : 'Halaman Produk'}</p>
+            <p className={`font-bold ${filterProduct.length ? 'flex justify-end' : 'hidden'}`}>{(category.trim() !== '' || stats.trim() !== '') ? (category.toUpperCase() || `${stats.toUpperCase()} PRODUCTS`) : 'Halaman Produk'}</p>
             {filterProduct.length > 0 ? 
             (<section className='grid max-sm:grid-cols-2 max-xl:grid-cols-3 grid-cols-4 gap-2'>
                 {filterProduct.map(item => (

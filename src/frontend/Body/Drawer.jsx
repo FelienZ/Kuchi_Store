@@ -1,19 +1,21 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useState } from "react";
+import {useContext, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { updateQueryParams } from "../../queryParams";
+import { ProductReducerContext } from "../../storeContext";
 
 export default function Drawer(){
     const price = {
         min: null,
         max: null
     }
-    // const dispatch = useContext(ProductReducerContext)
+    const dispatch = useContext(ProductReducerContext)
     const [filterPrice, setFilterPrice] = useState(price)
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
     function handleSendFilter(){
+        if(filterPrice.min === null && filterPrice.max === null) dispatch({type: 'SET_STATUS', status: 'invalid'})
         updateQueryParams(filterPrice, navigate, searchParams)
     }
     function handleSendCategories(category){

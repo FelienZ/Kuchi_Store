@@ -27,12 +27,12 @@ export default function StoreLayout(){
             try {
                 const response = await fetch('http://localhost:3000/api/products')
                 const result = await response.json();
-                console.log(result)
                 if(result.type === 'success'){
                     dispatch({
                     type: 'GET_DATA',
                     payload: result.payload
                 })
+                return
                 }
             } catch (error) {
                 dispatch({
@@ -55,6 +55,9 @@ export default function StoreLayout(){
     useEffect(()=> {
         if(store.status.trim() === 'fetch_fail'){
             setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'})
+        }
+        if(store.status.trim() === 'invalid'){
+            setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
         }
         if(store.status){
             dispatch({

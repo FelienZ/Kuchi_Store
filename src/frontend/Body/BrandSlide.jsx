@@ -2,7 +2,7 @@ import { brands } from "../Products/Brands";
 
 export default function Brands(){
     return(
-        <div className="overflow-hidden z-0 md:w-[80%] flex items-center text-base-300">
+        <div className="overflow-hidden z-0 md:w-[80%] my-5 flex items-center text-base-300">
             {/* <p className="text-lg font-bold">Our Brands</p> */}
         <div className="flex whitespace-nowrap animate-marquee gap-5 md:gap-15 items-center px-4">
             {brands.map(item => (

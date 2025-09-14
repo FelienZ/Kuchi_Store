@@ -1,4 +1,4 @@
-const productServices = require('../services/productServices/productServices.cjs')
+const productServices = require('../services/productServices.cjs')
 exports.getProducts = async(req, res)=> {
     try {
         const data = await productServices.getProducts()

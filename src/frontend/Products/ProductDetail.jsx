@@ -17,7 +17,7 @@ export default function ProductDetail(){
     }
     const [order, setOrder] = useState(0);
     return (
-        mapData.length? (<section className="min-h-screen grid mt-20 max-sm:mt-0 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
+        mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
             <div className="left max-md:order-2 p-3 flex w-full flex-col gap-5">
                 {/* Image Kalau > md */}
                 <div className="image max-md:hidden">
@@ -44,7 +44,7 @@ export default function ProductDetail(){
                 <div className="divide-y max-md:order-1 flex flex-col gap-4 p-3 top-[128px]">
                     {/* Image Kalau < md */}
                     <div className="image max-md:flex justify-center hidden p-2">
-                        <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-90 max-sm:size-70 p-3 self-center border border-gray-400"/>
+                        <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-90 mb-5 max-sm:size-70 p-3 self-center border border-gray-400"/>
                     </div>
                     <div className="items flex flex-col gap-3">
                         <p className="font-black md:text-2xl">{matchProduct.name.toUpperCase()}</p>

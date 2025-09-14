@@ -19,13 +19,15 @@ export default function HomePage(){
         setSelectItem(null)
     }
   return(
-    <section className='h-full flex flex-col justify-between gap-15 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
+    <section className='h-full flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
       <Hero/>
       <Brands/>
       <CheckoutForm product={selectedItem} onClose={handleClose}/>
       <div className="items flex flex-col gap-30 max-sm:w-full max-sm:px-3 w-[80%]">
         <Pinned title={"New Products"} item={newProducts} triggerInfo={showFormCheckout} stats='new'/>
+        <hr className="text-gray-400"/>
         <Pinned title={"Popular Products"} item={popularProducts} triggerInfo={showFormCheckout} stats='popular'/>
+        <hr className="text-gray-400"/>
         <Pinned title={"Recommended For You"} item={recommended} triggerInfo={showFormCheckout} stats='recommended'/>
       </div>
     </section>

@@ -1,20 +1,22 @@
 const supabase = require('./supabase/supabaseClient.cjs')
 const bcrypt = require('bcrypt')
 
+async function verifyNewUser(email) {
+    const {data} = await supabase.from('users').select('email').eq('email', email).maybeSingle()
+    if(data){
+        throw new Error('Gagal Menambahkan User, email yang sama telah digunakan')
+    }
+}
+
 async function addUser({username, email, password}) {
     await verifyNewUser(email)
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log('password: ', hashedPassword)
     const { data, error } = await supabase.from('users').insert([{username, email, password: hashedPassword}])
     if(error) throw new Error('Gagal Menyimpan User')
     return data;
 }
 
-async function verifyNewUser(email) {
-    const data = await supabase.from('users').select('email').eq('email', email).maybeSingle()
-    if(data){
-        throw new Error('Gagal Menambahkan User, email yang sama telah digunakan')
-    }
-}
 
 async function verifyUserCredentials(email, password) {
     const { data, error } = await supabase.from('users').select('id, password').eq('email', email).single()
@@ -25,6 +27,14 @@ async function verifyUserCredentials(email, password) {
     return id;
 }
 
+async function getUserById(userId) {
+    const data = await supabase.from('users').select('id, name, email').eq('id', userId).single()
+    if(!data){
+        throw new Error('User Tidak Ditemukan')
+    }
+    return data;
+}
+
 module.exports = {
-    addUser, verifyNewUser, verifyUserCredentials
+    addUser, verifyNewUser, verifyUserCredentials, getUserById
 }

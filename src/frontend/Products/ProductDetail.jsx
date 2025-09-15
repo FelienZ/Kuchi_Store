@@ -47,7 +47,7 @@ export default function ProductDetail(){
                         <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-90 mb-5 max-sm:size-70 p-3 self-center border border-gray-400"/>
                     </div>
                     <div className="items flex flex-col gap-3">
-                        <p className="font-black md:text-2xl">{matchProduct.name.toUpperCase()}</p>
+                        <p className="font-black md:text-2xl max-sm:text-center">{matchProduct.name.toUpperCase()}</p>
                         <p className="font-bold md:text-xl text-lime-500">{matchProduct.price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</p>
                     </div>
                     <div className="items-detail text-sm flex flex-col gap-3">

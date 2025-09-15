@@ -12,6 +12,8 @@ function StoreReducer(list, action){
             return {...list, product: action.payload}
         case "SET_STATUS":
             return {...list, status: action.status }
+        case "SET_USER":
+            return {...list, user: action.data, status: action.status}
         case "RESET_STATUS":
             return {...list, status: ''}
     }
@@ -20,6 +22,7 @@ function StoreReducer(list, action){
 export default function StoreLayout(){
     const [store, dispatch] = useReducer(StoreReducer, {
         product: [],
+        user: null,
         status: ''
     })
     useEffect(()=> {
@@ -50,7 +53,7 @@ export default function StoreLayout(){
         setMessage(value)
         setTimeout(() => {
             setMessage(null)
-        }, 1100);
+        }, 1600);
     }
     useEffect(()=> {
         if(store.status.trim() === 'fetch_fail'){
@@ -58,6 +61,12 @@ export default function StoreLayout(){
         }
         if(store.status.trim() === 'invalid'){
             setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
+        }
+        if(store.status.trim() === 'invalid_auth'){
+            setAlert({text: 'Data Tidak Valid!', type: 'fail'})
+        }
+        if(store.status.trim() === 'unmatch_data'){
+            setAlert({text: 'Password Tidak Cocok!', type: 'fail'})
         }
         if(store.status){
             dispatch({
@@ -79,6 +88,7 @@ export default function StoreLayout(){
     function handleSendCloseLogin(value){
         setTriggerLogin(value)
     }
+
 
     return(
         <div className ='min-h-screen font-[Roboto] flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>

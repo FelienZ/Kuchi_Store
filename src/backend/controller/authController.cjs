@@ -37,6 +37,7 @@ exports.postRegister = async(req, res) => {
                     status: 'fail'
                 })
             }
+            console.log('register jalan')
         const user = await usersServices.addUser(req.body);
         res.status(201).json({status: 'success', message: 'berhasil terdaftar', data: user})
     } catch (error) {

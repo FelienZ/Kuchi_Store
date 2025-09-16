@@ -8,6 +8,7 @@ export default function Login({istriggered, sendClose}){
     }
     const modalRef = useRef()
     const dispatch = useContext(ProductReducerContext)
+    const [isLoading, setIsLoading] = useState(false)
     const [account, setAccount] = useState(data)
     useEffect(()=> {
         function handleClickOutside(event){
@@ -20,34 +21,52 @@ export default function Login({istriggered, sendClose}){
     })
     async function HandleLogin(e){
         e.preventDefault();
+        setIsLoading(true)
         if(account.email.trim() === '' || account.password.trim() === ''){
             dispatch({
                 type: 'SET_STATUS',
-                status:'invalid_auth'
-            })
-            return
-        }
-        const response = await fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(account)
-        })
-        const result = await response.json();
-        console.log('cek hasil: ', result)
-        if(result.status.trim() === 'success'){
-            dispatch({
-                type:'SET_USER',
-                data: result.data.user,
-                status: 'success_login'
-            })
-        }else{
-            dispatch({
-                type:'SET_STATUS',
                 status:'invalid_login'
             })
+            setIsLoading(false)
+            handleClose()
+            return
         }
+        try {
+            const response = await fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify(account)
+            })
+            const result = await response.json();
+            // console.log('cek hasil: ', result)
+            if(result.status.trim() === 'success'){
+                const user = result.data.user
+                setIsLoading(false)
+                localStorage.setItem('user_data', JSON.stringify(user))
+                localStorage.setItem('access_token', JSON.stringify(result.data.accesstoken))
+                dispatch({
+                    type:'SET_USER',
+                    data: user,
+                    status: 'success_login'
+                })
+            }else{
+                dispatch({
+                    type:'SET_STATUS',
+                    status:'invalid_login'
+                })
+            }
+        } catch (error) {
+            dispatch({
+                    type:'SET_STATUS',
+                    status:'invalid_login'
+                })
+        }
+        finally{
+        setIsLoading(false)
         handleClose()
-        setAccount({email: '', password: ''})
+        setAccount({email: '', password: ''})    
+        }
+        
     }
     function handleClose(){
         istriggered === true ? sendClose(false) : ''
@@ -68,7 +87,7 @@ export default function Login({istriggered, sendClose}){
                     <p className="hover:cursor-pointer text-left">Lupa Password?</p>
                     <p className="hover:cursor-pointer text-right">Belum Memiliki Akun?</p>
                 </div>
-                <button className="btn btn-neutral w-full">Login</button>
+                <button type="submit" className={`btn btn-neutral w-full ${isLoading ? 'cursor-not-allowed text-neutral opacity-80' : ''}`} disabled={isLoading}> {isLoading ? <>Loading.. <span className="loading loading-spinner loading-sm text-info"></span></>: 'Login'}</button>
             </form>
         </section>
     )

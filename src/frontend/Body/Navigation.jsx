@@ -1,14 +1,16 @@
-import { faBars, faCartShopping, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightToBracket, faBars, faCartShopping, faMagnifyingGlass, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { updateQueryParams } from "../../queryParams";
+import { ProductReducerContext, UserContext } from "../../storeContext";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [keyword, setKeyword] = useState('')
     const [searchParams] = useSearchParams()
     const navigate = useNavigate();
-
+    const dispatch = useContext(ProductReducerContext)
+    const isLogin = useContext(UserContext)
     function handleSendKeyword(){
         updateQueryParams({keyword}, navigate, searchParams)
     }
@@ -16,6 +18,15 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
         updateQueryParams({category}, navigate, searchParams)
     }
     
+    function handleLogout(){
+        localStorage.removeItem('user_data')
+        dispatch({
+            type: 'SET_USER',
+            data: null,
+            status: 'success_logout'
+        })
+    }
+
     return(
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">
@@ -29,11 +40,15 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     <Link to={'/'}><li>Home</li></Link>
                     </div>
                 <hr className="text-gray-400"/>
+                {isLogin ? (
+                    <li className="hover:cursor-pointer">View Profile</li>
+                ): (
                 <div className="flex gap-2">
                     <li className="hover:cursor-pointer" onClick={sendTriggerRegister}>Daftar</li>
                     <p>|</p>
                     <li className="hover:cursor-pointer" onClick={sendTriggerLogin}>Masuk</li>
                 </div>
+                )}
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
                     <NavLink to={'/information/help'}><li>Bantuan</li></NavLink>
@@ -55,12 +70,26 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                 </button>
             </div>
         </div>
-        <div className="right flex max-sm:hidden gap-5 items-center text-nowrap w-fit">
-            <Link to={'/checkout'}><FontAwesomeIcon icon={faCartShopping}/></Link>
-            <div className="auth flex gap-2">
-               |  <p className="hover:cursor-pointer" onClick={sendTriggerRegister}>Daftar</p> |
-                <p className="hover:cursor-pointer" onClick={sendTriggerLogin}>Masuk</p> |
+        <div className="right flex divide-x max-sm:hidden justify-between items-center text-nowrap w-fit">
+            <Link className='pr-3' to={'/checkout'}><FontAwesomeIcon icon={faCartShopping}/></Link>
+            {isLogin ? (
+                <div className="flex items-center gap-3">
+                    <div className="pl-3 avatar dropdown dropdown-center">
+                    <div tabIndex={0} role="button" className="ring-gray-600 hover:cursor-pointer text-gray-600 place-items-center place-content-center bg-white ring-offset-base-100 size-8 rounded-full ring-2">
+                        <p>{isLogin.username[0].toUpperCase()}</p>
+                    </div>
+                    <ul tabIndex={0} className="dropdown-content menu bg-neutral rounded-box z-1 w-52 p-2 mt-13 shadow-sm">
+                        <li><a className="flex items-center gap-4"><FontAwesomeIcon icon={faUser}/> Profile</a></li>
+                        <li onClick={handleLogout}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
+                    </ul>
+                    </div>
+                </div>
+            ) : (
+            <div className="auth flex divide-x">
+                <p className="hover:cursor-pointer px-3" onClick={sendTriggerRegister}>Daftar</p>
+                <p className="hover:cursor-pointer pl-3" onClick={sendTriggerLogin}>Masuk</p>
             </div>
+            )}
         </div>
     </header>
     )

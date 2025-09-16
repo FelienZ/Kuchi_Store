@@ -11,7 +11,6 @@ async function verifyNewUser(email) {
 async function addUser({username, email, password}) {
     await verifyNewUser(email)
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log('password: ', hashedPassword)
     const { data, error } = await supabase.from('users').insert([{username, email, password: hashedPassword}])
     if(error) throw new Error('Gagal Menyimpan User')
     return data;
@@ -28,7 +27,7 @@ async function verifyUserCredentials(email, password) {
 }
 
 async function getUserById(userId) {
-    const data = await supabase.from('users').select('id, name, email').eq('id', userId).single()
+    const { data } = await supabase.from('users').select('id, username, email').eq('id', userId).single()
     if(!data){
         throw new Error('User Tidak Ditemukan')
     }

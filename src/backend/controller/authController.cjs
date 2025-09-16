@@ -14,15 +14,15 @@ exports.postAuthentication = async(req, res) => {
             })
         }
         const {email, password} = req.body;
-
         const id = await usersServices.verifyUserCredentials(email, password)
 
         const accessToken = tokenManager.generateAccessToken({id})
         const refreshToken = tokenManager.generateRefreshToken({id})
-
+        
         await authServices.addRefreshToken(refreshToken)
-
-        res.status(201).json({status: 'success', message: 'Berhasil Terotentikasi', data: {accessToken, refreshToken}})
+        const userData = await usersServices.getUserById(id)
+        
+        res.status(201).json({status: 'success', message: 'Berhasil Terotentikasi', data: {user: userData , accessToken, refreshToken}})
     } catch (error) {
         res.status(500).json({status: 'fail', message: 'Kesalahan Server'})
     }

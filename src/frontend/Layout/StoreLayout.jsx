@@ -62,8 +62,17 @@ export default function StoreLayout(){
         if(store.status.trim() === 'invalid'){
             setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
         }
-        if(store.status.trim() === 'invalid_auth'){
-            setAlert({text: 'Data Tidak Valid!', type: 'fail'})
+        if(store.status.trim() === 'invalid_register'){
+            setAlert({text: 'Gagal Registrasi, Data Tidak Valid!', type: 'fail'})
+        }
+        if(store.status.trim() === 'success_register'){
+            setAlert({text: 'Berhasil Mendaftar!', type: 'success'})
+        }
+        if(store.status.trim() === 'invalid_login'){
+            setAlert({text: 'Gagal Login, Data Tidak Valid!', type: 'fail'})
+        }
+        if(store.status.trim() === 'success_login'){
+            setAlert({text: 'Berhasil Login!', type: 'success'})
         }
         if(store.status.trim() === 'unmatch_data'){
             setAlert({text: 'Password Tidak Cocok!', type: 'fail'})
@@ -81,7 +90,7 @@ export default function StoreLayout(){
     function handleTriggerFormLogin(){
         setTriggerLogin(true)
     }
-    // console.log('tes: ', store)
+    console.log('tes: ', store.user)
     function handleSendCloseRegister(value){
         setTriggerRegister(value)
     }

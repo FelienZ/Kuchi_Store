@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
+import { ProductReducerContext } from "../../storeContext"
 
-export default function Login({istriggered, sendLogin, sendClose}){
+export default function Login({istriggered, sendClose}){
     const data = {
         email: '',
         password: ''
     }
     const modalRef = useRef()
+    const dispatch = useContext(ProductReducerContext)
     const [account, setAccount] = useState(data)
     useEffect(()=> {
         function handleClickOutside(event){
@@ -16,9 +18,34 @@ export default function Login({istriggered, sendLogin, sendClose}){
         document.addEventListener('mousedown', handleClickOutside)
         return()=> document.removeEventListener('mousedown', handleClickOutside)
     })
-    function handleSendLogin(e){
+    async function HandleLogin(e){
         e.preventDefault();
-        // sendLogin(account)
+        if(account.email.trim() === '' || account.password.trim() === ''){
+            dispatch({
+                type: 'SET_STATUS',
+                status:'invalid_auth'
+            })
+            return
+        }
+        const response = await fetch('http://localhost:3000/api/auth/login', {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(account)
+        })
+        const result = await response.json();
+        console.log('cek hasil: ', result)
+        if(result.status.trim() === 'success'){
+            dispatch({
+                type:'SET_USER',
+                data: result.data.user,
+                status: 'success_login'
+            })
+        }else{
+            dispatch({
+                type:'SET_STATUS',
+                status:'invalid_login'
+            })
+        }
         handleClose()
         setAccount({email: '', password: ''})
     }
@@ -27,7 +54,7 @@ export default function Login({istriggered, sendLogin, sendClose}){
     }
     return(
         <section className={`fixed z-40 backdrop-blur-sm inset-0 bg-black/20 justify-center items-center ${istriggered ? 'flex': 'hidden'}`}>
-            <form ref={modalRef} action="" onSubmit={handleSendLogin} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
+            <form ref={modalRef} action="" onSubmit={HandleLogin} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">Login</p>
                 <div className="name flex flex-col w-full">
                     <p>Your Email</p>

@@ -28,18 +28,17 @@ export default function Register({istriggered, sendClose}){
             body: JSON.stringify(payload)
         })
         const result = await response.json()
-        console.log('cek: ', result)
         if(result.status.trim() === 'success'){
             dispatch({
                 type:'SET_USER',
                 data: result.data,
-                status: 'success'
+                status: 'success_register'
             })
             return
         }else{
             dispatch({
                 type:'SET_STATUS',
-                status:'invalid_auth'
+                status:'invalid_register'
             })
             return
         }

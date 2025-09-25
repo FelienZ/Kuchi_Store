@@ -13,6 +13,7 @@ import Contact from './frontend/Information/Contact.jsx'
 import Partner from './frontend/Information/Partner.jsx'
 import Tutorials from './frontend/Information/Tutorials.jsx'
 import Services from './frontend/Information/Services.jsx'
+import ProfilePages from './frontend/User/profilePages.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='/products' element={<ProductMain/>}/>
           <Route path='/products/:id' element={<ProductDetail/>}/>
           <Route path='/checkout' element={<CheckoutPage/>}/>
+          <Route path='/profile' element={<ProfilePages/> }/>
           <Route path='/information' element={<HelpPage/>}>
             <Route path='help' element={<Help/>}/>
             <Route path='about' element={<About/>}/>

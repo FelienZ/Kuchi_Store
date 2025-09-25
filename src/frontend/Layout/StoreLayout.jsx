@@ -53,7 +53,7 @@ export default function StoreLayout(){
         setMessage(value)
         setTimeout(() => {
             setMessage(null)
-        }, 1600);
+        }, 2000);
     }
 
     useEffect(()=>{
@@ -68,41 +68,35 @@ export default function StoreLayout(){
     }, [])
 
     useEffect(()=> {
-        if(store.status.trim() === 'fetch_fail'){
-            setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'})
-        }
-        if(store.status.trim() === 'invalid'){
-            setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
-        }
-        if(store.status.trim() === 'invalid_register'){
-            setAlert({text: 'Gagal Registrasi, Data Tidak Valid!', type: 'fail'})
-        }
-        if(store.status.trim() === 'success_register'){
-            setAlert({text: 'Berhasil Mendaftar!', type: 'success'})
-        }
-        if(store.status.trim() === 'invalid_login'){
-            setAlert({text: 'Gagal Login, Data Tidak Valid!', type: 'fail'})
-        }
-        if(store.status.trim() === 'success_login'){
-            setAlert({text: 'Berhasil Login!', type: 'success'})
-        }
-        if(store.status.trim() === 'success_logout'){
-            setAlert({text: 'Berhasil Logout!', type: 'success'})
-        }
-        if(store.status.trim() === 'unmatch_data'){
-            setAlert({text: 'Password Tidak Cocok!', type: 'fail'})
-        }
-        if(store.status){
-            dispatch({
-                type: 'RESET_STATUS'
-            })
-        }
+       switch(store.status.trim()){
+            case "invalid_register":
+                return setAlert({text: 'Filter Tidak Valid!', type: 'fail'});
+            case "success_register":
+                return setAlert({text: 'Berhasil Mendaftar!', type: 'success'});
+            case "fetch_fail":
+                return setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'});
+            case "invalid_login":
+                return setAlert({text: 'Gagal Login, Data Tidak Valid!', type: 'fail'});
+            case "not_loggedin":
+                return setAlert({text: 'Anda Belum Login!', type: 'fail'});
+            case "success_login":
+                return setAlert({text: 'Berhasil Login!', type: 'success'});
+            case "success_logout":
+                return setAlert({text: 'Berhasil Logout!', type: 'success'});
+            case "unmatch_data":
+                return setAlert({text: 'Data Tidak Valid!', type: 'fail'})
+            case "invalid_filter":
+                return setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
+       }
+        store.status ? (dispatch({type: 'RESET_STATUS'})) : ''
     }, [store.status])
     function handleTriggerFormRegister(){
+        setTriggerLogin(false)
         setTriggerRegister(true)
     }
     const [triggerLogin, setTriggerLogin] = useState(false)
     function handleTriggerFormLogin(){
+        setTriggerRegister(false)
         setTriggerLogin(true)
     }
     // console.log('tes: ', store.user)
@@ -120,8 +114,8 @@ export default function StoreLayout(){
                 <ProductReducerContext.Provider value={dispatch}>
                     <UserContext.Provider value={store.user}>
                         <Navigation sendTriggerRegister={handleTriggerFormRegister} sendTriggerLogin={handleTriggerFormLogin}/>
-                        <Register istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
-                        <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin}/>
+                        <Register sendTriggerLogin={handleTriggerFormLogin} istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
+                        <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin} sendTriggerRegister={handleTriggerFormRegister}/>
                         <div className="my-15 w-full">
                             <Outlet/>
                             {message ? (

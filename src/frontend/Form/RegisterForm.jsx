@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import { ProductReducerContext } from "../../storeContext";
 
-export default function Register({istriggered, sendClose}){
+export default function Register({istriggered, sendClose, sendTriggerLogin}){
     const data = {
         username: '',
         email: '',
@@ -89,7 +89,7 @@ export default function Register({istriggered, sendClose}){
                     <input type="password" value={account.confirmPassword} onChange={e=> setAccount({...account, confirmPassword: e.target.value})} placeholder="Enter Confirm Password" className="input w-full bg-transparent border border-neutral-500"/>
                 </div>
                 <div className="addition flex items-center text-sm w-full justify-end">
-                    <p className="hover:cursor-pointer text-right">Sudah Memiliki Akun?</p>
+                    <p onClick={sendTriggerLogin} className="hover:cursor-pointer text-right">Sudah Memiliki Akun?</p>
                 </div>
                 <button className="btn btn-neutral w-full">Register Now</button>
             </form>

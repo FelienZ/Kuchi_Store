@@ -15,7 +15,7 @@ export default function Drawer(){
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
     function handleSendFilter(){
-        if(filterPrice.min === null && filterPrice.max === null) dispatch({type: 'SET_STATUS', status: 'invalid'})
+        if(filterPrice.min === null && filterPrice.max === null) dispatch({type: 'SET_STATUS', status: 'invalid_filter'})
         updateQueryParams(filterPrice, navigate, searchParams)
     }
     function handleSendCategories(category){

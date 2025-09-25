@@ -17,9 +17,16 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     function handleSendCategories(category){
         updateQueryParams({category}, navigate, searchParams)
     }
-    
+    function checkStatus(){
+        const isLoggedIn = localStorage.getItem('access_token')
+        isLoggedIn ? navigate('/profile') : dispatch({
+            type: 'SET_STATUS',
+            status:'not_loggedin'
+        })
+    }
     function handleLogout(){
         localStorage.removeItem('user_data')
+        localStorage.removeItem('access_token')
         dispatch({
             type: 'SET_USER',
             data: null,
@@ -79,7 +86,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                         <p>{isLogin.username[0].toUpperCase()}</p>
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-neutral rounded-box z-1 w-52 p-2 mt-13 shadow-sm">
-                        <li><a className="flex items-center gap-4"><FontAwesomeIcon icon={faUser}/> Profile</a></li>
+                        <li onClick={()=>checkStatus()}><p className="flex items-center gap-4"><FontAwesomeIcon icon={faUser}/> {isLogin.username}</p></li>
                         <li onClick={handleLogout}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
                     </ul>
                     </div>

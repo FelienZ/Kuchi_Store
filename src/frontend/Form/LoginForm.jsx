@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import { ProductReducerContext } from "../../storeContext"
 
-export default function Login({istriggered, sendClose}){
+export default function Login({istriggered, sendClose, sendTriggerRegister}){
     const data = {
         email: '',
         password: ''
@@ -43,7 +43,7 @@ export default function Login({istriggered, sendClose}){
                 const user = result.data.user
                 setIsLoading(false)
                 localStorage.setItem('user_data', JSON.stringify(user))
-                localStorage.setItem('access_token', JSON.stringify(result.data.accesstoken))
+                localStorage.setItem('access_token', JSON.stringify(result.data.accessToken))
                 dispatch({
                     type:'SET_USER',
                     data: user,
@@ -68,6 +68,7 @@ export default function Login({istriggered, sendClose}){
         }
         
     }
+
     function handleClose(){
         istriggered === true ? sendClose(false) : ''
     }
@@ -85,7 +86,7 @@ export default function Login({istriggered, sendClose}){
                 </div>
                 <div className="addition text-sm flex items-center w-full justify-between">
                     <p className="hover:cursor-pointer text-left">Lupa Password?</p>
-                    <p className="hover:cursor-pointer text-right">Belum Memiliki Akun?</p>
+                    <p onClick={sendTriggerRegister} className="hover:cursor-pointer text-right">Belum Memiliki Akun?</p>
                 </div>
                 <button type="submit" className={`btn btn-neutral w-full ${isLoading ? 'cursor-not-allowed text-neutral opacity-80' : ''}`} disabled={isLoading}> {isLoading ? <>Loading.. <span className="loading loading-spinner loading-sm text-info"></span></>: 'Login'}</button>
             </form>

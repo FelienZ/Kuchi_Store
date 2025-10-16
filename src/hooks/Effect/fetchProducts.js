@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export default function FetchProducts({dispatch}){
     useEffect(()=> {
-            async function FetchData() {
+        async function FetchData() {
                 try {
                     const response = await fetch('http://localhost:3000/api/products')
                     const result = await response.json();

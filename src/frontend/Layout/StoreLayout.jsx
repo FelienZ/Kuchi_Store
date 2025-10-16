@@ -1,13 +1,13 @@
 import { Outlet } from "react-router";
 import Navigation from "../Body/Navigation";
-import { useEffect, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import { ProductList, ProductReducerContext, UserContext } from "../../storeContext";
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
-import MessageAlert from "../../hooks/messageAlert";
-import FetchProducts from "../../hooks/fetchProducts";
-import FetchUser from "../../hooks/fetchUser";
+import MessageAlert from "../../hooks/Effect/messageAlert";
+import FetchProducts from "../../hooks/Effect/fetchProducts";
+import FetchUser from "../../hooks/Effect/fetchUser";
 
 function StoreReducer(list, action){
     switch(action.type){
@@ -32,6 +32,7 @@ export default function StoreLayout(){
     // console.log('tes : ', store.filter)
     const [triggerRegister, setTriggerRegister] = useState(false)
     const [message, setMessage] = useState(null)
+
     function setAlert(value){
         setMessage(value)
         setTimeout(() => {

@@ -2,7 +2,7 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import CheckWindowWidth from "../../hooks/checkWindow";
+import CheckWindowWidth from "../../hooks/Effect/checkWindow";
 
 export default function Pinned({title, item, stats}){
     const navigate = useNavigate()

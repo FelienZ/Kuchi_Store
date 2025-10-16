@@ -5,6 +5,9 @@ import { ProductList, ProductReducerContext, UserContext } from "../../storeCont
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
+import MessageAlert from "../../hooks/messageAlert";
+import FetchProducts from "../../hooks/fetchProducts";
+import FetchUser from "../../hooks/fetchUser";
 
 function StoreReducer(list, action){
     switch(action.type){
@@ -25,27 +28,7 @@ export default function StoreLayout(){
         user: null,
         status: ''
     })
-    useEffect(()=> {
-        async function FetchData() {
-            try {
-                const response = await fetch('http://localhost:3000/api/products')
-                const result = await response.json();
-                if(result.type === 'success'){
-                    dispatch({
-                    type: 'GET_DATA',
-                    payload: result.payload
-                })
-                return
-                }
-            } catch (error) {
-                dispatch({
-                    type: 'SET_STATUS',
-                    status: 'fetch_fail'
-                })
-            }
-        }
-        FetchData()
-    },[])
+    
     // console.log('tes : ', store.filter)
     const [triggerRegister, setTriggerRegister] = useState(false)
     const [message, setMessage] = useState(null)
@@ -56,40 +39,10 @@ export default function StoreLayout(){
         }, 2000);
     }
 
-    useEffect(()=>{
-        const getUser = localStorage.getItem('user_data')
-        if(getUser){
-        dispatch({
-            type: 'SET_USER',
-            data: JSON.parse(getUser),
-            status: ''
-        })
-        }
-    }, [])
+    FetchProducts({dispatch});
+    FetchUser({dispatch});
+    MessageAlert({info: store, setAlert, dispatch})
 
-    useEffect(()=> {
-       switch(store.status.trim()){
-            case "invalid_register":
-                return setAlert({text: 'Filter Tidak Valid!', type: 'fail'});
-            case "success_register":
-                return setAlert({text: 'Berhasil Mendaftar!', type: 'success'});
-            case "fetch_fail":
-                return setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'});
-            case "invalid_login":
-                return setAlert({text: 'Gagal Login, Data Tidak Valid!', type: 'fail'});
-            case "not_loggedin":
-                return setAlert({text: 'Anda Belum Login!', type: 'fail'});
-            case "success_login":
-                return setAlert({text: 'Berhasil Login!', type: 'success'});
-            case "success_logout":
-                return setAlert({text: 'Berhasil Logout!', type: 'success'});
-            case "unmatch_data":
-                return setAlert({text: 'Data Tidak Valid!', type: 'fail'})
-            case "invalid_filter":
-                return setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
-       }
-        store.status ? (dispatch({type: 'RESET_STATUS'})) : ''
-    }, [store.status])
     function handleTriggerFormRegister(){
         setTriggerLogin(false)
         setTriggerRegister(true)
@@ -106,7 +59,6 @@ export default function StoreLayout(){
     function handleSendCloseLogin(value){
         setTriggerLogin(value)
     }
-
 
     return(
         <div className ='min-h-screen font-[Roboto] flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>

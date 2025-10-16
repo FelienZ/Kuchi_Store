@@ -2,8 +2,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useContext, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
-import { updateQueryParams } from "../../queryParams";
 import { ProductReducerContext } from "../../storeContext";
+import { updateQueryParams } from "../../utils/queryParams";
 
 export default function Drawer(){
     const price = {

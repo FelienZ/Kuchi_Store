@@ -2,8 +2,8 @@ import { faArrowRightToBracket, faBars, faCartShopping, faMagnifyingGlass, faUse
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
-import { updateQueryParams } from "../../queryParams";
 import { ProductReducerContext, UserContext } from "../../storeContext";
+import { updateQueryParams } from "../../utils/queryParams";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [keyword, setKeyword] = useState('')

@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors')
 const productRoutes = require('./router/productRoutes.cjs')
 const authRoutes = require('./router/authRoutes.cjs')
+const userRoutes = require('./router/userRoutes.cjs')
 
 require('dotenv').config();
 const port = process.env.PORT;
@@ -13,6 +14,7 @@ app.use(cors({origin: 'http://localhost:5173'}))
 
 app.use('/api/products', productRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/users', userRoutes)
 
 app.use(async(req, res)=> {
     res.json(`Cannot get PATH`)

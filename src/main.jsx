@@ -14,10 +14,12 @@ import Partner from './frontend/Information/Partner.jsx'
 import Tutorials from './frontend/Information/Tutorials.jsx'
 import Services from './frontend/Information/Services.jsx'
 import ProfilePages from './frontend/User/profilePages.jsx'
+import ScrollToTop from './hooks/ScrollToTop.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
+    <ScrollToTop/>
       <Routes>
         <Route path='' element={<StoreLayout/>}>
           <Route path='/' element={<HomePage/>}/>

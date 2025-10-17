@@ -1,18 +1,13 @@
-const jwt = require('jsonwebtoken');
+const { verifyAccessToken } = require("../services/token/tokenManager.cjs");
 
-function verifyAccessToken(req, res, next){
-    const authHeader =req.headers.authorization;
-    if(!authHeader){
-        return res.status(400).json({status: 'fail', message: 'token tidak valid'})
-    }
-    const token = authHeader.split(' ')[1]
-    try {
-        const data = jwt.verify(token, process.env.ACCESS_TOKEN_KEY)
-        req.user = data
-        next()
-    } catch (error) {
-        return res.status(400).json({status: 'fail', message: 'token tidak valid'})
-    }
+module.exports = (req, res, next) => {
+    const token = req.cookies.accessToken;
+    if(!token) return res.status(401).json({message: 'Unauthorized'})
+        try {
+            const payload = verifyAccessToken(token)
+            req.user = payload
+            next()
+        } catch (error) {
+            return res.status(500).json({message: `Kesalahan Server: ${error.message}`})
+        }
 }
-
-module.exports = verifyAccessToken

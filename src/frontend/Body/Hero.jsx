@@ -56,9 +56,19 @@ export default function Hero(){
                      className="font-bold text-justify max-sm:text-center md:text-lg">
                         {items[pages].content}
                      </motion.p>
-                     <div onClick={()=> navigate('/products')}>
-                         {items[pages].addition}
-                     </div>
+
+                     <motion.button
+                        onClick={()=> navigate('/products')}
+                        initial={{ opacity: 0}}
+                        className="btn rounded-r-full md:text-xl glass text-white max-sm:self-center max-sm:rounded-full"
+                        key={items[pages].addition}
+                        src={items[pages].addition}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0,}}
+                        transition={{ duration: 0.7 }}
+                     >
+                        {items[pages].addition}
+                     </motion.button>
                  </div>
                  <div className="image max-sm:order-1 max-sm:size-[60%] size-[30%] drop-shadow-md drop-shadow-white">
                      <AnimatePresence mode="wait">

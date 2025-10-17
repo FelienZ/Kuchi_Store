@@ -2,9 +2,9 @@ import { faArrowRightToBracket, faBars, faCartShopping, faMagnifyingGlass, faUse
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
-import { ProductReducerContext } from "../../storeContext";
+import { ProductReducerContext, UserContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
-import { UserContext } from "../../userContext";
+import { AttemptLogout } from "../../hooks/Effect/attemptLogout";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [keyword, setKeyword] = useState('')
@@ -13,7 +13,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const dispatch = useContext(ProductReducerContext)
     const {user, setUser} = useContext(UserContext)
     const isLogin = user
-    console.log('cek: ', isLogin)
+    // console.log('cek: ', isLogin)
     function handleSendKeyword(){
         updateQueryParams({keyword}, navigate, searchParams)
     }
@@ -26,14 +26,9 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
             status:'not_loggedin'
         })
     }
+    
     function handleLogout(){
-        /* localStorage.removeItem('user_data')
-        localStorage.removeItem('access_token') */
-        setUser(null)
-        dispatch({
-            type: 'SET_USER',
-            status: 'success_logout'
-        })
+        AttemptLogout({setUser, dispatch})
     }
 
     return(
@@ -89,7 +84,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-neutral rounded-box z-1 w-52 p-2 mt-13 shadow-sm">
                         <li onClick={()=>checkStatus()}><p className="flex items-center gap-4"><FontAwesomeIcon icon={faUser}/> {isLogin.username}</p></li>
-                        <li onClick={handleLogout}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
+                        <li onClick={()=> handleLogout()}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
                     </ul>
                     </div>
                 </div>

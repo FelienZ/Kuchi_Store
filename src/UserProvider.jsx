@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-
-export const UserContext = createContext(null)
+import { useEffect, useState } from "react";
+import { UserContext } from "./storeContext";
 
 export function UserProvider({children}){
     const [user, setUser] = useState(null);
@@ -9,14 +8,13 @@ export function UserProvider({children}){
         credentials: 'include' 
     })
       .then(res => res.ok ? res.json() : Promise.reject())
-      .then(data => {setUser(data.data); console.log(data)})
+      .then(data => setUser(data.data))
       .catch(() => setUser(null));
       //kalo basi -> null
   }, []);
     
     return(
         <UserContext.Provider value={{user, setUser}}>
-            {console.log('cek user dari context: ', user)}
             {children}
         </UserContext.Provider>
     )

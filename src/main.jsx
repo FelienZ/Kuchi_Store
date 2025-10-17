@@ -15,7 +15,7 @@ import Tutorials from './frontend/Information/Tutorials.jsx'
 import Services from './frontend/Information/Services.jsx'
 import ProfilePages from './frontend/User/profilePages.jsx'
 import ScrollToTop from './hooks/Effect/scrollToTop.js'
-import { UserProvider } from './userContext.jsx'
+import { UserProvider } from './UserProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

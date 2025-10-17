@@ -1,5 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { ProductReducerContext } from "../../storeContext";
+import ClickedOutside from "../../hooks/Effect/clickedOutside";
+import AttemptRegister from "../../hooks/Effect/attemptRegister";
 
 export default function Register({istriggered, sendClose, sendTriggerLogin}){
     const data = {
@@ -11,37 +13,11 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
     const dispatch = useContext(ProductReducerContext)
     const [account, setAccount] = useState(data)
     const modalRef = useRef();
-    useEffect(()=> {
-        function handleClickOutside(event){
-            if(modalRef.current && !modalRef.current.contains(event.target)){
-                handleClose()
-                }
-            }
-            document.addEventListener('mousedown', handleClickOutside)
-            return()=> document.removeEventListener('mousedown', handleClickOutside)
-    }, [sendClose])
 
-    async function HandleRegister(payload){
-        const response = await fetch('http://localhost:3000/api/auth/register',{
-            method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(payload)
-        })
-        const result = await response.json()
-        if(result.status.trim() === 'success'){
-            dispatch({
-                type:'SET_USER',
-                data: result.data,
-                status: 'success_register'
-            })
-            return
-        }else{
-            dispatch({
-                type:'SET_STATUS',
-                status:'invalid_register'
-            })
-            return
-        }
+    ClickedOutside({modalRef, handleClose: sendClose})
+
+    function HandleRegister(payload){
+        AttemptRegister({payload, dispatch})
     }
     function checkRegister(e){
         e.preventDefault();
@@ -70,7 +46,7 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
     }
     return(
         <section className={`${istriggered === true ? 'flex' : 'hidden'} fixed z-40 backdrop-blur-sm inset-0 bg-black/20 justify-center items-center`}>
-            <form ref={modalRef} action="" onSubmit={checkRegister} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
+            <form ref={modalRef} onSubmit={checkRegister} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">Register Account</p>
                 <div className="name flex flex-col w-full">
                     <p>Your Name</p>

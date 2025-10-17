@@ -5,7 +5,7 @@ export default function ProductCard({products, onCheckout}){
     const navigate = useNavigate()
     return(
     <section id='list'>
-          <div onClick={()=> navigate(`/products/${products.id}`)} className='flex flex-col items-center border border-base-300 p-3 rounded-sm'>
+          <div onClick={()=> navigate(`/products/${products.id}`)} className='flex flex-col items-center border border-base-300 p-3 rounded-sm hover:cursor-pointer'>
             <div className="picture">
               <img src={products.url} alt={`Gambar-${products.name}`} className='max-sm:size-30 size-40 rounded-md' />
             </div>

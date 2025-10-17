@@ -1,13 +1,12 @@
 import { Outlet } from "react-router";
 import Navigation from "../Body/Navigation";
 import { useReducer, useState } from "react";
-import { ProductList, ProductReducerContext, UserContext } from "../../storeContext";
+import { ProductList, ProductReducerContext } from "../../storeContext";
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
 import MessageAlert from "../../hooks/Effect/messageAlert";
 import FetchProducts from "../../hooks/Effect/fetchProducts";
-import FetchUser from "../../hooks/Effect/fetchUser";
 
 function StoreReducer(list, action){
     switch(action.type){
@@ -25,7 +24,6 @@ function StoreReducer(list, action){
 export default function StoreLayout(){
     const [store, dispatch] = useReducer(StoreReducer, {
         product: [],
-        user: null,
         status: ''
     })
     
@@ -41,7 +39,6 @@ export default function StoreLayout(){
     }
 
     FetchProducts({dispatch});
-    FetchUser({dispatch});
     MessageAlert({info: store, setAlert, dispatch})
 
     function handleTriggerFormRegister(){
@@ -65,7 +62,6 @@ export default function StoreLayout(){
         <div className ='min-h-screen font-[Roboto] flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
             <ProductList.Provider value={store.product}>
                 <ProductReducerContext.Provider value={dispatch}>
-                    <UserContext.Provider value={store.user}>
                         <Navigation sendTriggerRegister={handleTriggerFormRegister} sendTriggerLogin={handleTriggerFormLogin}/>
                         <Register sendTriggerLogin={handleTriggerFormLogin} istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
                         <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin} sendTriggerRegister={handleTriggerFormRegister}/>
@@ -78,7 +74,6 @@ export default function StoreLayout(){
                         ) : ''}
                     </div>
                     <Footer/>
-                    </UserContext.Provider>
                 </ProductReducerContext.Provider>
             </ProductList.Provider>
         </div>

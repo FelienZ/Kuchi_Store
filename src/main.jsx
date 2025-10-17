@@ -15,28 +15,31 @@ import Tutorials from './frontend/Information/Tutorials.jsx'
 import Services from './frontend/Information/Services.jsx'
 import ProfilePages from './frontend/User/profilePages.jsx'
 import ScrollToTop from './hooks/Effect/scrollToTop.js'
+import { UserProvider } from './userContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-    <ScrollToTop/>
-      <Routes>
-        <Route path='' element={<StoreLayout/>}>
-          <Route path='/' element={<HomePage/>}/>
-          <Route path='/products' element={<ProductMain/>}/>
-          <Route path='/products/:id' element={<ProductDetail/>}/>
-          <Route path='/checkout' element={<CheckoutPage/>}/>
-          <Route path='/profile' element={<ProfilePages/> }/>
-          <Route path='/information' element={<HelpPage/>}>
-            <Route path='help' element={<Help/>}/>
-            <Route path='about' element={<About/>}/>
-            <Route path='contact' element={<Contact/>}/>
-            <Route path='partnership' element={<Partner/>}/>
-            <Route path='tutorials' element={<Tutorials/>}/>
-            <Route path='services' element={<Services/>}/>
-          </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <ScrollToTop/>
+          <Routes>
+            <Route path='' element={<StoreLayout/>}>
+              <Route path='/' element={<HomePage/>}/>
+              <Route path='/products' element={<ProductMain/>}/>
+              <Route path='/products/:id' element={<ProductDetail/>}/>
+              <Route path='/checkout' element={<CheckoutPage/>}/>
+              <Route path='/profile' element={<ProfilePages/> }/>
+              <Route path='/information' element={<HelpPage/>}>
+                <Route path='help' element={<Help/>}/>
+                <Route path='about' element={<About/>}/>
+                <Route path='contact' element={<Contact/>}/>
+                <Route path='partnership' element={<Partner/>}/>
+                <Route path='tutorials' element={<Tutorials/>}/>
+                <Route path='services' element={<Services/>}/>
+              </Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+    </UserProvider>
   </StrictMode>,
 )

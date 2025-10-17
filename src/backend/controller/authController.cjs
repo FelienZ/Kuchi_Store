@@ -1,7 +1,7 @@
 const authServices = require('../services/authServices.cjs');
 const tokenManager = require('../services/token/tokenManager.cjs');
 const usersServices = require('../services/usersServices.cjs');
-const { postAuthSchema, postRegisterSchema, putAuthSchema, deleteAuthSchema } = require('../validator/authValidator.cjs');
+const { postAuthSchema, postRegisterSchema } = require('../validator/authValidator.cjs');
 
 //handler Login -> postAuth
 exports.postAuthentication = async(req, res) => {

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-import { HeroItems } from "../../utils/heroItems.jsx"
+import { HeroItems } from "../../utils/heroItems"
 
 export default function Hero(){
     const navigate = useNavigate()
@@ -28,7 +28,7 @@ export default function Hero(){
          exit={{opacity: 0}}
          transition={{duration: 0.5}}
          >
-            <div className="flex flex-col w-full items-center gap-10">
+        <div className="flex flex-col w-full items-center gap-10">
              <div className="hero-content w-full items-center relative max-sm:flex-col max-sm:gap-y-10 md:justify-between text-neutral-content text-center">
                  <div className="control absolute flex w-full max-sm:hidden justify-between z-10">
                      <button onClick={handlePrev} className="btn rounded-full glass"><FontAwesomeIcon icon={faArrowLeft}/></button>

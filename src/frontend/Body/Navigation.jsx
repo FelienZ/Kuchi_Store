@@ -2,15 +2,18 @@ import { faArrowRightToBracket, faBars, faCartShopping, faMagnifyingGlass, faUse
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
-import { ProductReducerContext, UserContext } from "../../storeContext";
+import { ProductReducerContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
+import { UserContext } from "../../userContext";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [keyword, setKeyword] = useState('')
     const [searchParams] = useSearchParams()
     const navigate = useNavigate();
     const dispatch = useContext(ProductReducerContext)
-    const isLogin = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
+    const isLogin = user
+    console.log('cek: ', isLogin)
     function handleSendKeyword(){
         updateQueryParams({keyword}, navigate, searchParams)
     }
@@ -18,18 +21,17 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
         updateQueryParams({category}, navigate, searchParams)
     }
     function checkStatus(){
-        const isLoggedIn = localStorage.getItem('access_token')
-        isLoggedIn ? navigate('/profile') : dispatch({
+        isLogin ? navigate('/profile') : dispatch({
             type: 'SET_STATUS',
             status:'not_loggedin'
         })
     }
     function handleLogout(){
-        localStorage.removeItem('user_data')
-        localStorage.removeItem('access_token')
+        /* localStorage.removeItem('user_data')
+        localStorage.removeItem('access_token') */
+        setUser(null)
         dispatch({
             type: 'SET_USER',
-            data: null,
             status: 'success_logout'
         })
     }

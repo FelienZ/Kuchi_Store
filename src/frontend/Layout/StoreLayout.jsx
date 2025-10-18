@@ -30,6 +30,8 @@ export default function StoreLayout(){
     // console.log('tes : ', store.filter)
     const [triggerRegister, setTriggerRegister] = useState(false)
     const [message, setMessage] = useState(null)
+    const [triggerLogin, setTriggerLogin] = useState(false)
+    
     function setAlert(value){
         setMessage(value)
         setTimeout(() => {
@@ -44,7 +46,6 @@ export default function StoreLayout(){
         setTriggerLogin(false)
         setTriggerRegister(true)
     }
-    const [triggerLogin, setTriggerLogin] = useState(false)
     function handleTriggerFormLogin(){
         setTriggerRegister(false)
         setTriggerLogin(true)

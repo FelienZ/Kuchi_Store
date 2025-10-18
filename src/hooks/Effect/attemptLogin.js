@@ -1,4 +1,4 @@
-export default async function AttemptLogin({setIsLoading, dispatch, account, handleClose, setAccount}){
+export default async function AttemptLogin({setIsLoading, dispatch, account, handleClose, setUser, setAccount}){
         setIsLoading(true)
         if(account.email.trim() === '' || account.password.trim() === ''){
             dispatch({
@@ -13,6 +13,7 @@ export default async function AttemptLogin({setIsLoading, dispatch, account, han
             const response = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json'},
+                credentials: 'include',
                 body: JSON.stringify(account)
             })
             const result = await response.json();
@@ -20,11 +21,11 @@ export default async function AttemptLogin({setIsLoading, dispatch, account, han
             if(result.status.trim() === 'success'){
                 const user = result.data.user
                 setIsLoading(false)
-                localStorage.setItem('user_data', JSON.stringify(user))
-                localStorage.setItem('access_token', JSON.stringify(result.data.accessToken))
+                setUser(user)
+                // localStorage.setItem('user_data', JSON.stringify(user))
+                // localStorage.setItem('access_token', JSON.stringify(result.data.accessToken))
                 dispatch({
                     type:'SET_USER',
-                    data: user,
                     status: 'success_login'
                 })
             }else{

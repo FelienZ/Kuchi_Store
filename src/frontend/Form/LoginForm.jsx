@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react"
-import { ProductReducerContext } from "../../storeContext"
+import { ProductReducerContext, UserContext } from "../../storeContext"
 import ClickedOutside from "../../hooks/Effect/clickedOutside"
 import AttemptLogin from "../../hooks/Effect/attemptLogin"
 
@@ -8,11 +8,11 @@ export default function Login({istriggered, sendClose, sendTriggerRegister}){
         email: '',
         password: ''
     }
+    const {setUser} = useContext(UserContext)
     const modalRef = useRef()
     const dispatch = useContext(ProductReducerContext)
     const [isLoading, setIsLoading] = useState(false)
     const [account, setAccount] = useState(data)
-    
     ClickedOutside({modalRef, handleClose: sendClose})
 
     function handleClose(){
@@ -21,7 +21,7 @@ export default function Login({istriggered, sendClose, sendTriggerRegister}){
 
     function handleLogin(e) {
         e.preventDefault()
-        AttemptLogin({setIsLoading, handleClose, account, dispatch, setAccount})
+        AttemptLogin({setIsLoading, handleClose, account, setUser, dispatch, setAccount})
     }
 
     return(

@@ -1,7 +1,8 @@
 const express = require('express');
-const userController = require('../controller/userController.cjs')
+const userController = require('../controller/userController.cjs');
+const verifyAccessToken = require('../middleware/verifyAccessToken.cjs');
 const routes = express.Router();
 
-routes.get('/detail', userController.getUserDetail)
+routes.get('/me', verifyAccessToken, userController.getUserDetail)
 
 module.exports = routes;

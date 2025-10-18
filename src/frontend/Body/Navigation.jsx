@@ -4,13 +4,16 @@ import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { ProductReducerContext, UserContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
+import { AttemptLogout } from "../../hooks/Effect/attemptLogout";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [keyword, setKeyword] = useState('')
     const [searchParams] = useSearchParams()
     const navigate = useNavigate();
     const dispatch = useContext(ProductReducerContext)
-    const isLogin = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
+    const isLogin = user
+    // console.log('cek: ', isLogin)
     function handleSendKeyword(){
         updateQueryParams({keyword}, navigate, searchParams)
     }
@@ -18,20 +21,14 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
         updateQueryParams({category}, navigate, searchParams)
     }
     function checkStatus(){
-        const isLoggedIn = localStorage.getItem('access_token')
-        isLoggedIn ? navigate('/profile') : dispatch({
+        isLogin ? navigate('/profile') : dispatch({
             type: 'SET_STATUS',
             status:'not_loggedin'
         })
     }
+    
     function handleLogout(){
-        localStorage.removeItem('user_data')
-        localStorage.removeItem('access_token')
-        dispatch({
-            type: 'SET_USER',
-            data: null,
-            status: 'success_logout'
-        })
+        AttemptLogout({setUser, dispatch})
     }
 
     return(
@@ -87,7 +84,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-neutral rounded-box z-1 w-52 p-2 mt-13 shadow-sm">
                         <li onClick={()=>checkStatus()}><p className="flex items-center gap-4"><FontAwesomeIcon icon={faUser}/> {isLogin.username}</p></li>
-                        <li onClick={handleLogout}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
+                        <li onClick={()=> handleLogout()}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
                     </ul>
                     </div>
                 </div>

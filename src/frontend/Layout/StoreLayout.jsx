@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import Navigation from "../Body/Navigation";
-import { useReducer, useState } from "react";
-import { ProductList, ProductReducerContext } from "../../storeContext";
+import { useContext, useReducer, useState } from "react";
+import { ModalContext, ProductList, ProductReducerContext, UserContext } from "../../storeContext";
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
@@ -30,7 +30,6 @@ export default function StoreLayout(){
     // console.log('tes : ', store.filter)
     const [triggerRegister, setTriggerRegister] = useState(false)
     const [message, setMessage] = useState(null)
-
     function setAlert(value){
         setMessage(value)
         setTimeout(() => {
@@ -60,22 +59,24 @@ export default function StoreLayout(){
 
     return(
         <div className ='min-h-screen font-[Roboto] flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
-            <ProductList.Provider value={store.product}>
-                <ProductReducerContext.Provider value={dispatch}>
-                        <Navigation sendTriggerRegister={handleTriggerFormRegister} sendTriggerLogin={handleTriggerFormLogin}/>
-                        <Register sendTriggerLogin={handleTriggerFormLogin} istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
-                        <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin} sendTriggerRegister={handleTriggerFormRegister}/>
-                        <div className="my-15 w-full">
-                            <Outlet/>
-                            {message ? (
-                            <div className={`${message.type.trim()==='fail' ? 'alert-error' : 'alert-success'} fixed inset-0 text-white z-40 alert place-self-end m-4`}>
-                                {message.text}
-                            </div>
-                        ) : ''}
-                    </div>
-                    <Footer/>
-                </ProductReducerContext.Provider>
-            </ProductList.Provider>
+            <ModalContext.Provider value={{triggerLogin, setTriggerLogin}}>
+                <ProductList.Provider value={store.product}>
+                    <ProductReducerContext.Provider value={dispatch}>
+                            <Navigation sendTriggerRegister={handleTriggerFormRegister} sendTriggerLogin={handleTriggerFormLogin}/>
+                            <Register sendTriggerLogin={handleTriggerFormLogin} istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
+                            <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin} sendTriggerRegister={handleTriggerFormRegister}/>
+                            <div className="my-15 w-full">
+                                <Outlet/>
+                                {message ? (
+                                <div className={`${message.type.trim()==='fail' ? 'alert-error' : 'alert-success'} fixed inset-0 text-white z-40 alert place-self-end m-4`}>
+                                    {message.text}
+                                </div>
+                            ) : ''}
+                        </div>
+                        <Footer/>
+                    </ProductReducerContext.Provider>
+                </ProductList.Provider>
+            </ModalContext.Provider>
         </div>
     )
 }

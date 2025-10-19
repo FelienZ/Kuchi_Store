@@ -11,8 +11,9 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [searchParams] = useSearchParams()
     const navigate = useNavigate();
     const dispatch = useContext(ProductReducerContext)
-    const {user, setUser} = useContext(UserContext)
+    const {user, setUser, isLoading} = useContext(UserContext)
     const isLogin = user
+    // console.log('cek Loading: ', isLoading)
     // console.log('cek: ', isLogin)
     function handleSendKeyword(){
         updateQueryParams({keyword}, navigate, searchParams)
@@ -47,12 +48,13 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                 {isLogin ? (
                     <li className="hover:cursor-pointer">View Profile</li>
                 ): (
+            !isLoading? (<span className="loading loading-bars text-white loading-xs"></span>) :(
                 <div className="flex gap-2">
                     <li className="hover:cursor-pointer" onClick={sendTriggerRegister}>Daftar</li>
                     <p>|</p>
                     <li className="hover:cursor-pointer" onClick={sendTriggerLogin}>Masuk</li>
                 </div>
-                )}
+                ))}
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
                     <NavLink to={'/information/help'}><li>Bantuan</li></NavLink>
@@ -74,10 +76,10 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                 </button>
             </div>
         </div>
-        <div className="right flex divide-x max-sm:hidden justify-between items-center text-nowrap w-fit">
+        <div className="right flex divide-x max-sm:hidden justify-between items-center text-nowrap w-fit gap-2">
             <Link className='pr-3' to={'/checkout'}><FontAwesomeIcon icon={faCartShopping}/></Link>
             {isLogin ? (
-                <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3">
                     <div className="pl-3 avatar dropdown dropdown-center">
                     <div tabIndex={0} role="button" className="ring-gray-600 hover:cursor-pointer text-gray-600 place-items-center place-content-center bg-white ring-offset-base-100 size-8 rounded-full ring-2">
                         <p>{isLogin.username[0].toUpperCase()}</p>
@@ -89,10 +91,12 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     </div>
                 </div>
             ) : (
-            <div className="auth flex divide-x">
-                <p className="hover:cursor-pointer px-3" onClick={sendTriggerRegister}>Daftar</p>
-                <p className="hover:cursor-pointer pl-3" onClick={sendTriggerLogin}>Masuk</p>
-            </div>
+                !isLoading? (<span className="loading loading-bars text-white loading-xs"></span>) : (
+                    <div className="auth flex divide-x">
+                        <p className="hover:cursor-pointer pr-3" onClick={sendTriggerRegister}>Daftar</p>
+                        <p className="hover:cursor-pointer pl-3" onClick={sendTriggerLogin}>Masuk</p>
+                    </div>
+                )
             )}
         </div>
     </header>

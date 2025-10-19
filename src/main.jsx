@@ -16,6 +16,7 @@ import Services from './frontend/Information/Services.jsx'
 import ProfilePages from './frontend/User/profilePages.jsx'
 import ScrollToTop from './hooks/Effect/scrollToTop.js'
 import { UserProvider } from './UserProvider.jsx'
+import ProtectedRoute from './utils/ProtectedRoutes.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -27,8 +28,12 @@ createRoot(document.getElementById('root')).render(
               <Route path='/' element={<HomePage/>}/>
               <Route path='/products' element={<ProductMain/>}/>
               <Route path='/products/:id' element={<ProductDetail/>}/>
-              <Route path='/checkout' element={<CheckoutPage/>}/>
-              <Route path='/profile' element={<ProfilePages/> }/>
+              
+              <Route element={<ProtectedRoute/>}>
+                <Route path='/checkout' element={<CheckoutPage/>}/>
+                <Route path='/profile' element={<ProfilePages/> }/>
+              </Route>
+
               <Route path='/information' element={<HelpPage/>}>
                 <Route path='help' element={<Help/>}/>
                 <Route path='about' element={<About/>}/>

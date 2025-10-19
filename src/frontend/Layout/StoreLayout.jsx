@@ -1,12 +1,13 @@
 import { Outlet } from "react-router";
 import Navigation from "../Body/Navigation";
-import { useContext, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import { ModalContext, ProductList, ProductReducerContext, UserContext } from "../../storeContext";
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
 import MessageAlert from "../../hooks/Effect/messageAlert";
 import FetchProducts from "../../hooks/Effect/fetchProducts";
+import EditProfile from "../Form/EditProfile";
 
 function StoreReducer(list, action){
     switch(action.type){
@@ -31,7 +32,6 @@ export default function StoreLayout(){
     const [triggerRegister, setTriggerRegister] = useState(false)
     const [message, setMessage] = useState(null)
     const [triggerLogin, setTriggerLogin] = useState(false)
-    
     function setAlert(value){
         setMessage(value)
         setTimeout(() => {
@@ -50,6 +50,7 @@ export default function StoreLayout(){
         setTriggerRegister(false)
         setTriggerLogin(true)
     }
+
     // console.log('tes: ', store.user)
     function handleSendCloseRegister(value){
         setTriggerRegister(value)

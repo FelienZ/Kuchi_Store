@@ -27,7 +27,7 @@ async function verifyUserCredentials(email, password) {
 }
 
 async function getUserById(userId) {
-    const { data } = await supabase.from('users').select('id, username, email').eq('id', userId).single()
+    const { data } = await supabase.from('users').select('id, username, email, detail').eq('id', userId).single()
     if(!data){
         throw new Error('User Tidak Ditemukan')
     }

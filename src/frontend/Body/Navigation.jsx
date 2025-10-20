@@ -46,7 +46,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     </div>
                 <hr className="text-gray-400"/>
                 {isLogin ? (
-                    <li className="hover:cursor-pointer">View Profile</li>
+                    <li onClick={()=> navigate('/profile')} className="hover:cursor-pointer">View Profile</li>
                 ): (
             !isLoading? (<span className="loading loading-bars text-white loading-xs"></span>) :(
                 <div className="flex gap-2">

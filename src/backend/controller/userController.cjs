@@ -10,3 +10,13 @@ exports.getUserDetail = async(req, res) => {
         res.status(400).send({type: 'fail', message: 'Gagal Mendapatkan Data'})
     }
 }
+
+exports.editUserDetail = async(req, res) => {
+    try {
+        const userData = await usersServices.getUserById(req.user.id)
+        const newData = req.body
+        console.log('Cek Data Baru: ', newData)
+    } catch (error) {
+        res.status(404).send({type: 'fail', message: 'User Tidak Ditemukan'})
+    }
+}

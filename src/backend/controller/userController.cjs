@@ -13,9 +13,10 @@ exports.getUserDetail = async(req, res) => {
 
 exports.editUserDetail = async(req, res) => {
     try {
-        const userData = await usersServices.getUserById(req.user.id)
-        const newData = req.body
-        console.log('Cek Data Baru: ', newData)
+        const id = req.user.id
+        const data = req.body
+        const newProfile = await usersServices.updateUserProfile(id, data)
+        res.status(201).send({type: 'success', message: 'Berhasil Memperbarui Profile!', newProfile})
     } catch (error) {
         res.status(404).send({type: 'fail', message: 'User Tidak Ditemukan'})
     }

@@ -34,6 +34,14 @@ async function getUserById(userId) {
     return data;
 }
 
+async function updateUserProfile(userId, newData) {
+    const { data, error } = await supabase.from('users').update({detail: newData}).eq('id', userId).select()
+    if(error){
+        throw new Error('Gagal Memperbarui Profile')
+    }
+    return data
+}
+
 module.exports = {
-    addUser, verifyNewUser, verifyUserCredentials, getUserById
+    addUser, verifyNewUser, verifyUserCredentials, getUserById,updateUserProfile
 }

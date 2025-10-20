@@ -21,6 +21,10 @@ export default function MessageAlert({info, setAlert, dispatch}){
                 return setAlert({text: 'Data Tidak Valid!', type: 'fail'})
             case "invalid_filter":
                 return setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
+            case "success_updated":
+                return setAlert({text: 'Berhasil Memperbarui Profile', type: 'success'})
+            case "fail_updated":
+                return setAlert({text: 'Gagal Memperbarui Profile', type: 'fail'})
            }
             info.status ? (dispatch({type: 'RESET_STATUS'})) : ''
         }, [info.status])

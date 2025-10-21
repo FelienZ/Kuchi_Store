@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react"
 import { ProductReducerContext } from "../../storeContext";
 import ClickedOutside from "../../hooks/Effect/clickedOutside";
-import AttemptRegister from "../../hooks/Effect/attemptRegister";
+import AttemptRegister from "../../utils/attemptRegister";
 
 export default function Register({istriggered, sendClose, sendTriggerLogin}){
     const data = {
@@ -30,7 +30,7 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
         if(account.username.trim() === '' || account.email.trim() === '' || account.password.trim() === '' || account.confirmPassword.trim() === ''){
             dispatch({
                 type: 'SET_STATUS',
-                status:'invalid_auth'
+                status:'invalid_register'
             })
             return
         }

@@ -3,30 +3,44 @@ import { useEffect } from "react";
 export default function MessageAlert({info, setAlert, dispatch}){
     useEffect(()=> {
         switch(info.status.trim()){
-            case "invalid_register":
-                return setAlert({text: 'Data Tidak Valid!', type: 'fail'});
             case "success_register":
-                return setAlert({text: 'Berhasil Mendaftar!', type: 'success'});
+                setAlert({text: 'Berhasil Mendaftar!', type: 'success'});
+                break;
             case "fetch_fail":
-                return setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'});
-            case "invalid_login":
-                return setAlert({text: 'Gagal Login, Data Tidak Valid!', type: 'fail'});
+                setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'});
+                break;
             case "not_loggedin":
-                return setAlert({text: 'Anda Belum Login!', type: 'fail'});
+                setAlert({text: 'Anda Belum Login!', type: 'fail'});
+                break;
             case "success_login":
-                return setAlert({text: 'Berhasil Login!', type: 'success'});
+                setAlert({text: 'Berhasil Login!', type: 'success'});
+                break;
             case "success_logout":
-                return setAlert({text: 'Berhasil Logout!', type: 'success'});
+                setAlert({text: 'Berhasil Logout!', type: 'success'});
+                break;
             case "unmatch_data":
-                return setAlert({text: 'Data Tidak Valid!', type: 'fail'})
+                setAlert({text: 'Data Tidak Valid!', type: 'fail'})
+                break;
             case "invalid_filter":
-                return setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
+                setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
+                break;
             case "success_updated":
-                return setAlert({text: 'Berhasil Memperbarui Profile', type: 'success'})
+                setAlert({text: 'Berhasil Memperbarui Profile', type: 'success'})
+                break;
+
+            //Invalid Auth & Profile
+            case "invalid_register":
+                setAlert({text: `Data Tidak Valid`, type: 'fail'});
+                break;
+            case "invalid_login":
+                setAlert({text: `Gagal Login, Data Tidak Valid! ${info.message??''}`, type: 'fail'});
+                break;
             case "fail_updated":
-                return setAlert({text: 'Gagal Memperbarui Profile', type: 'fail'})
+                setAlert({text: `Gagal Memperbarui Profile ${info.message??''}`, type: 'fail'})
+                break;
             case "redundant_register":
-                return setAlert({text: 'Gagal Mendaftar, Akun Invalid', type: 'fail'})
+                setAlert({text: `${info.message??'Gagal Mendaftar, Akun Invalid'}`, type: 'fail'})
+                break;
            }
             info.status ? (dispatch({type: 'RESET_STATUS'})) : ''
         }, [info.status])

@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react"
 import { ProductReducerContext, UserContext } from "../../storeContext"
 import ClickedOutside from "../../hooks/Effect/clickedOutside"
-import AttemptLogin from "../../hooks/Effect/attemptLogin"
+import AttemptLogin from "../../utils/attemptLogin"
 
 export default function Login({istriggered, sendClose, sendTriggerRegister}){
     const data = {

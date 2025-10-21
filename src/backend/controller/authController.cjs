@@ -15,7 +15,6 @@ exports.postAuthentication = async(req, res) => {
         }
         const {email, password} = req.body;
         const id = await authServices.verifyUserCredentials(email, password)
-        // console.log('cek id: ', id)
         const accessToken = tokenManager.generateAccessToken({id})
         const refreshToken = tokenManager.generateRefreshToken({id})
         

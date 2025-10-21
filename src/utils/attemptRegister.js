@@ -16,9 +16,11 @@ export default async function AttemptRegister({payload, dispatch, handleClose, s
                     status: 'success_register'
                 })
             }else{
+                // console.log('cek: ', result.message)
                 dispatch({
                     type:'SET_STATUS',
-                    status:'redundant_register'
+                    status:'redundant_register',
+                    message: result.message
                 })
             }
         } catch (error) {

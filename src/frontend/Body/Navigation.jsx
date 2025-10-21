@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { ProductReducerContext, UserContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
-import { AttemptLogout } from "../../hooks/Effect/attemptLogout";
+import { AttemptLogout } from "../../utils/attemptLogout";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
     const [keyword, setKeyword] = useState('')

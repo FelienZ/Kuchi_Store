@@ -13,7 +13,7 @@ function StoreReducer(list, action){
         case "GET_DATA":
             return {...list, product: action.payload}
         case "SET_STATUS":
-            return {...list, status: action.status }
+            return {...list, status: action.status, message: action.message??''}
         case "SET_USER":
             return {...list, user: action.data, status: action.status}
         case "RESET_STATUS":
@@ -24,7 +24,8 @@ function StoreReducer(list, action){
 export default function StoreLayout(){
     const [store, dispatch] = useReducer(StoreReducer, {
         product: [],
-        status: ''
+        status: '',
+        message: ''
     })
     
     // console.log('tes : ', store.filter)

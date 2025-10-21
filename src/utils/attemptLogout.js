@@ -4,7 +4,7 @@ export async function AttemptLogout({setUser, dispatch}) {
         credentials: 'include'
     })
     const data = await response.json();
-    console.log(data)
+    // console.log(data)
     setUser(null)
     dispatch({
         type: 'SET_USER',

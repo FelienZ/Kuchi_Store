@@ -35,10 +35,7 @@ export default async function AttemptLogin({setIsLoading, dispatch, account, han
                 })
             }
         } catch (error) {
-            dispatch({
-                    type:'SET_STATUS',
-                    status:'invalid_login'
-                })
+            console.error(`Gagal dalam login: ${error.message}`)
         }
         finally{
         setIsLoading(false)

@@ -1,5 +1,5 @@
 const supabase = require('./supabase/supabaseClient.cjs')
-
+const bcrypt = require('bcrypt')
 async function addRefreshToken(token) {
     const { error } = await supabase.from('authentications').insert([{token}])
     if(error) throw new Error('Gagal Menyimpan Refresh Token')
@@ -11,7 +11,8 @@ async function verifyRefreshToken(token) {
 }
 
 async function verifyUserCredentials(email, password) {
-    const { data, error } = await supabase.from('users').select('id, email').eq('email', email).single()
+    const { data, error } = await supabase.from('users').select('id, email, password').eq('email', email).single()
+    // console.log('cek data verif: ', data)
     if(error) throw new Error('Kredensial tidak Valid')
     const {id, password: hashedPassword} = data
     const matchData = await bcrypt.compare(password, hashedPassword)

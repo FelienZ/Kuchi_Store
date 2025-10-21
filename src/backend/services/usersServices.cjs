@@ -2,9 +2,14 @@ const supabase = require('./supabase/supabaseClient.cjs')
 const bcrypt = require('bcrypt')
 
 async function verifyNewUser(email) {
-    const {data} = await supabase.from('users').select('email').eq('email', email).single()
-    if(data){
-        throw new Error('Gagal Menambahkan User, email yang sama telah digunakan')
+    const {count, error} = await supabase.from('users').select('email', {count: 'exact', head: true}).eq('email', email)
+    if(error){
+        console.log('masuk reg Error')
+        throw new Error('Gagal Menambahkan User, Terjadi Kesalahan Server')
+    }
+    if(count > 0){
+        console.log('masuk reg duplicate')
+        throw new Error('Gagal Menambahkan User, Email telah digunakan')
     }
 }
 

@@ -15,13 +15,13 @@ exports.postAuthentication = async(req, res) => {
         }
         const {email, password} = req.body;
         const id = await authServices.verifyUserCredentials(email, password)
-
+        // console.log('cek id: ', id)
         const accessToken = tokenManager.generateAccessToken({id})
         const refreshToken = tokenManager.generateRefreshToken({id})
         
         await authServices.addRefreshToken(refreshToken)
         const userData = await usersServices.getUserById(id)
-        
+        console.log('cek user: ', userData)
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             maxAge: 1000 * 60 * 15, //15menit
@@ -52,7 +52,11 @@ exports.postRegister = async(req, res) => {
                 })
             }
         const {email} = req.body
-        await usersServices.verifyNewUser(email) 
+        try {
+            await usersServices.verifyNewUser(email) 
+        } catch (error) {
+            return res.status(409).json({status: 'fail', message: error.message})
+        }
         const user = await usersServices.addUser(req.body);
         res.status(201).json({status: 'success', message: 'berhasil terdaftar', data: user})
     } catch (error) {

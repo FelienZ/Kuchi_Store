@@ -12,12 +12,17 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
     }
     const dispatch = useContext(ProductReducerContext)
     const [account, setAccount] = useState(data)
+    const [isLoading, setIsLoading] = useState(false)
     const modalRef = useRef();
 
     ClickedOutside({modalRef, handleClose: sendClose})
 
+    function handleClose(){
+        istriggered === true ? sendClose(false) : ''
+    }
+
     function HandleRegister(payload){
-        AttemptRegister({payload, dispatch})
+        AttemptRegister({payload, dispatch, handleClose, setIsLoading})
     }
 
     function checkRegister(e){
@@ -38,11 +43,7 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
                 status: 'unmatch_data'
             })
         }
-        handleClose()
         setAccount({username: '',email: '', password: '', confirmPassword: ''})
-    }
-    function handleClose(){
-        istriggered === true ? sendClose(false) : ''
     }
     return(
         <section className={`${istriggered === true ? 'flex' : 'hidden'} fixed z-40 backdrop-blur-sm inset-0 bg-black/20 justify-center items-center`}>
@@ -67,7 +68,7 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
                 <div className="addition flex items-center text-sm w-full justify-end">
                     <p onClick={sendTriggerLogin} className="hover:cursor-pointer text-right">Sudah Memiliki Akun?</p>
                 </div>
-                <button className="btn btn-neutral w-full">Register Now</button>
+                <button type="submit" className={`btn btn-neutral w-full ${isLoading ? 'cursor-not-allowed text-neutral opacity-80' : ''}`} disabled={isLoading}> {isLoading ? <>Loading.. <span className="loading loading-spinner loading-sm text-info"></span></>: 'Register'}</button>
             </form>
         </section>
     )

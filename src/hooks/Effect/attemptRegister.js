@@ -5,7 +5,7 @@ export default async function AttemptRegister({payload, dispatch}){
             body: JSON.stringify(payload)
         })
         const result = await response.json()
-        if(result.status.trim() === 'success'){
+        if(result.status.trim() === 'success' || response.ok){
             dispatch({
                 type:'SET_USER',
                 data: result.data,
@@ -15,7 +15,7 @@ export default async function AttemptRegister({payload, dispatch}){
         }else{
             dispatch({
                 type:'SET_STATUS',
-                status:'invalid_register'
+                status:'redundant_register'
             })
             return
         }

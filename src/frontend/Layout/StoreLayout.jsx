@@ -7,7 +7,6 @@ import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
 import MessageAlert from "../../hooks/Effect/messageAlert";
 import FetchProducts from "../../hooks/Effect/fetchProducts";
-import EditProfile from "../Form/EditProfile";
 
 function StoreReducer(list, action){
     switch(action.type){

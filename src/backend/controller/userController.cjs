@@ -21,3 +21,12 @@ exports.editUserDetail = async(req, res) => {
         res.status(404).send({type: 'fail', message: 'User Tidak Ditemukan'})
     }
 }
+
+exports.editAccount= async(req, res) => {
+    try {
+        const id = req.user.id
+        const data = req.body
+    } catch (error) {
+        res.status(404).send({type: 'fail', message: 'User Tidak Ditemukan'})
+    }
+}

@@ -14,7 +14,7 @@ exports.postAuthentication = async(req, res) => {
             })
         }
         const {email, password} = req.body;
-        const id = await usersServices.verifyUserCredentials(email, password)
+        const id = await authServices.verifyUserCredentials(email, password)
 
         const accessToken = tokenManager.generateAccessToken({id})
         const refreshToken = tokenManager.generateRefreshToken({id})
@@ -51,6 +51,8 @@ exports.postRegister = async(req, res) => {
                     status: 'fail'
                 })
             }
+        const {email} = req.body
+        await usersServices.verifyNewUser(email) 
         const user = await usersServices.addUser(req.body);
         res.status(201).json({status: 'success', message: 'berhasil terdaftar', data: user})
     } catch (error) {

@@ -4,7 +4,7 @@ export default function MessageAlert({info, setAlert, dispatch}){
     useEffect(()=> {
         switch(info.status.trim()){
             case "invalid_register":
-                return setAlert({text: 'Filter Tidak Valid!', type: 'fail'});
+                return setAlert({text: 'Data Tidak Valid!', type: 'fail'});
             case "success_register":
                 return setAlert({text: 'Berhasil Mendaftar!', type: 'success'});
             case "fetch_fail":
@@ -25,6 +25,8 @@ export default function MessageAlert({info, setAlert, dispatch}){
                 return setAlert({text: 'Berhasil Memperbarui Profile', type: 'success'})
             case "fail_updated":
                 return setAlert({text: 'Gagal Memperbarui Profile', type: 'fail'})
+            case "redundant_register":
+                return setAlert({text: 'Gagal Mendaftar, Akun Invalid', type: 'fail'})
            }
             info.status ? (dispatch({type: 'RESET_STATUS'})) : ''
         }, [info.status])

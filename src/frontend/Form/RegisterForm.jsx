@@ -19,6 +19,7 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
     function HandleRegister(payload){
         AttemptRegister({payload, dispatch})
     }
+
     function checkRegister(e){
         e.preventDefault();
         if(account.username.trim() === '' || account.email.trim() === '' || account.password.trim() === '' || account.confirmPassword.trim() === ''){
@@ -36,7 +37,6 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
                 type: 'SET_STATUS',
                 status: 'unmatch_data'
             })
-            return
         }
         handleClose()
         setAccount({username: '',email: '', password: '', confirmPassword: ''})
@@ -50,7 +50,7 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
                 <p className="font-bold text-xl">Register Account</p>
                 <div className="name flex flex-col w-full">
                     <p>Your Name</p>
-                    <input type="text" value={account.name} onChange={e=> setAccount({...account, username:e.target.value })} placeholder="Enter Your Name" className="input w-full bg-transparent border border-neutral-500"/>
+                    <input type="text" value={account.username} onChange={e=> setAccount({...account, username:e.target.value })} placeholder="Enter Your Name" className="input w-full bg-transparent border border-neutral-500"/>
                 </div>
                 <div className="email flex flex-col w-full">
                     <p>Your Email</p>

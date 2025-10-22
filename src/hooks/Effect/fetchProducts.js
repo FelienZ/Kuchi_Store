@@ -21,5 +21,5 @@ export default function FetchProducts({dispatch}){
                 }
             }
             FetchData()
-        },[])
+        },[dispatch])
 }

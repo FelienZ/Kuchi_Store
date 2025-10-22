@@ -7,6 +7,7 @@ import EditAccount from "../Form/EditAccount"
 
 export default function ProfilePages(){
     const {user} = useContext(UserContext)
+    // console.log('cek user: ', user)
     const [triggerProfile, setTriggerProfile] = useState(false)
     const [triggerAccount, setTriggerAccount] = useState(false)
     function handleCloseProfile(value){

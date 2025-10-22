@@ -4,7 +4,7 @@ import { ProductReducerContext, UserContext } from "../../storeContext"
 
 export default function EditProfile({sendClose}){
     const modalRef = useRef()
-    const {user} = useContext(UserContext)
+    const {user, refetchUser} = useContext(UserContext)
     const dispatch = useContext(ProductReducerContext)
     const [userProfile, setUserProfile] = useState({
         organization: user.detail?.organization??'',
@@ -17,7 +17,7 @@ export default function EditProfile({sendClose}){
     async function sendEditProfile(e){
         e.preventDefault()
         setIsLoading(true)
-        const response = await fetch('http://localhost:3000/api/users/edit', {
+        const response = await fetch('http://localhost:3000/api/users/editprofile', {
             method: 'PUT',
             credentials: 'include',
             body: JSON.stringify(userProfile),
@@ -28,6 +28,7 @@ export default function EditProfile({sendClose}){
             // console.log('hasil fetch: ', data)
             if(response.ok){
                 setUserProfile(data.newProfile)
+                refetchUser()
                 dispatch({
                     type: 'SET_STATUS',
                     status: 'success_updated'

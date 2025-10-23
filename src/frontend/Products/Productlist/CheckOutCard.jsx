@@ -2,8 +2,8 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function CheckOutCard({checkoutItems = []}){
-    if(checkoutItems.length > 0){
-        return(
+  if(checkoutItems.length > 0){
+    return(
             <section className="flex flex-col gap-3 mt-5 w-[80%]">
                 <p  className="font-bold text-xl"><FontAwesomeIcon icon={faCartShopping}/> Pesanan Anda</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -21,13 +21,13 @@ export default function CheckOutCard({checkoutItems = []}){
                 </div>
             </section>
             
-        )
-    }else{
-        return(
+    )
+  }else{
+    return(
             <section className="flex flex-col mt-5 w-[80%] gap-3">
                 <p className="font-bold text-xl"><FontAwesomeIcon icon={faCartShopping}/> Pesanan Anda</p>
                 <p>Pesanan Anda Masih Kosong</p>
             </section>
-        )
-    }
+    )
+  }
 }

@@ -38,7 +38,7 @@ async function updateUserProfile(userId, newData) {
 }
 
 async function updateUserAccount(userId, newData) {
-    const {email, oldpassword, newPassword, confirmPassword} = newData
+    const {email, oldpassword, newPassword, username, confirmPassword} = newData
     if(newPassword !== confirmPassword){
         throw new Error('Password Baru tidak cocok')
     }
@@ -50,7 +50,7 @@ async function updateUserAccount(userId, newData) {
         throw new Error('Password Lama tidak valid')
     }
     const updatePassword = await bcrypt.hash(newPassword, 10)
-    const{ data, error } = await supabase.from('users').update({email: email, password: updatePassword}).eq('id', userId).select()
+    const{ data, error } = await supabase.from('users').update({email: email, username: username, password: updatePassword}).eq('id', userId).select()
     return data
 }
 

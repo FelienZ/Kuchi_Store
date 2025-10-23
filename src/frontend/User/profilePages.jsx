@@ -6,18 +6,18 @@ import EditProfile from "../Form/EditProfile"
 import EditAccount from "../Form/EditAccount"
 
 export default function ProfilePages(){
-    const {user} = useContext(UserContext)
-    // console.log('cek user: ', user)
-    const [triggerProfile, setTriggerProfile] = useState(false)
-    const [triggerAccount, setTriggerAccount] = useState(false)
-    function handleCloseProfile(value){
-        setTriggerProfile(value)
-    }
-    function handleCloseAccount(value){
-        setTriggerAccount(value)
-    }
-    // console.log(user)
-    return(
+  const {user} = useContext(UserContext)
+  // console.log('cek user: ', user)
+  const [triggerProfile, setTriggerProfile] = useState(false)
+  const [triggerAccount, setTriggerAccount] = useState(false)
+  function handleCloseProfile(value){
+    setTriggerProfile(value)
+  }
+  function handleCloseAccount(value){
+    setTriggerAccount(value)
+  }
+  // console.log(user)
+  return(
         <section className="min-h-screen p-5 md:w-[90%] place-self-center">
             {triggerProfile ? (
                 <EditProfile sendClose={handleCloseProfile}/>
@@ -65,5 +65,5 @@ export default function ProfilePages(){
                 </div>
             </div>
         </section>
-    )
+  )
 }

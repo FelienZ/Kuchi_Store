@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router'
 
 export default function ProductCard({products, onCheckout}){
-    const navigate = useNavigate()
-    return(
+  const navigate = useNavigate()
+  return(
     <section id='list'>
           <div onClick={()=> navigate(`/products/${products.id}`)} className='flex flex-col items-center border border-base-300 p-3 rounded-sm hover:cursor-pointer'>
             <div className="picture">
@@ -20,5 +20,5 @@ export default function ProductCard({products, onCheckout}){
             </div>
           </div>
       </section>
-    )
+  )
 }

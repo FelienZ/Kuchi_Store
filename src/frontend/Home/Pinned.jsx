@@ -6,31 +6,31 @@ import CheckWindowWidth from "../../hooks/Effect/checkWindow";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Pinned({title, item, stats}){
-    const navigate = useNavigate()
-    const width = CheckWindowWidth();
-    const itemsLimit = width < 768 ? 2 : 4;
-    const [show, setShow] = useState({min: 1, max: itemsLimit})
-    useEffect(()=> {
-        setShow({min: 1, max:itemsLimit})
-    }, [itemsLimit])
+  const navigate = useNavigate()
+  const width = CheckWindowWidth();
+  const itemsLimit = width < 768 ? 2 : 4;
+  const [show, setShow] = useState({min: 1, max: itemsLimit})
+  useEffect(()=> {
+    setShow({min: 1, max:itemsLimit})
+  }, [itemsLimit])
 
-    function checkStatus(status){
-        switch(status){
-            case "new":
-                navigate('/products?status=_new')
-                break;
-            case "popular":
-                navigate('/products?status=popular')
-                break;
-            case "recommended":
-                navigate('/products?status=popular')
-                break;
-        }
+  function checkStatus(status){
+    switch(status){
+      case "new":
+        navigate('/products?status=_new')
+        break;
+      case "popular":
+        navigate('/products?status=popular')
+        break;
+      case "recommended":
+        navigate('/products?status=popular')
+        break;
     }
-    const filterNewProducts = item.filter((i,idx) => idx + 1 >= show.min && idx + 1 <= show.max)
-    const isPrevDisabled = show.min < 2
-    const isNextDisabled = show.max >= item.length
-    return(
+  }
+  const filterNewProducts = item.filter((i,idx) => idx + 1 >= show.min && idx + 1 <= show.max)
+  const isPrevDisabled = show.min < 2
+  const isNextDisabled = show.max >= item.length
+  return(
         <section className="flex w-full max-sm:text-sm gap-3 flex-col">
             <div className="top flex justify-between items-center">
                 <p className="font-black text-nowrap lg:text-2xl md:text-xl">{title}</p>
@@ -69,5 +69,5 @@ export default function Pinned({title, item, stats}){
                 </AnimatePresence>
             </div>
         </section>
-    )
+  )
 }

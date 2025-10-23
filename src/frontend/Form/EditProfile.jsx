@@ -3,50 +3,50 @@ import ClickedOutside from "../../hooks/Effect/clickedOutside"
 import { ProductReducerContext, UserContext } from "../../storeContext"
 
 export default function EditProfile({sendClose}){
-    const modalRef = useRef()
-    const {user, refetchUser} = useContext(UserContext)
-    const dispatch = useContext(ProductReducerContext)
-    const [userProfile, setUserProfile] = useState({
-        organization: user.detail?.organization??'',
-        address: user.detail?.address??'',
-        gender: user.detail?.gender??''
+  const modalRef = useRef()
+  const {user, refetchUser} = useContext(UserContext)
+  const dispatch = useContext(ProductReducerContext)
+  const [userProfile, setUserProfile] = useState({
+    organization: user.detail?.organization??'',
+    address: user.detail?.address??'',
+    gender: user.detail?.gender??''
+  })
+  const [isActive, setIsActive] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  // console.log('cek profile: ', userProfile)
+  async function sendEditProfile(e){
+    e.preventDefault()
+    setIsLoading(true)
+    const response = await fetch('http://localhost:3000/api/users/editprofile', {
+      method: 'PUT',
+      credentials: 'include',
+      body: JSON.stringify(userProfile),
+      headers: {'Content-Type' : 'application/json'}
     })
-    const [isActive, setIsActive] = useState(true)
-    const [isLoading, setIsLoading] = useState(false)
-    // console.log('cek profile: ', userProfile)
-    async function sendEditProfile(e){
-        e.preventDefault()
-        setIsLoading(true)
-        const response = await fetch('http://localhost:3000/api/users/editprofile', {
-            method: 'PUT',
-            credentials: 'include',
-            body: JSON.stringify(userProfile),
-            headers: {'Content-Type' : 'application/json'}
+    try {
+      const data = await response.json()
+      // console.log('hasil fetch: ', data)
+      if(response.ok){
+        setUserProfile(data.newProfile)
+        refetchUser()
+        dispatch({
+          type: 'SET_STATUS',
+          status: 'success_updated'
         })
-        try {
-            const data = await response.json()
-            // console.log('hasil fetch: ', data)
-            if(response.ok){
-                setUserProfile(data.newProfile)
-                refetchUser()
-                dispatch({
-                    type: 'SET_STATUS',
-                    status: 'success_updated'
-                })
-                setIsLoading(false)
-                setIsActive(false)
-            }
-        } catch (error) {
-            console.error(`Error at Updating Profile: ${error.message}`)
-        }
-        finally{
-            setIsLoading(false)
-            setIsActive(false)
-        }
-        // console.log('cek: ', result)
+        setIsLoading(false)
+        setIsActive(false)
+      }
+    } catch (error) {
+      console.error(`Error at Updating Profile: ${error.message}`)
     }
-    ClickedOutside({modalRef, handleClose: sendClose})
-    return(
+    finally{
+      setIsLoading(false)
+      setIsActive(false)
+    }
+    // console.log('cek: ', result)
+  }
+  ClickedOutside({modalRef, handleClose: sendClose})
+  return(
         <section className={`${isActive ? 'flex' : 'hidden'} bg-black/20 inset-0 backdrop-blur-lg fixed justify-center items-center z-40`}>
             <form onSubmit={sendEditProfile} ref={modalRef} action="" className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">EDIT PROFILE</p>
@@ -65,5 +65,5 @@ export default function EditProfile({sendClose}){
                 <button type="submit" className="btn btn-neutral w-full">Save {isLoading ? (<span className="loading loading-spinner text-primary"></span>) : ''}</button>
             </form>
         </section>
-    )
+  )
 }

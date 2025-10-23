@@ -5,19 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMinus, faPlus, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
 export default function ProductDetail(){
-    const { id } = useParams()
-    const product = useContext(ProductList)
-    const matchProduct = product.find(i => i.id === id)
-    const mapData = []
-    if(matchProduct){
+  const { id } = useParams()
+  const product = useContext(ProductList)
+  const matchProduct = product.find(i => i.id === id)
+  const mapData = []
+  if(matchProduct){
     const data = matchProduct.specifications
     for( let key in data){
-        mapData.push({key, data: data[key]})
+      mapData.push({key, data: data[key]})
     }
-    }
-    const [order, setOrder] = useState(0);
-    return (
-        mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
+  }
+  const [order, setOrder] = useState(0);
+  return (
+    mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
             <div className="left max-md:order-2 p-3 flex w-full flex-col gap-5">
                 {/* Image Kalau > md */}
                 <div className="image max-md:hidden">
@@ -75,6 +75,6 @@ export default function ProductDetail(){
             <section className="min-h-screen grid place-content-center">
                 <span className="loading loading-bars loading-xl text-lime-500"></span>
             </section>
-        )
     )
+  )
 }

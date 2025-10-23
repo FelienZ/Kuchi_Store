@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router";
 
 export default function HelpPage(){
-    return(
+  return(
         <section className="my-10 min-h-screen w-[80%] divide-y place-self-center gap-4 flex flex-col">
             <p className="font-bold md:text-2xl py-3">Pusat Informasi</p>
             <div className="container grid gap-3 md:grid-cols-3">
@@ -33,5 +33,5 @@ export default function HelpPage(){
                 </div>
             </div>
         </section>
-    )
+  )
 }

@@ -6,22 +6,22 @@ import { ProductReducerContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
 
 export default function Drawer(){
-    const price = {
-        min: null,
-        max: null
-    }
-    const dispatch = useContext(ProductReducerContext)
-    const [filterPrice, setFilterPrice] = useState(price)
-    const [searchParams] = useSearchParams()
-    const navigate = useNavigate()
-    function handleSendFilter(){
-        if(filterPrice.min === null && filterPrice.max === null) dispatch({type: 'SET_STATUS', status: 'invalid_filter'})
-        updateQueryParams(filterPrice, navigate, searchParams)
-    }
-    function handleSendCategories(category){
-        updateQueryParams({category}, navigate, searchParams)
-    }
-    return(
+  const price = {
+    min: null,
+    max: null
+  }
+  const dispatch = useContext(ProductReducerContext)
+  const [filterPrice, setFilterPrice] = useState(price)
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  function handleSendFilter(){
+    if(filterPrice.min === null && filterPrice.max === null) dispatch({type: 'SET_STATUS', status: 'invalid_filter'})
+    updateQueryParams(filterPrice, navigate, searchParams)
+  }
+  function handleSendCategories(category){
+    updateQueryParams({category}, navigate, searchParams)
+  }
+  return(
         <div className="flex flex-col text-base-300 gap-3">
             <p className="font-bold">Filter Item</p>
             <div className="flex flex-col max-lg:hidden category border border-gray-500 p-4 rounded-sm gap-5">
@@ -145,5 +145,5 @@ export default function Drawer(){
             </div>
             
         </div>
-    )
+  )
 }

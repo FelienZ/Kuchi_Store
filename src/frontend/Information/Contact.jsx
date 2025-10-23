@@ -2,7 +2,7 @@ import { faContactBook } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Contact(){
-    return(
+  return(
         <section className="grid max-md:w-[80%] xl:grid-cols-2 gap-4">
             <div className="contact1 flex flex-col gap-5">
                 <p className="font-bold text-xl"><FontAwesomeIcon icon={faContactBook}/> Kuchiha</p>
@@ -47,5 +47,5 @@ export default function Contact(){
                 </div>
             </div>
         </section>
-    )
+  )
 }

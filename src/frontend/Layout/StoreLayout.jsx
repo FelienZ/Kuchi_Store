@@ -9,57 +9,57 @@ import MessageAlert from "../../hooks/Effect/messageAlert";
 import FetchProducts from "../../hooks/Effect/fetchProducts";
 
 function StoreReducer(list, action){
-    switch(action.type){
-        case "GET_DATA":
-            return {...list, product: action.payload}
-        case "SET_STATUS":
-            return {...list, status: action.status, message: action.message??''}
-        case "SET_USER":
-            return {...list, user: action.data, status: action.status}
-        case "RESET_STATUS":
-            return {...list, status: ''}
-    }
+  switch(action.type){
+    case "GET_DATA":
+      return {...list, product: action.payload}
+    case "SET_STATUS":
+      return {...list, status: action.status, message: action.message??''}
+    case "SET_USER":
+      return {...list, user: action.data, status: action.status}
+    case "RESET_STATUS":
+      return {...list, status: ''}
+  }
 }
 
 export default function StoreLayout(){
-    const [store, dispatch] = useReducer(StoreReducer, {
-        product: [],
-        status: '',
-        message: ''
-    })
+  const [store, dispatch] = useReducer(StoreReducer, {
+    product: [],
+    status: '',
+    message: ''
+  })
     
-    // console.log('tes : ', store.filter)
-    const [triggerRegister, setTriggerRegister] = useState(false)
-    const [message, setMessage] = useState(null)
-    const [triggerLogin, setTriggerLogin] = useState(false)
-    function setAlert(value){
-        setMessage(value)
-        setTimeout(() => {
-            setMessage(null)
-        }, 2000);
-    }
+  // console.log('tes : ', store.filter)
+  const [triggerRegister, setTriggerRegister] = useState(false)
+  const [message, setMessage] = useState(null)
+  const [triggerLogin, setTriggerLogin] = useState(false)
+  function setAlert(value){
+    setMessage(value)
+    setTimeout(() => {
+      setMessage(null)
+    }, 2000);
+  }
 
-    FetchProducts({dispatch});
-    MessageAlert({info: store, setAlert, dispatch})
+  FetchProducts({dispatch});
+  MessageAlert({info: store, setAlert, dispatch})
 
-    function handleTriggerFormRegister(){
-        setTriggerLogin(false)
-        setTriggerRegister(true)
-    }
-    function handleTriggerFormLogin(){
-        setTriggerRegister(false)
-        setTriggerLogin(true)
-    }
+  function handleTriggerFormRegister(){
+    setTriggerLogin(false)
+    setTriggerRegister(true)
+  }
+  function handleTriggerFormLogin(){
+    setTriggerRegister(false)
+    setTriggerLogin(true)
+  }
 
-    // console.log('tes: ', store.user)
-    function handleSendCloseRegister(value){
-        setTriggerRegister(value)
-    }
-    function handleSendCloseLogin(value){
-        setTriggerLogin(value)
-    }
+  // console.log('tes: ', store.user)
+  function handleSendCloseRegister(value){
+    setTriggerRegister(value)
+  }
+  function handleSendCloseLogin(value){
+    setTriggerLogin(value)
+  }
 
-    return(
+  return(
         <div className ='min-h-screen font-[Roboto] flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
             <ModalContext.Provider value={{triggerLogin, setTriggerLogin}}>
                 <ProductList.Provider value={store.product}>
@@ -80,5 +80,5 @@ export default function StoreLayout(){
                 </ProductList.Provider>
             </ModalContext.Provider>
         </div>
-    )
+  )
 }

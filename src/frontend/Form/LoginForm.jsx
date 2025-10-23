@@ -4,27 +4,27 @@ import ClickedOutside from "../../hooks/Effect/clickedOutside"
 import AttemptLogin from "../../utils/attemptLogin"
 
 export default function Login({istriggered, sendClose, sendTriggerRegister}){
-    const data = {
-        email: '',
-        password: ''
-    }
-    const {setUser} = useContext(UserContext)
-    const modalRef = useRef()
-    const dispatch = useContext(ProductReducerContext)
-    const [isLoading, setIsLoading] = useState(false)
-    const [account, setAccount] = useState(data)
-    ClickedOutside({modalRef, handleClose: sendClose})
+  const data = {
+    email: '',
+    password: ''
+  }
+  const {setUser} = useContext(UserContext)
+  const modalRef = useRef()
+  const dispatch = useContext(ProductReducerContext)
+  const [isLoading, setIsLoading] = useState(false)
+  const [account, setAccount] = useState(data)
+  ClickedOutside({modalRef, handleClose: sendClose})
 
-    function handleClose(){
-        istriggered === true ? sendClose(false) : ''
-    }
+  function handleClose(){
+    istriggered === true ? sendClose(false) : ''
+  }
 
-    function handleLogin(e) {
-        e.preventDefault()
-        AttemptLogin({setIsLoading, handleClose, account, setUser, dispatch, setAccount})
-    }
+  function handleLogin(e) {
+    e.preventDefault()
+    AttemptLogin({setIsLoading, handleClose, account, setUser, dispatch, setAccount})
+  }
 
-    return(
+  return(
         <section className={`fixed z-40 backdrop-blur-sm inset-0 bg-black/20 justify-center items-center ${istriggered ? 'flex': 'hidden'}`}>
             <form ref={modalRef} action="" onSubmit={handleLogin} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">Login</p>
@@ -43,5 +43,5 @@ export default function Login({istriggered, sendClose, sendTriggerRegister}){
                 <button type="submit" className={`btn btn-neutral w-full ${isLoading ? 'cursor-not-allowed text-neutral opacity-80' : ''}`} disabled={isLoading}> {isLoading ? <>Loading.. <span className="loading loading-spinner loading-sm text-info"></span></>: 'Login'}</button>
             </form>
         </section>
-    )
+  )
 }

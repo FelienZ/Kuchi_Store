@@ -7,32 +7,32 @@ import { updateQueryParams } from "../../utils/queryParams";
 import { AttemptLogout } from "../../utils/attemptLogout";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
-    const [keyword, setKeyword] = useState('')
-    const [searchParams] = useSearchParams()
-    const navigate = useNavigate();
-    const dispatch = useContext(ProductReducerContext)
-    const {user, setUser, isLoading} = useContext(UserContext)
-    const isLogin = user
-    // console.log('cek Loading: ', isLoading)
-    // console.log('cek: ', isLogin)
-    function handleSendKeyword(){
-        updateQueryParams({keyword}, navigate, searchParams)
-    }
-    function handleSendCategories(category){
-        updateQueryParams({category}, navigate, searchParams)
-    }
-    function checkStatus(){
-        isLogin ? navigate('/profile') : dispatch({
-            type: 'SET_STATUS',
-            status:'not_loggedin'
-        })
-    }
+  const [keyword, setKeyword] = useState('')
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate();
+  const dispatch = useContext(ProductReducerContext)
+  const {user, setUser, isLoading} = useContext(UserContext)
+  const isLogin = user
+  // console.log('cek Loading: ', isLoading)
+  // console.log('cek: ', isLogin)
+  function handleSendKeyword(){
+    updateQueryParams({keyword}, navigate, searchParams)
+  }
+  function handleSendCategories(category){
+    updateQueryParams({category}, navigate, searchParams)
+  }
+  function checkStatus(){
+    isLogin ? navigate('/profile') : dispatch({
+      type: 'SET_STATUS',
+      status:'not_loggedin'
+    })
+  }
     
-    function handleLogout(){
-        AttemptLogout({setUser, dispatch})
-    }
+  function handleLogout(){
+    AttemptLogout({setUser, dispatch})
+  }
 
-    return(
+  return(
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">
             <Link to={'/'}><p className="font-bold font-[Outfit] text-lg max-sm:text-sm">Kuchiha Store</p></Link>
@@ -100,5 +100,5 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
             )}
         </div>
     </header>
-    )
+  )
 }

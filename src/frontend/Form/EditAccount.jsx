@@ -1,10 +1,11 @@
 import { useContext, useRef, useState } from "react"
 import ClickedOutside from "../../hooks/Effect/clickedOutside"
-import { UserContext } from "../../storeContext"
+import { ProductReducerContext, UserContext } from "../../storeContext"
 
 export default function EditAccount({sendClose}){
     const modalRef = useRef()
-    const {user} = useContext(UserContext)
+    const {user, refetchUser} = useContext(UserContext)
+    const dispatch = useContext(ProductReducerContext)
     const [userAccount, setUserAccount] = useState({
             email: user.email,
             oldpassword: '',
@@ -16,14 +17,64 @@ export default function EditAccount({sendClose}){
     /* function handleClose(){
         istriggered === true ? sendClose(false) : ''
     } */
-   async function sendEditAccount(e) {
-        e.preventDefault();
-        const response = await fetch('http://localhost:3000/api/users/')
+   function checkSetAccount(e){
+    e.preventDefault();
+    setIsLoading(true)
+        if(userAccount.email.trim() === '' || userAccount.oldpassword.trim() === '' || userAccount.newPassword.trim() === '' || userAccount.confirmPassword.trim() === ''){
+            setIsLoading(false)
+            dispatch({
+                type: 'SET_STATUS',
+                status: 'unmatch_data'
+            })
+            sendClose()
+            return
+        }
+        if(userAccount.newPassword !== userAccount.confirmPassword){
+            setIsLoading(false)
+            dispatch({
+                type: 'SET_STATUS',
+                status: 'unmatch_data'
+            })
+            sendClose()
+            return 
+        }
+        sendEditAccount()
+   }
+   async function sendEditAccount() {
+        try {
+            const response = await fetch('http://localhost:3000/api/users/editaccount', {
+                credentials: 'include',
+                method: 'PUT',
+                body: JSON.stringify(userAccount),
+                headers: {'Content-Type' : 'application/json'}
+            })
+            // console.log('is response ok? ', response.ok)
+            const result = await response.json()
+            // console.log('hasil update: ', result)
+            if(response.ok){
+                setUserAccount(result.data)
+                refetchUser()
+                dispatch({
+                    type: 'SET_STATUS',
+                    status: 'success_updated'
+                })
+            }else{
+                dispatch({
+                    type: 'SET_STATUS',
+                    status: 'fail_updated'
+                }) 
+            }
+        } catch (error) {
+            console.error(`Error at Updating Account: ${error.message}`)
+        } finally{
+            setIsLoading(false)
+            setIsActive(false)
+        }
    }
     ClickedOutside({modalRef, handleClose: sendClose})
     return(
         <section className={`${isActive? 'flex' : 'hidden'} bg-black/20 inset-0 backdrop-blur-lg fixed justify-center items-center z-40`}>
-            <form ref={modalRef} action="" className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
+            <form ref={modalRef} action="" onSubmit={checkSetAccount} className="bg-white max-sm:w-[80%] w-[50%] lg:w-[35%] flex flex-col gap-3 p-5 items-center justify-center rounded-sm">
                 <p className="font-bold text-xl">EDIT ACCOUNT</p>
                 <div className="flex flex-col gap-2 w-full">
                     <p className="text-sm">Email: </p>

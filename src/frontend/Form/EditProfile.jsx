@@ -37,10 +37,7 @@ export default function EditProfile({sendClose}){
                 setIsActive(false)
             }
         } catch (error) {
-            dispatch({
-                type: 'SET_STATUS',
-                status: 'fail_updated'
-            })
+            console.error(`Error at Updating Profile: ${error.message}`)
         }
         finally{
             setIsLoading(false)

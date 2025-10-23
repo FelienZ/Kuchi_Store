@@ -16,5 +16,4 @@ export default function useFetchUser(setUser, setIsLoading) {
       setIsLoading(true)
     }
   }, [setUser, setIsLoading])
-  //kalo basi -> null
 }

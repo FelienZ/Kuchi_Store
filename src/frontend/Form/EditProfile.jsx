@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from "react"
 import ClickedOutside from "../../hooks/Effect/clickedOutside"
 import { ProductReducerContext, UserContext } from "../../storeContext"
+import attemptEditProfile from "../../utils/editProfile"
 
 export default function EditProfile({sendClose}){
   const modalRef = useRef()
@@ -14,35 +15,9 @@ export default function EditProfile({sendClose}){
   const [isActive, setIsActive] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   // console.log('cek profile: ', userProfile)
-  async function sendEditProfile(e){
+  function sendEditProfile(e){
     e.preventDefault()
-    setIsLoading(true)
-    const response = await fetch('http://localhost:3000/api/users/editprofile', {
-      method: 'PUT',
-      credentials: 'include',
-      body: JSON.stringify(userProfile),
-      headers: {'Content-Type' : 'application/json'}
-    })
-    try {
-      const data = await response.json()
-      // console.log('hasil fetch: ', data)
-      if(response.ok){
-        setUserProfile(data.newProfile)
-        refetchUser()
-        dispatch({
-          type: 'SET_STATUS',
-          status: 'success_updated'
-        })
-        setIsLoading(false)
-        setIsActive(false)
-      }
-    } catch (error) {
-      console.error(`Error at Updating Profile: ${error.message}`)
-    }
-    finally{
-      setIsLoading(false)
-      setIsActive(false)
-    }
+    attemptEditProfile({setIsActive, setIsLoading, refetchUser, dispatch, setUserProfile, userProfile})
     // console.log('cek: ', result)
   }
   ClickedOutside({modalRef, handleClose: sendClose})

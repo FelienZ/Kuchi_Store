@@ -12,12 +12,14 @@ export default function FetchProducts({dispatch}){
             payload: result.payload
           })
           return
+        }else{
+          dispatch({
+            type: 'SET_STATUS',
+            status: 'fetch_fail'
+          })
         }
       } catch (error) {
-        dispatch({
-          type: 'SET_STATUS',
-          status: 'fetch_fail'
-        })
+        console.error(`Terjadi Kesalahan dalam Load: ${error.message}`)
       }
     }
     FetchData()

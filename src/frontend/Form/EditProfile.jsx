@@ -2,6 +2,8 @@ import { useContext, useRef, useState } from "react"
 import ClickedOutside from "../../hooks/Effect/clickedOutside"
 import { ProductReducerContext, UserContext } from "../../storeContext"
 import attemptEditProfile from "../../utils/editProfile"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 
 export default function EditProfile({sendClose}){
   const modalRef = useRef()
@@ -10,7 +12,10 @@ export default function EditProfile({sendClose}){
   const [userProfile, setUserProfile] = useState({
     organization: user.detail?.organization??'',
     address: user.detail?.address??'',
-    gender: user.detail?.gender??''
+    gender: user.detail?.gender??'',
+    github: user.detail?.github??'',
+    linkedin: user.detail?.linkedin??'',
+    instagram: user.detail?.instagram??''
   })
   const [isActive, setIsActive] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
@@ -35,7 +40,24 @@ export default function EditProfile({sendClose}){
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                     <p className="text-sm">Gender: </p>
-                    <input type="text" className="input border border-neutral w-full bg-white" defaultValue={userProfile.gender} placeholder="Masukkan Data Baru" onChange={(e)=> setUserProfile({...userProfile, gender: e.target.value})}/>
+                    <select className="select bg-transparent border text-neutral border-neutral w-full" defaultValue={userProfile.gender??'Your Gender'} onChange={(e)=> setUserProfile({...userProfile, gender: e.target.value})}>
+                        <option value="Pria">Pria</option>
+                        <option value="Wanita">Wanita</option>
+                    </select>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                    <div className="flex flex-col gap-2">
+                        <FontAwesomeIcon icon={faGithub} className="self-center text-xl"/>
+                        <input type="text" className="input border border-neutral w-full bg-white" defaultValue={userProfile.github} placeholder="Masukkan Data Baru" onChange={(e)=> setUserProfile({...userProfile, github: e.target.value})}/>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <FontAwesomeIcon icon={faLinkedin} className="self-center text-xl"/>
+                        <input type="text" className="input border border-neutral w-full bg-white" defaultValue={userProfile.linkedin} placeholder="Masukkan Data Baru" onChange={(e)=> setUserProfile({...userProfile, linkedin: e.target.value})}/>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <FontAwesomeIcon icon={faInstagram} className="self-center text-xl"/>
+                        <input type="text" className="input border border-neutral w-full bg-white" defaultValue={userProfile.instagram} placeholder="Masukkan Data Baru" onChange={(e)=> setUserProfile({...userProfile, instagram: e.target.value})}/>
+                    </div>
                 </div>
                 <button type="submit" className="btn btn-neutral w-full">Save {isLoading ? (<span className="loading loading-spinner text-primary"></span>) : ''}</button>
             </form>

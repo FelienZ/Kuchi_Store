@@ -34,9 +34,9 @@ export default function Pinned({title, item, stats}){
         <section className="flex w-full max-sm:text-sm gap-3 flex-col">
             <div className="top flex justify-between items-center">
                 <p className="font-black text-nowrap lg:text-2xl md:text-xl">{title}</p>
-                <div className="navi flex items-center max-sm:gap-1 gap-3">
-                    <p className="hover:underline hover:underline-offset-4 hover:cursor-pointer" onClick={()=>checkStatus(stats)}>Lihat Semua</p>
-                    <p className={`${isNextDisabled && isPrevDisabled ? 'hidden' : 'flex'}`}> | </p>
+                <div className="flex items-center max-sm:gap-1 gap-3 divide-x">
+                    <p className="hover:underline hover:underline-offset-4 hover:cursor-pointer pr-3" onClick={()=>checkStatus(stats)}>Lihat Semua</p>
+                    {/* <p className={`${isNextDisabled && isPrevDisabled ? 'hidden' : 'flex'}`}> | </p> */}
                     <div className={`buttons ${isNextDisabled && isPrevDisabled ? 'opacity-50 cursor-not-allowed flex' : 'flex'} items-center max-sm:gap-1 gap-3`}>
                         <button disabled={isPrevDisabled} onClick={()=> {setShow({...show, max: show.max - 1, min: show.min -1});}} className={`btn btn-neutral size-10 ${isPrevDisabled ? 'opacity-40  text-neutral cursor-not-allowed border border-neutral' : 'flex'}`}><FontAwesomeIcon icon={faAngleLeft}/></button>
                         <button disabled={isNextDisabled} onClick={()=> {setShow({...show, max: show.max + 1, min:show.min +1});}} className={`btn btn-neutral size-10 ${isNextDisabled ? 'opacity-40 text-neutral cursor-not-allowed border border-neutral' : 'flex'}`}><FontAwesomeIcon icon={faAngleRight}/></button>

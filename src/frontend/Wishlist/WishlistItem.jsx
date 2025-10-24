@@ -1,7 +1,7 @@
 export default function WishlistItem(){
   return(
-        <section className="mt-20">
-            <p>This is Wishlist Page!</p>
+        <section className="flex flex-col gap-4">
+            <p className="font-bold">Your Wishlist</p>
         </section>
   )
 }

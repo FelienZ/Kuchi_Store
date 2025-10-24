@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditProfile from '../Form/EditProfile'
 import EditAccount from '../Form/EditAccount'
 
+
 export default function ProfileCard({triggerProfile, triggerAccount, handleCloseAccount, handleCloseProfile, user,setTriggerAccount, setTriggerProfile}){
   return(
       <div>
@@ -16,7 +17,7 @@ export default function ProfileCard({triggerProfile, triggerAccount, handleClose
             <div className="top md:divide-x max-md:divide-y text-neutral/60 rounded-sm bg-white p-3 drop-shadow-sm max-md:flex max-md:flex-col items-center md:grid md:grid-cols-[auto_1fr_1fr] gap-3">
                 <div className="avatar p-3 w-full justify-center">
                     <div className="w-50 rounded-full bg-white drop-shadow-sm">
-                        <img src="pp.png" />
+                        <img src='/pp.png' />
                     </div>
                 </div>
                 <div className="flex flex-col justify-evenly h-full p-3">

@@ -57,7 +57,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                 ))}
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
-                    <NavLink to={'/information/help'}><li>Bantuan</li></NavLink>
+                    <NavLink to={'/information'}><li>Bantuan</li></NavLink>
                     <p>|</p>
                     <Link to={'/checkout'}><li>Pemesanan</li></Link>
                 </div>

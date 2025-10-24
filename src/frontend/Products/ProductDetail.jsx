@@ -1,12 +1,14 @@
 import { useContext, useState } from "react"
 import { useParams } from "react-router"
-import { ProductList } from "../../storeContext"
+import { ProductList, ProductReducerContext, UserContext } from "../../storeContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMinus, faPlus, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark, faMinus, faPlus, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
 export default function ProductDetail(){
   const { id } = useParams()
   const product = useContext(ProductList)
+  const {user} = useContext(UserContext)
+  const dispatch = useContext(ProductReducerContext)
   const matchProduct = product.find(i => i.id === id)
   const mapData = []
   if(matchProduct){
@@ -16,10 +18,41 @@ export default function ProductDetail(){
     }
   }
   const [order, setOrder] = useState(0);
+  async function sendBookmark(id) {
+    if(!user){
+      return dispatch({
+        type: 'SET_STATUS',
+        status:'not_loggedin',
+      })
+    }else{
+      try {
+        // console.log('cek id: ', id)
+        const response = await fetch('http://localhost:3000/api/products/addwishlist', {
+          method: 'POST',
+          credentials: 'include',
+          body: id,
+          headers: {'Content-Type' : 'text/plain'}
+        })
+        const result = await response.json()
+        if(result.type === 'success' || response.ok){
+          dispatch({
+            type: 'SET_STATUS',
+            status: 'success_added'
+          })
+        }else{
+          dispatch({
+            type: 'SET_STATUS',
+            status: 'fail_added'
+          })  
+        }
+      } catch (error) {
+        console.error(`Kesalahan: ${error.message}`)
+      }
+    }
+  }
   return (
     mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
             <div className="left max-md:order-2 p-3 flex w-full flex-col gap-5">
-                {/* Image Kalau > md */}
                 <div className="image max-md:hidden">
                     <img src={matchProduct.url} alt={`gambar-${matchProduct.name}`}  className="size-90 max-sm:size-50 p-3 border border-gray-400"/>
                 </div>
@@ -64,8 +97,8 @@ export default function ProductDetail(){
                             <button onClick={()=>{order < matchProduct.stock ? setOrder(order+1): order}} className="btn btn-neutral size-8"><FontAwesomeIcon icon={faPlus}/></button>
                         </div>
                         <div className="buttons flex w-full gap-3 items-center">
-                            <button className="btn btn-outline w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Tambahkan</button>
-                            <button className="btn btn-neutral w-[50%]">Beli Sekarang</button>
+                            <button onClick={()=>sendBookmark(matchProduct.id)} className="btn btn-outline w-[50%]"><FontAwesomeIcon icon={faBookmark}/>Wishlist</button>
+                            <button className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
                         </div>
                         </div>
                     </div>

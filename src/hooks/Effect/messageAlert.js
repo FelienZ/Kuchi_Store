@@ -27,7 +27,12 @@ export default function MessageAlert({info, setAlert, dispatch}){
       case "success_updated":
         setAlert({text: 'Berhasil Memperbarui Profile', type: 'success'})
         break;
-
+      case "success_added":
+        setAlert({text: 'Berhasil Menambahkan!', type: 'success'});
+        break;
+      case "fail_added":
+        setAlert({text: 'Gagal Menambahkan!', type: 'fail'});
+        break;
         //Invalid Auth & Profile
       case "invalid_register":
         setAlert({text: `Data Tidak Valid`, type: 'fail'});

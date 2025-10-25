@@ -22,7 +22,7 @@ exports.addWishlist = async(req, res)=> {
             return res.status(409).json({type: 'fail', message: 'Produk Sudah Ada di Wishlist'})
         }
         // console.log(`[productController:addBookmark] productId:${productId}, userId:${userId}`)
-        const data = await wishlistServices.postWislistItem(productId, userId)
+        await wishlistServices.postWislistItem(productId, userId)
         res.status(200).json({type: 'success', message:'Berhasil Menambahkan Wishlist'}) 
     } catch (error) {
         res.status(400).json({type: 'fail', message: 'Gagal Menambahkan Wishlist'})

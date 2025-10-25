@@ -31,7 +31,7 @@ export default function MessageAlert({info, setAlert, dispatch}){
         setAlert({text: 'Berhasil Menambahkan!', type: 'success'});
         break;
       case "fail_added":
-        setAlert({text: 'Gagal Menambahkan!', type: 'fail'});
+        setAlert({text: `Gagal Menambahkan ${info.message??''}!`, type: 'fail'});
         break;
         //Invalid Auth & Profile
       case "invalid_register":

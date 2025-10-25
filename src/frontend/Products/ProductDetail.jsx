@@ -42,7 +42,8 @@ export default function ProductDetail(){
         }else{
           dispatch({
             type: 'SET_STATUS',
-            status: 'fail_added'
+            status: 'fail_added',
+            message: result.message
           })  
         }
       } catch (error) {

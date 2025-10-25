@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
-import getWishlist from "../../utils/getWishlist";
+import { useCallback, useEffect, useState } from "react";
+import GetWishlist from "../../utils/getWishlist";
 
 export default function useFetchWishlist({setIsLoading}){
   const [wishlist, setWishlist] = useState([])
+
+  const fetchWishlist = useCallback(()=> {
+    GetWishlist({setWishlist, setIsLoading})
+  }, [setWishlist, setIsLoading])
+
   useEffect(()=> {
-    getWishlist({setWishlist, setIsLoading})
-  }, [setIsLoading])
-  return wishlist
+    fetchWishlist()
+  }, [fetchWishlist])
+
+  return [wishlist, fetchWishlist]
 }

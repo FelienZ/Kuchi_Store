@@ -16,7 +16,7 @@ export default function ProductDetail(){
 
   const [isLoading, setIsLoading] = useState(false)
   const [order, setOrder] = useState(0);
-  const wishlist = useFetchWishlist({setIsLoading})
+  const [wishlist, fetchWishlist] = useFetchWishlist({setIsLoading})
 
   const matchProduct = product.find(i => i.id === id)
   const isWishlist = wishlist.some(i => i.product_id === id)
@@ -28,11 +28,13 @@ export default function ProductDetail(){
       mapData.push({key, data: data[key]})
     }
   }
-  function sendBookmark(id) {
-    AddWishlist({id, dispatch, user})
+  async function SendBookmark(id) {
+    await AddWishlist({id, dispatch, user})
+    fetchWishlist()
   }
-  function deleteBookmark(id){
-    RemoveWishlist({id, dispatch, setIsLoading})
+  async function DeleteBookmark(id){
+    await RemoveWishlist({id, dispatch, setIsLoading})
+    fetchWishlist()
   }
   return (
     mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
@@ -80,11 +82,13 @@ export default function ProductDetail(){
                                 <p className="border border-neutral flex items-center justify-center size-8 rounded-sm">{order}</p>
                             <button onClick={()=>{order < matchProduct.stock ? setOrder(order+1): order}} className="btn btn-neutral size-8"><FontAwesomeIcon icon={faPlus}/></button>
                         </div>
-                        <div className="buttons flex w-full gap-3 items-center">
-                            {isWishlist ? (
-                              <button onClick={()=>deleteBookmark(matchProduct.id)} className="btn btn-outline w-[50%]"><FontAwesomeIcon icon={faBookmark}/>Remove Wishlist</button>
+                        <div className="buttons justify-end flex w-full gap-3 items-center">
+                            {isLoading ? (<span className="loading loading-bars loading-xs"></span>) : (
+                              isWishlist ? (
+                              <button onClick={()=>DeleteBookmark(matchProduct.id)} className="btn btn-outline w-fit"><FontAwesomeIcon icon={faBookmark}/></button>
                             ) : (
-                              <button onClick={()=>sendBookmark(matchProduct.id)} className="btn btn-outline w-[50%]"><FontAwesomeIcon icon={faBookmarkRegular}/>Wishlist</button>
+                              <button onClick={()=>SendBookmark(matchProduct.id)} className="btn btn-neutral w-fit"><FontAwesomeIcon icon={faBookmarkRegular}/></button>
+                            )
                             )}
                             <button className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
                         </div>

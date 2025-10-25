@@ -6,22 +6,22 @@ import { useNavigate } from "react-router"
 import { HeroItems } from "../../utils/heroItems"
 
 export default function Hero(){
-    const navigate = useNavigate()
-    const items = HeroItems
-    const [pages, setPages] = useState(1)
-    const handlePrev = () =>{
-         setPages((prev)=> (prev - 1 + items.length) % items.length)
-    }
-    const handleNext = () =>{
-         setPages((prev)=> (prev + 1) % items.length)
-    }
-    useEffect(()=> {
-        const interval = setInterval(() => {
-            setPages((prev)=> (prev + 1) % items.length)
-        }, 5000);
-        return ()=> clearInterval(interval)
-    }, [pages])
-    return(
+  const navigate = useNavigate()
+  const items = HeroItems
+  const [pages, setPages] = useState(1)
+  const handlePrev = () =>{
+    setPages((prev)=> (prev - 1 + items.length) % items.length)
+  }
+  const handleNext = () =>{
+    setPages((prev)=> (prev + 1) % items.length)
+  }
+  useEffect(()=> {
+    const interval = setInterval(() => {
+      setPages((prev)=> (prev + 1) % items.length)
+    }, 5000);
+    return ()=> clearInterval(interval)
+  }, [pages, items.length])
+  return(
         <motion.div className={`hero place-content-center w-screen min-h-screen`}
          animate={{backgroundColor: items[pages].background, opacity: 1}}
          initial={{opacity: 0.5}}
@@ -88,5 +88,5 @@ export default function Hero(){
              </div>
          </div>
         </motion.div>
-    )
+  )
 }

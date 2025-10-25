@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
         try {
             const payload = verifyAccessToken(token)
             req.user = payload
-            next()
+            next() //lanjut handler
         } catch (error) {
             return res.status(500).json({message: `Kesalahan Server: ${error.message}`})
         }

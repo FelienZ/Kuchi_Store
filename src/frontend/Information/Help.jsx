@@ -2,7 +2,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Help(){
-    return (
+  return (
         <section className="flex flex-col gap-4">
             <p className="font-bold text-xl">Pusat Bantuan</p>
             <div className="seacrhField flex items-center">
@@ -22,5 +22,5 @@ export default function Help(){
             </div>
             </div>
         </section>
-    )
+  )
 }

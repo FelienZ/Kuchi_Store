@@ -24,6 +24,10 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      "indent": ["error", 2, {
+        "ignoredNodes": ["JSXElement", "JSXElement *"],
+        "SwitchCase": 1
+      }],
     },
   },
 ])

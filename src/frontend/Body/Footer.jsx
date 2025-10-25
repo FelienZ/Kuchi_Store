@@ -5,7 +5,7 @@ import CardPayment from "../Products/Productlist/CardPayment";
 import { faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer(){
-    return(
+  return(
         <footer className="flex flex-col gap-20 w-full mt-10 bg-neutral text-base-content">
             <section className="footer sm:footer-horizontal p-10">
             <nav className="flex flex-col gap-2">
@@ -41,5 +41,5 @@ export default function Footer(){
                 <p className="font-bold">2025 © Kuchiha Store By FelienZ</p>
             </section>
         </footer>
-    )
+  )
 }

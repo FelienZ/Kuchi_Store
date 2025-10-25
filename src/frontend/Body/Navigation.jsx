@@ -4,35 +4,31 @@ import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { ProductReducerContext, UserContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
-import { AttemptLogout } from "../../hooks/Effect/attemptLogout";
+import { AttemptLogout } from "../../utils/attemptLogout";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
-    const [keyword, setKeyword] = useState('')
-    const [searchParams] = useSearchParams()
-    const navigate = useNavigate();
-    const dispatch = useContext(ProductReducerContext)
-    const {user, setUser, isLoading} = useContext(UserContext)
-    const isLogin = user
-    // console.log('cek Loading: ', isLoading)
-    // console.log('cek: ', isLogin)
-    function handleSendKeyword(){
-        updateQueryParams({keyword}, navigate, searchParams)
-    }
-    function handleSendCategories(category){
-        updateQueryParams({category}, navigate, searchParams)
-    }
-    function checkStatus(){
-        isLogin ? navigate('/profile') : dispatch({
-            type: 'SET_STATUS',
-            status:'not_loggedin'
-        })
-    }
-    
-    function handleLogout(){
-        AttemptLogout({setUser, dispatch})
-    }
-
-    return(
+  const [keyword, setKeyword] = useState('')
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate();
+  const dispatch = useContext(ProductReducerContext)
+  const {user, setUser, isLoading} = useContext(UserContext)
+  const isLogin = user
+  function handleSendKeyword(){
+    updateQueryParams({keyword}, navigate, searchParams)
+  }
+  function handleSendCategories(category){
+    updateQueryParams({category}, navigate, searchParams)
+  }
+  function checkStatus(){
+    isLogin ? navigate('/profile') : dispatch({
+      type: 'SET_STATUS',
+      status:'not_loggedin'
+    })
+  }
+  function handleLogout(){
+    AttemptLogout({setUser, dispatch})
+  }
+  return(
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">
             <Link to={'/'}><p className="font-bold font-[Outfit] text-lg max-sm:text-sm">Kuchiha Store</p></Link>
@@ -46,7 +42,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     </div>
                 <hr className="text-gray-400"/>
                 {isLogin ? (
-                    <li className="hover:cursor-pointer">View Profile</li>
+                    <li onClick={()=> navigate('/profile')} className="hover:cursor-pointer">View Profile</li>
                 ): (
             !isLoading? (<span className="loading loading-bars text-white loading-xs"></span>) :(
                 <div className="flex gap-2">
@@ -57,7 +53,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                 ))}
                 <hr className="text-gray-400"/>
                 <div className="flex gap-2">
-                    <NavLink to={'/information/help'}><li>Bantuan</li></NavLink>
+                    <NavLink to={'/information'}><li>Bantuan</li></NavLink>
                     <p>|</p>
                     <Link to={'/checkout'}><li>Pemesanan</li></Link>
                 </div>
@@ -100,5 +96,5 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
             )}
         </div>
     </header>
-    )
+  )
 }

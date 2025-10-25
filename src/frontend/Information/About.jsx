@@ -1,5 +1,5 @@
 export default function About(){
-    return(
+  return(
         <section className="flex flex-col gap-4">
             <p className="font-bold">Overview</p>
             <p className="text-justify">KuchiStore adalah toko online elektronik yang berdedikasi untuk menyediakan produk-produk berkualitas tinggi dan inovatif untuk memenuhi kebutuhan Anda. Dengan pengalaman dan pengetahuan yang luas dalam industri elektronik, kami berkomitmen untuk memberikan pelayanan terbaik dan produk yang sesuai dengan keinginan Anda.</p>
@@ -11,5 +11,5 @@ export default function About(){
             </ul>
             
         </section>
-    )
+  )
 }

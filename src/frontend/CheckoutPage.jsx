@@ -1,7 +1,7 @@
 export default function CheckoutPage(){
-    return(
+  return(
         <section className="mt-20">
             <p>This is checkout Page!</p>
         </section>
-    )
+  )
 }

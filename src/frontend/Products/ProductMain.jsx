@@ -9,8 +9,6 @@ function ProductMain() {
   
   const product = useContext(ProductList);
   const [searchParams] = useSearchParams()
-  const [visibility, setVisibility] = useState(false)
-  const [selectedItem, setSelectItem] = useState(null)
   const [sortBy, setSortBy] = useState('')
 
   const keyword = searchParams.get('keyword') || ''
@@ -19,14 +17,6 @@ function ProductMain() {
   const maxPrice = Number(searchParams.get('max'))
   const stats = searchParams.get('status') || ''
 
-  function handleOnclick(items){
-    setSelectItem(items)
-    setVisibility(!visibility)
-  }
-  function handleClose(){
-    setSelectItem(null)
-    setVisibility(!visibility)
-  }
   function handleSelectSort(e){
     setSortBy(e.target.value)
   }
@@ -62,9 +52,9 @@ function ProductMain() {
             (<section className='grid max-sm:grid-cols-2 max-xl:grid-cols-3 grid-cols-4 gap-2'>
                 {sortBy.trim() !== '' ? (
                  sortItem.map(item => (
-                <ProductCard key={item.id} products={item} onCheckout={handleOnclick}/>
+                <ProductCard key={item.id} products={item}/>
               ))) : filterProduct.map(item => (
-                <ProductCard key={item.id} products={item} onCheckout={handleOnclick}/>
+                <ProductCard key={item.id} products={item}/>
               ))
               }
             </section>) : (

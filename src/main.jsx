@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import StoreLayout from './frontend/Layout/StoreLayout.jsx'
 import CheckoutPage from './frontend/CheckoutPage.jsx'
 import HomePage from './frontend/Home/HomePage.jsx'
@@ -17,6 +17,8 @@ import ProfilePages from './frontend/User/profilePages.jsx'
 import ScrollToTop from './hooks/Effect/scrollToTop.js'
 import { UserProvider } from './UserProvider.jsx'
 import ProtectedRoute from './utils/ProtectedRoutes.jsx'
+import Notfound from './frontend/Not_Found/NotFound.jsx'
+import WishlistItem from './frontend/Products/Wishlist/WishlistItem.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -30,11 +32,19 @@ createRoot(document.getElementById('root')).render(
               <Route path='/products/:id' element={<ProductDetail/>}/>
               
               <Route element={<ProtectedRoute/>}>
-                <Route path='/checkout' element={<CheckoutPage/>}/>
-                <Route path='/profile' element={<ProfilePages/> }/>
+                  <Route path='/checkout' element={<CheckoutPage/>}/>
+              </Route>
+
+              <Route element={<ProtectedRoute/>}>
+                <Route path='/profile' element={<ProfilePages/>}>
+                  <Route index element={<Navigate to={'wishlist'} replace/>}/>
+                  <Route path='wishlist' element={<WishlistItem/>}/>
+                  {/* <Route path='history' element={''}/> */}
+                </Route>
               </Route>
 
               <Route path='/information' element={<HelpPage/>}>
+                <Route index element={<Navigate to={'help'} replace/>}/>
                 <Route path='help' element={<Help/>}/>
                 <Route path='about' element={<About/>}/>
                 <Route path='contact' element={<Contact/>}/>
@@ -42,6 +52,8 @@ createRoot(document.getElementById('root')).render(
                 <Route path='tutorials' element={<Tutorials/>}/>
                 <Route path='services' element={<Services/>}/>
               </Route>
+
+              <Route path='*' element={<Notfound/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

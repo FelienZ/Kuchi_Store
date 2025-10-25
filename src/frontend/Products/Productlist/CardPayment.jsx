@@ -1,7 +1,7 @@
 import { payment } from "../payment";
 
 export default function CardPayment(){
-    return(
+  return(
         <section className='grid grid-cols-2 max-sm:grid-cols-3 lg:grid-cols-4 gap-2'>
             {payment.map(item => (
                 <div key={item.id}>
@@ -9,5 +9,5 @@ export default function CardPayment(){
                 </div>
             ))}
         </section>
-    )
+  )
 }

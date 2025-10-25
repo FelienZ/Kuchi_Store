@@ -3,8 +3,7 @@ export async function AttemptLogout({setUser, dispatch}) {
     method: 'DELETE',
     credentials: 'include'
   })
-  const data = await response.json();
-  // console.log(data)
+  await response.json();
   setUser(null)
   dispatch({
     type: 'SET_USER',

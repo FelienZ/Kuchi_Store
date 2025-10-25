@@ -30,7 +30,7 @@ export default function ProfilePages(){
             />
 
           <div className="grid text-neutral/60 md:grid-cols-[0.3fr_1fr] gap-3">
-              <div className="flex flex-col bg-white drop-shadow-sm rounded-sm p-4 gap-3">
+              <div className="flex flex-col bg-white drop-shadow-sm rounded-sm p-4 gap-3 h-fit">
                   <p className="font-bold">Your Activity</p>
                   <div className="flex flex-col gap-2 text-sm p-2">
                       <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'wishlist'}><p className="flex items-center gap-2"><FontAwesomeIcon icon={faBookmark}/>Wishlist Barang</p></NavLink>

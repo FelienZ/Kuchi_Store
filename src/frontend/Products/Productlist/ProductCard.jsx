@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router'
 
 export default function ProductCard({products}){
   const navigate = useNavigate()
-  console.log('cek product: ', products)
   return(
     <section id='list'>
           <div onClick={()=> navigate(`/products/${products.id}`)} className='flex flex-col items-center border border-base-300 p-3 rounded-sm hover:cursor-pointer'>

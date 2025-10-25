@@ -17,13 +17,10 @@ export default async function AttemptLogin({setIsLoading, dispatch, account, han
       body: JSON.stringify(account)
     })
     const result = await response.json();
-    // console.log('cek hasil: ', result)
     if(result.status.trim() === 'success'){
       const user = result.data.user
       setIsLoading(false)
       setUser(user)
-      // localStorage.setItem('user_data', JSON.stringify(user))
-      // localStorage.setItem('access_token', JSON.stringify(result.data.accessToken))
       dispatch({
         type:'SET_USER',
         status: 'success_login'

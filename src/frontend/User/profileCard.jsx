@@ -20,7 +20,7 @@ export default function ProfileCard({triggerProfile, triggerAccount, handleClose
                         <img src='/pp.png' />
                     </div>
                 </div>
-                <div className="flex flex-col justify-evenly h-full p-3">
+                <div className="flex flex-col justify-evenly h-full w-full p-3">
                     <p className="font-bold text-2xl">{user.username.toUpperCase()}</p>
                     <div className="flex flex-col gap-1">
                         <div className="flex items-center gap-2 text-sm">

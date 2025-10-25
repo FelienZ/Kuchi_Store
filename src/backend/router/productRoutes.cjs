@@ -7,6 +7,7 @@ const verifyAccessToken = require('../middleware/verifyAccessToken.cjs');
 routes.get('/', productsController.getProducts)
 
 //wishlist
+routes.get('/getwishlist', verifyAccessToken, productsController.getWishlist)
 routes.post('/addwishlist', verifyAccessToken, productsController.addWishlist)
 
 module.exports = routes;

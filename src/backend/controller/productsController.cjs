@@ -12,6 +12,16 @@ exports.getProducts = async(req, res)=> {
 exports.postProducts = async(req, res)=> {
     res.status(201).json('Hello World')
 }
+
+exports.getWishlist = async(req, res)=> {
+    try {
+        const userId = req.user.id
+        const data = await wishlistServices.getWishlists(userId)
+        res.status(200).json({type: 'success', data, message:'Berhasil Mendapatkan Wishlist'}) 
+    } catch (error) {
+        res.status(400).json({type: 'fail', message: 'failed to get data'})
+    }
+}
 exports.addWishlist = async(req, res)=> {
     try {
         const productId = req.body

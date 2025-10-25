@@ -8,7 +8,6 @@ export default function useFetchUser(setUser, setIsLoading) {
         credentials: 'include' 
       })
       const result = response.ok ?   await response.json() : await Promise.reject()
-      // console.log('cek result: ', result)
       setUser(result.data)
     } catch (error) {
       setUser(null)

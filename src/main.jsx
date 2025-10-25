@@ -17,8 +17,8 @@ import ProfilePages from './frontend/User/profilePages.jsx'
 import ScrollToTop from './hooks/Effect/scrollToTop.js'
 import { UserProvider } from './UserProvider.jsx'
 import ProtectedRoute from './utils/ProtectedRoutes.jsx'
-import WishlistItem from './frontend/Wishlist/WishlistItem.jsx'
 import Notfound from './frontend/Not_Found/NotFound.jsx'
+import WishlistItem from './frontend/Products/Wishlist/WishlistItem.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

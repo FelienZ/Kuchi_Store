@@ -1,5 +1,13 @@
 const supabase = require("./supabase/supabaseClient.cjs")
 
+async function getWishlists(userId) {
+    const { data, error } = await supabase.from('wishlists').select('*').eq('user_id', userId)
+    if(error){
+        throw new Error(`[WishlistServices::get] Error: ${error}`)
+    }
+    return data
+}
+
 async function checkWishlistItem(productId, userId) {
     const { data, error } = await supabase.from('wishlists').select('id').eq('user_id', userId).eq('product_id', productId)
     if(error){
@@ -16,4 +24,4 @@ async function postWislistItem(productId, userId) {
     return data
 }
 
-module.exports = {checkWishlistItem, postWislistItem}
+module.exports = {checkWishlistItem, postWislistItem, getWishlists}

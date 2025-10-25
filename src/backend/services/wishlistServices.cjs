@@ -24,4 +24,11 @@ async function postWislistItem(productId, userId) {
     return data
 }
 
-module.exports = {checkWishlistItem, postWislistItem, getWishlists}
+async function deleteWishlistItem(productId, userId) {
+   const { error } = await supabase.from('wishlists').delete('*').eq('user_id', userId).eq('product_id', productId)
+    if(error){
+        throw new Error(`[WishlistServices::delete] Error: ${error}`)
+    }
+}
+
+module.exports = {checkWishlistItem, postWislistItem, getWishlists, deleteWishlistItem}

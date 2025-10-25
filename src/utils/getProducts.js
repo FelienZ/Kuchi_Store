@@ -15,6 +15,6 @@ export default async function getProducts({dispatch}) {
       })
     }
   } catch (error) {
-    console.error(`Terjadi Kesalahan dalam Load: ${error.message}`)
+    console.error(`[getProducts]: ${error.message}`)
   }
 }

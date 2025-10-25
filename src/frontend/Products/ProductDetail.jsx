@@ -3,13 +3,24 @@ import { useParams } from "react-router"
 import { ProductList, ProductReducerContext, UserContext } from "../../storeContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark, faMinus, faPlus, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import useFetchWishlist from "../../hooks/Effect/fetchWishlist"
+import AddWishlist from "../../utils/addWishlist"
+import { faBookmark as faBookmarkRegular } from "@fortawesome/free-regular-svg-icons"
+import RemoveWishlist from "../../utils/removeWishlist"
 
 export default function ProductDetail(){
   const { id } = useParams()
   const product = useContext(ProductList)
   const {user} = useContext(UserContext)
   const dispatch = useContext(ProductReducerContext)
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [order, setOrder] = useState(0);
+  const wishlist = useFetchWishlist({setIsLoading})
+
   const matchProduct = product.find(i => i.id === id)
+  const isWishlist = wishlist.some(i => i.product_id === id)
+  
   const mapData = []
   if(matchProduct){
     const data = matchProduct.specifications
@@ -17,39 +28,11 @@ export default function ProductDetail(){
       mapData.push({key, data: data[key]})
     }
   }
-  const [order, setOrder] = useState(0);
-  async function sendBookmark(id) {
-    if(!user){
-      return dispatch({
-        type: 'SET_STATUS',
-        status:'not_loggedin',
-      })
-    }else{
-      try {
-        // console.log('cek id: ', id)
-        const response = await fetch('http://localhost:3000/api/products/addwishlist', {
-          method: 'POST',
-          credentials: 'include',
-          body: id,
-          headers: {'Content-Type' : 'text/plain'}
-        })
-        const result = await response.json()
-        if(result.type === 'success' || response.ok){
-          dispatch({
-            type: 'SET_STATUS',
-            status: 'success_added'
-          })
-        }else{
-          dispatch({
-            type: 'SET_STATUS',
-            status: 'fail_added',
-            message: result.message
-          })  
-        }
-      } catch (error) {
-        console.error(`Kesalahan: ${error.message}`)
-      }
-    }
+  function sendBookmark(id) {
+    AddWishlist({id, dispatch, user})
+  }
+  function deleteBookmark(id){
+    RemoveWishlist({id, dispatch, setIsLoading})
   }
   return (
     mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
@@ -98,7 +81,11 @@ export default function ProductDetail(){
                             <button onClick={()=>{order < matchProduct.stock ? setOrder(order+1): order}} className="btn btn-neutral size-8"><FontAwesomeIcon icon={faPlus}/></button>
                         </div>
                         <div className="buttons flex w-full gap-3 items-center">
-                            <button onClick={()=>sendBookmark(matchProduct.id)} className="btn btn-outline w-[50%]"><FontAwesomeIcon icon={faBookmark}/>Wishlist</button>
+                            {isWishlist ? (
+                              <button onClick={()=>deleteBookmark(matchProduct.id)} className="btn btn-outline w-[50%]"><FontAwesomeIcon icon={faBookmark}/>Remove Wishlist</button>
+                            ) : (
+                              <button onClick={()=>sendBookmark(matchProduct.id)} className="btn btn-outline w-[50%]"><FontAwesomeIcon icon={faBookmarkRegular}/>Wishlist</button>
+                            )}
                             <button className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
                         </div>
                         </div>

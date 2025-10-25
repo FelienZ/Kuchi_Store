@@ -38,3 +38,13 @@ exports.addWishlist = async(req, res)=> {
         res.status(400).json({type: 'fail', message: 'Gagal Menambahkan Wishlist'})
     }
 }
+exports.removeWishlist = async(req, res)=> {
+    try {
+        const productId = req.body
+        const userId = req.user.id
+        await wishlistServices.deleteWishlistItem(productId, userId)
+        res.status(200).json({type: 'success', message:'Berhasil Menghapus Wishlist'})
+    } catch (error) {
+        res.status(400).json({type: 'fail', message: 'Gagal Menghapus Wishlist'})
+    }
+}

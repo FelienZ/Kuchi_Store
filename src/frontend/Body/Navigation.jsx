@@ -13,8 +13,6 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
   const dispatch = useContext(ProductReducerContext)
   const {user, setUser, isLoading} = useContext(UserContext)
   const isLogin = user
-  // console.log('cek Loading: ', isLoading)
-  // console.log('cek: ', isLogin)
   function handleSendKeyword(){
     updateQueryParams({keyword}, navigate, searchParams)
   }
@@ -27,11 +25,9 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
       status:'not_loggedin'
     })
   }
-    
   function handleLogout(){
     AttemptLogout({setUser, dispatch})
   }
-
   return(
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
         <div className="left flex md:gap-5 gap-2 items-center text-nowrap w-fit">

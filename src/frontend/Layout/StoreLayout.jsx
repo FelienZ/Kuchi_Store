@@ -6,7 +6,7 @@ import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
 import MessageAlert from "../../hooks/Effect/messageAlert";
-import FetchProducts from "../../hooks/Effect/fetchProducts";
+import useFetchProducts from "../../hooks/Effect/fetchProducts";
 
 function StoreReducer(list, action){
   switch(action.type){
@@ -28,10 +28,10 @@ export default function StoreLayout(){
     message: ''
   })
     
-  // console.log('tes : ', store.filter)
   const [triggerRegister, setTriggerRegister] = useState(false)
   const [message, setMessage] = useState(null)
   const [triggerLogin, setTriggerLogin] = useState(false)
+  
   function setAlert(value){
     setMessage(value)
     setTimeout(() => {
@@ -39,7 +39,7 @@ export default function StoreLayout(){
     }, 2000);
   }
 
-  FetchProducts({dispatch});
+  useFetchProducts({dispatch});
   MessageAlert({info: store, setAlert, dispatch})
 
   function handleTriggerFormRegister(){
@@ -50,8 +50,6 @@ export default function StoreLayout(){
     setTriggerRegister(false)
     setTriggerLogin(true)
   }
-
-  // console.log('tes: ', store.user)
   function handleSendCloseRegister(value){
     setTriggerRegister(value)
   }
@@ -64,9 +62,20 @@ export default function StoreLayout(){
             <ModalContext.Provider value={{triggerLogin, setTriggerLogin}}>
                 <ProductList.Provider value={store.product}>
                     <ProductReducerContext.Provider value={dispatch}>
-                            <Navigation sendTriggerRegister={handleTriggerFormRegister} sendTriggerLogin={handleTriggerFormLogin}/>
-                            <Register sendTriggerLogin={handleTriggerFormLogin} istriggered={triggerRegister} sendClose={handleSendCloseRegister}/>
-                            <Login istriggered={triggerLogin} sendClose={handleSendCloseLogin} sendTriggerRegister={handleTriggerFormRegister}/>
+                            <Navigation 
+                              sendTriggerRegister={handleTriggerFormRegister} 
+                              sendTriggerLogin={handleTriggerFormLogin}
+                            />
+                            <Register 
+                              sendTriggerLogin={handleTriggerFormLogin} 
+                              istriggered={triggerRegister} 
+                              sendClose={handleSendCloseRegister}
+                            />
+                            <Login 
+                              istriggered={triggerLogin} 
+                              sendClose={handleSendCloseLogin} 
+                              sendTriggerRegister={handleTriggerFormRegister}
+                            />
                             <div className="my-15 w-full">
                                 <Outlet/>
                                 {message ? (

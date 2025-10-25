@@ -20,7 +20,7 @@ export default function Hero(){
       setPages((prev)=> (prev + 1) % items.length)
     }, 5000);
     return ()=> clearInterval(interval)
-  }, [pages])
+  }, [pages, items.length])
   return(
         <motion.div className={`hero place-content-center w-screen min-h-screen`}
          animate={{backgroundColor: items[pages].background, opacity: 1}}

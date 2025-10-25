@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Brands from "../Body/BrandSlide";
 import Hero from "../Body/Hero";
 import { ProductList } from "../../storeContext";

@@ -19,9 +19,9 @@ export default function Login({istriggered, sendClose, sendTriggerRegister}){
     istriggered === true ? sendClose(false) : ''
   }
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault()
-    AttemptLogin({setIsLoading, handleClose, account, setUser, dispatch, setAccount})
+    await AttemptLogin({setIsLoading, handleClose, account, setUser, dispatch, setAccount})
   }
 
   return(

@@ -2,7 +2,6 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import StoreLayout from './frontend/Layout/StoreLayout.jsx'
-import CheckoutPage from './frontend/CheckoutPage.jsx'
 import HomePage from './frontend/Home/HomePage.jsx'
 import ProductMain from './frontend/Products/ProductMain.jsx'
 import ProductDetail from './frontend/Products/ProductDetail.jsx'
@@ -19,6 +18,7 @@ import { UserProvider } from './UserProvider.jsx'
 import ProtectedRoute from './utils/ProtectedRoutes.jsx'
 import Notfound from './frontend/Not_Found/NotFound.jsx'
 import WishlistItem from './frontend/Products/Wishlist/WishlistItem.jsx'
+import CheckoutPage from './frontend/Checkout/CheckoutPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -30,12 +30,9 @@ createRoot(document.getElementById('root')).render(
               <Route path='/' element={<HomePage/>}/>
               <Route path='/products' element={<ProductMain/>}/>
               <Route path='/products/:id' element={<ProductDetail/>}/>
-              
-              <Route element={<ProtectedRoute/>}>
-                  <Route path='/checkout' element={<CheckoutPage/>}/>
-              </Route>
 
               <Route element={<ProtectedRoute/>}>
+                <Route path='/checkout' element={<CheckoutPage/>}/>
                 <Route path='/profile' element={<ProfilePages/>}>
                   <Route index element={<Navigate to={'wishlist'} replace/>}/>
                   <Route path='wishlist' element={<WishlistItem/>}/>

@@ -83,9 +83,9 @@ export default function ProductDetail(){
                             <button onClick={()=>{order < matchProduct.stock ? setOrder(order+1): order}} className="btn btn-neutral size-8"><FontAwesomeIcon icon={faPlus}/></button>
                         </div>
                         <div className="buttons justify-end flex w-full gap-3 items-center">
-                            {isLoading ? (<span className="loading loading-bars loading-xs"></span>) : (
+                            {isLoading ? (<button className="btn btn-neutral w-fit"><span className="loading loading-bars loading-xs"></span></button>) : (
                               isWishlist ? (
-                              <button onClick={()=>DeleteBookmark(matchProduct.id)} className="btn btn-outline w-fit"><FontAwesomeIcon icon={faBookmark}/></button>
+                              <button onClick={()=>DeleteBookmark(matchProduct.id)} className="btn btn-neutral w-fit"><FontAwesomeIcon icon={faBookmark}/></button>
                             ) : (
                               <button onClick={()=>SendBookmark(matchProduct.id)} className="btn btn-neutral w-fit"><FontAwesomeIcon icon={faBookmarkRegular}/></button>
                             )

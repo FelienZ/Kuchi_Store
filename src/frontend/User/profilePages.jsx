@@ -16,7 +16,7 @@ export default function ProfilePages(){
     setTriggerAccount(value)
   }
   return(
-        <section className="min-h-screen flex flex-col gap-4 p-5 md:w-[90%] place-self-center">
+        <section className="min-h-screen flex flex-col gap-4 p-5 md:w-[90%] place-self-center mt-15">
             <ProfileCard 
                 triggerAccount={triggerAccount}
                 triggerProfile={triggerProfile}

@@ -16,10 +16,8 @@ export default function EditAccount({sendClose}){
   })
   const [isActive, setIsActive] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
-  /* function handleClose(){
-        istriggered === true ? sendClose(false) : ''
-    } */
-  function checkSetAccount(e){
+  
+  async function checkSetAccount(e){
     e.preventDefault();
     setIsLoading(true)
     if(userAccount.email.trim() === '' || userAccount.oldpassword.trim() === '' || userAccount.username.trim() ==='' || userAccount.newPassword.trim() === '' || userAccount.confirmPassword.trim() === ''){
@@ -40,7 +38,7 @@ export default function EditAccount({sendClose}){
       sendClose()
       return 
     }
-    attemptEditAccount({userAccount, setUserAccount, refetchUser, dispatch, setIsActive, setIsLoading})
+    await attemptEditAccount({userAccount, setUserAccount, refetchUser, dispatch, setIsActive, setIsLoading})
   }
   ClickedOutside({modalRef, handleClose: sendClose})
   return(

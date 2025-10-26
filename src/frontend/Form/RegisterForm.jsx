@@ -21,8 +21,8 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
     istriggered === true ? sendClose(false) : ''
   }
 
-  function HandleRegister(payload){
-    AttemptRegister({payload, dispatch, handleClose, setIsLoading})
+  async function HandleRegister(payload){
+    await AttemptRegister({payload, dispatch, handleClose, setIsLoading})
   }
 
   function checkRegister(e){

@@ -13,12 +13,12 @@ import Partner from './frontend/Information/Partner.jsx'
 import Tutorials from './frontend/Information/Tutorials.jsx'
 import Services from './frontend/Information/Services.jsx'
 import ProfilePages from './frontend/User/profilePages.jsx'
-import ScrollToTop from './hooks/Effect/scrollToTop.js'
 import { UserProvider } from './UserProvider.jsx'
 import ProtectedRoute from './utils/ProtectedRoutes.jsx'
 import Notfound from './frontend/Not_Found/NotFound.jsx'
 import WishlistItem from './frontend/Products/Wishlist/WishlistItem.jsx'
 import CheckoutPage from './frontend/Checkout/CheckoutPage.jsx'
+import ScrollToTop from './hooks/scrollToTop.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { ProductList } from "../../../storeContext"
 import ProductCard from "../Productlist/ProductCard";
-import useFetchWishlist from "../../../hooks/Effect/fetchWishlist";
+import useFetchWishlist from "../../../hooks/fetchWishlist";
 
 export default function WishlistItem(){
   const product = useContext(ProductList);

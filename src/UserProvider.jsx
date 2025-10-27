@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { UserContext } from "./storeContext";
-import useFetchUser from "./hooks/Effect/fetchUser";
+import useFetchUser from "./hooks/fetchUser";
 
 export function UserProvider({children}){
   const [user, setUser] = useState(null);

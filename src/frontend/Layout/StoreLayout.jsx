@@ -5,8 +5,8 @@ import { ModalContext, ProductList, ProductReducerContext, UserContext } from ".
 import Footer from "../Body/Footer";
 import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
-import MessageAlert from "../../hooks/Effect/messageAlert";
-import useFetchProducts from "../../hooks/Effect/fetchProducts";
+import MessageAlert from "../../hooks/messageAlert";
+import useFetchProducts from "../../hooks/fetchProducts";
 
 function StoreReducer(list, action){
   switch(action.type){

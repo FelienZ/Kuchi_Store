@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react"
-import ClickedOutside from "../../hooks/Effect/clickedOutside"
+import ClickedOutside from "../../hooks/clickedOutside"
 import { ProductReducerContext, UserContext } from "../../storeContext"
 import attemptEditProfile from "../../utils/editProfile"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

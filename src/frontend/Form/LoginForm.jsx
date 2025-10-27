@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react"
 import { ProductReducerContext, UserContext } from "../../storeContext"
-import ClickedOutside from "../../hooks/Effect/clickedOutside"
+import ClickedOutside from "../../hooks/clickedOutside"
 import AttemptLogin from "../../utils/attemptLogin"
 
 export default function Login({istriggered, sendClose, sendTriggerRegister}){

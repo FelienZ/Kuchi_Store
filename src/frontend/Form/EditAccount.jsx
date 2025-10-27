@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react"
-import ClickedOutside from "../../hooks/Effect/clickedOutside"
+import ClickedOutside from "../../hooks/clickedOutside"
 import { ProductReducerContext, UserContext } from "../../storeContext"
 import attemptEditAccount from "../../utils/editAccount"
 

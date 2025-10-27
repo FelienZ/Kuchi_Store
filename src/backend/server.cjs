@@ -3,8 +3,10 @@ const app = express();
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const productRoutes = require('./router/productRoutes.cjs')
+const wishlistRoutes = require('./router/wishlistRoutes.cjs')
 const authRoutes = require('./router/authRoutes.cjs')
 const userRoutes = require('./router/userRoutes.cjs')
+const orderRoutes = require('./router/orderRoutes.cjs')
 
 require('dotenv').config();
 const port = process.env.PORT;
@@ -15,9 +17,11 @@ app.use(express.text({type: 'text/plain'})) //text
 app.use(cookieParser())
 app.use(cors({origin: 'http://localhost:5173', credentials: true}))
 
-app.use('/api/products', productRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/wishlists', wishlistRoutes)
+app.use('/api/orders', orderRoutes)
 
 app.use(async(req, res)=> {
     res.json(`Cannot get PATH`)

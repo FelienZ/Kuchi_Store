@@ -1,7 +1,7 @@
 export default async function RemoveWishlist({id, dispatch, setIsLoading}){
   setIsLoading(true)
   try {
-    const response = await fetch('http://localhost:3000/api/products/deleteWishlist', {
+    const response = await fetch('http://localhost:3000/api/wishlists/deleteWishlist', {
       method: 'DELETE',
       credentials:'include',
       body: id,

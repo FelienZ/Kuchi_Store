@@ -8,7 +8,6 @@ export function UserProvider({children}){
   const fetchUser = useFetchUser(setUser, setIsLoading)
   useEffect(() => {
     fetchUser()
-    //kalo basi -> null
   }, [fetchUser]);
   return(
         <UserContext.Provider value={{user, setUser, isLoading, refetchUser: fetchUser}}>

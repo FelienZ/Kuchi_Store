@@ -7,7 +7,7 @@ export default function WishlistItem(){
   const product = useContext(ProductList);
   const [isLoading, setIsLoading] = useState(false)
   const [wishlist, fetchWishlist] = useFetchWishlist({setIsLoading})
-  const matchData = wishlist.map(i =>{
+  const matchData = wishlist?.map(i =>{
     const findProduct = product.find(p => p.id === i.product_id)
     return findProduct
   })
@@ -15,7 +15,7 @@ export default function WishlistItem(){
         <section className="flex flex-col gap-4 p-3">
             <p className="font-bold">YOUR WISHLIST</p>
             {!isLoading ? (
-              matchData.length > 0 ? (
+              matchData?.length > 0 ? (
                 <div className="grid min-[360px]:grid-cols-2 lg:grid-cols-4 gap-2 max-h-[50dvh] overflow-y-auto">
                   {matchData.map(i=>(
                     <ProductCard key={i.id} products={i}/>

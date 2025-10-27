@@ -6,7 +6,7 @@ export default async function AddWishlist({user, dispatch, id}){
     })
   }else{
     try {
-      const response = await fetch('http://localhost:3000/api/products/addwishlist', {
+      const response = await fetch('http://localhost:3000/api/wishlists/addwishlist', {
         method: 'POST',
         credentials: 'include',
         body: id,

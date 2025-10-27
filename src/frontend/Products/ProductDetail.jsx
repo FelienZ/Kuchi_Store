@@ -7,6 +7,7 @@ import useFetchWishlist from "../../hooks/fetchWishlist"
 import AddWishlist from "../../utils/addWishlist"
 import { faBookmark as faBookmarkRegular } from "@fortawesome/free-regular-svg-icons"
 import RemoveWishlist from "../../utils/removeWishlist"
+import MakeOrder from "../../utils/makeOrder"
 
 export default function ProductDetail(){
   const { id } = useParams()
@@ -35,6 +36,10 @@ export default function ProductDetail(){
   async function DeleteBookmark(id){
     await RemoveWishlist({id, dispatch, setIsLoading})
     fetchWishlist()
+  }
+  async function PostCheckout(id) {
+    console.log('masuk post')
+    await MakeOrder({id, dispatch})
   }
   return (
     mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
@@ -90,7 +95,7 @@ export default function ProductDetail(){
                               <button onClick={()=>SendBookmark(matchProduct.id)} className="btn btn-neutral w-fit"><FontAwesomeIcon icon={faBookmarkRegular}/></button>
                             )
                             )}
-                            <button className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
+                            <button onClick={()=>PostCheckout(matchProduct.id)} className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
                         </div>
                         </div>
                     </div>

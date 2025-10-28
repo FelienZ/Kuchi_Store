@@ -1,10 +1,13 @@
+const orderServices = require('../services/orderServices.cjs')
+
 exports.makeOrder = async(req, res)=>{
     try {
-        const productId = req.body
+        const orderData = req.body
         const userId = req.user.id
-        console.log('[orderController]: Tes')
+        await orderServices.postOrder(userId, orderData)
         res.status(201).json({type:'success', message: 'success post order'})
     } catch (error) {
+        console.log('cek Error order: ', error)
         res.status(400).json({type: 'fail', message: 'failed post Order'})
     }
 }

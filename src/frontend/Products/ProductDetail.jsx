@@ -37,9 +37,9 @@ export default function ProductDetail(){
     await RemoveWishlist({id, dispatch, setIsLoading})
     fetchWishlist()
   }
-  async function PostCheckout(id) {
-    console.log('masuk post')
-    await MakeOrder({id, dispatch})
+  async function PostCheckout(item) {
+    const orderData = {id: item.id, qty: order, price: order*item.price}
+    await MakeOrder({user, dispatch, orderData})
   }
   return (
     mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
@@ -95,7 +95,7 @@ export default function ProductDetail(){
                               <button onClick={()=>SendBookmark(matchProduct.id)} className="btn btn-neutral w-fit"><FontAwesomeIcon icon={faBookmarkRegular}/></button>
                             )
                             )}
-                            <button onClick={()=>PostCheckout(matchProduct.id)} className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
+                            <button onClick={()=>PostCheckout(matchProduct)} className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
                         </div>
                         </div>
                     </div>

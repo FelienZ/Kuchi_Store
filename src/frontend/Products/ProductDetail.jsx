@@ -8,6 +8,7 @@ import AddWishlist from "../../utils/addWishlist"
 import { faBookmark as faBookmarkRegular } from "@fortawesome/free-regular-svg-icons"
 import RemoveWishlist from "../../utils/removeWishlist"
 import MakeOrder from "../../utils/makeOrder"
+import useFetchProducts from "../../hooks/fetchProducts"
 
 export default function ProductDetail(){
   const { id } = useParams()
@@ -18,6 +19,7 @@ export default function ProductDetail(){
   const [isLoading, setIsLoading] = useState(false)
   const [order, setOrder] = useState(0);
   const [wishlist, fetchWishlist] = useFetchWishlist({setIsLoading})
+  const fetchProduct = useFetchProducts({dispatch, setIsLoading})
 
   const matchProduct = product.find(i => i.id === id)
   const isWishlist = wishlist.some(i => i.product_id === id)
@@ -40,6 +42,7 @@ export default function ProductDetail(){
   async function PostCheckout(item) {
     const orderData = {id: item.id, qty: order, price: order*item.price}
     await MakeOrder({user, dispatch, orderData})
+    fetchProduct()
   }
   return (
     mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
@@ -77,7 +80,7 @@ export default function ProductDetail(){
                     <div className="items-detail text-sm flex flex-col gap-3">
                         <p>Kategori: {matchProduct.type}</p>
                         <p>Brand: {matchProduct.specifications.brand}</p>
-                        <p>Stok: {matchProduct.stock}</p>
+                        <p>Stok: {isLoading ? <span className="loading loading-bars loading-xs"></span> : matchProduct.stock}</p>
                     </div>
                     <div className="checkout flex flex-col gap-3">
                         <div className="qty flex max-md:items-end flex-col gap-4">

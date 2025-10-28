@@ -6,11 +6,8 @@ export default function MessageAlert({info, setAlert, dispatch}){
       case "success_register":
         setAlert({text: 'Berhasil Mendaftar!', type: 'success'});
         break;
-      case "fetch_fail":
-        setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'});
-        break;
-      case "not_loggedin":
-        setAlert({text: 'Anda Belum Login!', type: 'fail'});
+      case "success_order": 
+        setAlert({text: 'Berhasil Memesan!', type: 'success'});
         break;
       case "success_login":
         setAlert({text: 'Berhasil Login!', type: 'success'});
@@ -18,17 +15,27 @@ export default function MessageAlert({info, setAlert, dispatch}){
       case "success_logout":
         setAlert({text: 'Berhasil Logout!', type: 'success'});
         break;
-      case "unmatch_data":
-        setAlert({text: 'Data Tidak Valid!', type: 'fail'})
-        break;
-      case "invalid_filter":
-        setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
-        break;
       case "success_updated":
         setAlert({text: 'Berhasil Memperbarui Profile', type: 'success'})
         break;
       case "success_added":
         setAlert({text: 'Berhasil Menambahkan!', type: 'success'});
+        break;
+
+      case "fetch_fail":
+        setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'});
+        break;
+      case "fail_order": 
+        setAlert({text: `Gagal Memesan ${info.message??''}`, type: 'fail'});
+        break;
+      case "not_loggedin":
+        setAlert({text: 'Anda Belum Login!', type: 'fail'});
+        break;
+      case "unmatch_data":
+        setAlert({text: 'Data Tidak Valid!', type: 'fail'})
+        break;
+      case "invalid_filter":
+        setAlert({text: 'Filter Tidak Valid!', type: 'fail'})
         break;
       case "fail_added":
         setAlert({text: `Gagal Menambahkan ${info.message??''}!`, type: 'fail'});

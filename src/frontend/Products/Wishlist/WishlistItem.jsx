@@ -6,7 +6,7 @@ import useFetchWishlist from "../../../hooks/fetchWishlist";
 export default function WishlistItem(){
   const product = useContext(ProductList);
   const [isLoading, setIsLoading] = useState(false)
-  const [wishlist, fetchWishlist] = useFetchWishlist({setIsLoading})
+  const [wishlist] = useFetchWishlist({setIsLoading})
   const matchData = wishlist?.map(i =>{
     const findProduct = product.find(p => p.id === i.product_id)
     return findProduct

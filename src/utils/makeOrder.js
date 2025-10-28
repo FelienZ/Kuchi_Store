@@ -1,5 +1,4 @@
 export default async function MakeOrder({user, dispatch, orderData}){
-  console.log('cek dataOrder: ', orderData)
   if(!user){
     return dispatch({
       type: 'SET_STATUS',
@@ -9,7 +8,7 @@ export default async function MakeOrder({user, dispatch, orderData}){
   if(orderData.qty <= 0){
     return dispatch({
       type: 'SET_STATUS',
-      status:'unmatch_data',
+      status:'fail_order',
     })
   }
   try {
@@ -19,9 +18,9 @@ export default async function MakeOrder({user, dispatch, orderData}){
       headers: {'Content-Type': 'application/json'},
       credentials:'include'
     })
-    await response.json()
+    const result = await response.json()
     if(response.ok){
-      console.log('berhasil order')
+      // console.log('berhasil order')
       dispatch({
         type: 'SET_STATUS',
         status: 'success_order'
@@ -29,7 +28,8 @@ export default async function MakeOrder({user, dispatch, orderData}){
     }else{
       dispatch({
         type: 'SET_STATUS',
-        status: 'fail_order'
+        status: 'fail_order',
+        message: result.message
       })
     }
   } catch (error) {

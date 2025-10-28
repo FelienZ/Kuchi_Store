@@ -7,7 +7,7 @@ exports.makeOrder = async(req, res)=>{
         await orderServices.postOrder(userId, orderData)
         res.status(201).json({type:'success', message: 'success post order'})
     } catch (error) {
-        console.log('cek Error order: ', error)
-        res.status(400).json({type: 'fail', message: 'failed post Order'})
+        console.log(error)
+        res.status(400).json({type: 'fail', message: `failed post Order: ${error.message}`})
     }
 }

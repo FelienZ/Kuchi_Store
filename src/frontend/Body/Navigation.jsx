@@ -4,7 +4,6 @@ import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router";
 import { ProductReducerContext, UserContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
-import { AttemptLogout } from "../../utils/attemptLogout";
 
 export default function Navigation({sendTriggerRegister, sendTriggerLogin, sendTriggerConfirm}){
   const [keyword, setKeyword] = useState('')
@@ -79,7 +78,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin, sendT
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-neutral rounded-box z-1 w-52 p-2 mt-13 shadow-sm">
                         <li onClick={()=>checkStatus()}><p className="flex items-center gap-4"><FontAwesomeIcon icon={faUser}/> {isLogin.username}</p></li>
-                        <li onClick={()=>sendTriggerConfirm('logout')}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
+                        <li onClick={()=>sendTriggerConfirm({command: 'logout', message: 'Apakah Anda Yakin Ingin Logout?'})}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
                     </ul>
                     </div>
                 </div>

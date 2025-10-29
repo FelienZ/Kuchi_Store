@@ -1,20 +1,21 @@
 import { useContext, useState } from "react"
 import { useParams } from "react-router"
-import { ProductList, ProductReducerContext, UserContext } from "../../storeContext"
+import { ModalContext, ProductList, ProductReducerContext, UserContext } from "../../storeContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark, faMinus, faPlus, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import useFetchWishlist from "../../hooks/fetchWishlist"
 import AddWishlist from "../../utils/addWishlist"
 import { faBookmark as faBookmarkRegular } from "@fortawesome/free-regular-svg-icons"
 import RemoveWishlist from "../../utils/removeWishlist"
-import MakeOrder from "../../utils/makeOrder"
 import useFetchProducts from "../../hooks/fetchProducts"
+import MakeOrder from "../../utils/makeOrder"
 
 export default function ProductDetail(){
   const { id } = useParams()
   const product = useContext(ProductList)
   const {user} = useContext(UserContext)
   const dispatch = useContext(ProductReducerContext)
+  const {sendTriggerConfirm} = useContext(ModalContext)
 
   const [isLoading, setIsLoading] = useState(false)
   const [order, setOrder] = useState(0);
@@ -39,10 +40,16 @@ export default function ProductDetail(){
     await RemoveWishlist({id, dispatch})
     fetchWishlist()
   }
-  async function PostCheckout(item) {
+  function PostCheckout(item) {
     const orderData = {id: item.id, qty: order, price: order*item.price}
-    await MakeOrder({user, dispatch, orderData})
-    fetchProduct()
+    sendTriggerConfirm({
+      command: 'order', 
+      message: 'Apakah Anda Yakin Ingin Order Produk Ini?', 
+      onConfirm: async()=>{
+        await MakeOrder({user, dispatch, orderData})
+        fetchProduct()
+      }
+    })
   }
   return (
     mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">

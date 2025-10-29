@@ -6,12 +6,12 @@ import { ProductReducerContext, UserContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
 import { AttemptLogout } from "../../utils/attemptLogout";
 
-export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
+export default function Navigation({sendTriggerRegister, sendTriggerLogin, sendTriggerConfirm}){
   const [keyword, setKeyword] = useState('')
   const [searchParams] = useSearchParams()
   const navigate = useNavigate();
   const dispatch = useContext(ProductReducerContext)
-  const {user, setUser, isLoading} = useContext(UserContext)
+  const {user, isLoading} = useContext(UserContext)
   const isLogin = user
   function handleSendKeyword(){
     updateQueryParams({keyword}, navigate, searchParams)
@@ -24,9 +24,6 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
       type: 'SET_STATUS',
       status:'not_loggedin'
     })
-  }
-  function handleLogout(){
-    AttemptLogout({setUser, dispatch})
   }
   return(
     <header className="navbar fixed z-30 top-0 left-0 right-0 bg-neutral justify-evenly text-neutral-content w-full gap-2">
@@ -82,7 +79,7 @@ export default function Navigation({sendTriggerRegister, sendTriggerLogin}){
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-neutral rounded-box z-1 w-52 p-2 mt-13 shadow-sm">
                         <li onClick={()=>checkStatus()}><p className="flex items-center gap-4"><FontAwesomeIcon icon={faUser}/> {isLogin.username}</p></li>
-                        <li onClick={()=> handleLogout()}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
+                        <li onClick={()=>sendTriggerConfirm('logout')}><a className="flex items-center gap-4"><FontAwesomeIcon icon={faArrowRightToBracket}/> Logout</a></li>
                     </ul>
                     </div>
                 </div>

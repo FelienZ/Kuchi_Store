@@ -36,7 +36,7 @@ export default function ProductDetail(){
     fetchWishlist()
   }
   async function DeleteBookmark(id){
-    await RemoveWishlist({id, dispatch, setIsLoading})
+    await RemoveWishlist({id, dispatch})
     fetchWishlist()
   }
   async function PostCheckout(item) {

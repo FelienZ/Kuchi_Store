@@ -7,6 +7,7 @@ import Login from "../Form/LoginForm";
 import Register from "../Form/RegisterForm";
 import MessageAlert from "../../hooks/messageAlert";
 import useFetchProducts from "../../hooks/fetchProducts";
+import ConfirmationForm from "../Form/ConfirmForm";
 
 function StoreReducer(list, action){
   switch(action.type){
@@ -31,7 +32,9 @@ export default function StoreLayout(){
   const [triggerRegister, setTriggerRegister] = useState(false)
   const [message, setMessage] = useState(null)
   const [triggerLogin, setTriggerLogin] = useState(false)
-  
+  const [triggerConfirm, setTriggerConfirm] = useState(false)
+  const [action, setAction] = useState(null)
+
   function setAlert(value){
     setMessage(value)
     setTimeout(() => {
@@ -56,7 +59,13 @@ export default function StoreLayout(){
   function handleSendCloseLogin(value){
     setTriggerLogin(value)
   }
-
+  function handleSendCloseConfirm(value){
+    setTriggerConfirm(value)
+  }
+  function handleSendAction(value){
+    setTriggerConfirm(true)
+    setAction(value)
+  }
   return(
         <div className ='min-h-screen font-[Roboto] flex flex-col justify-between gap-5 items-center text-base-300 w-screen bg-white overflow-x-hidden'>
             <ModalContext.Provider value={{triggerLogin, setTriggerLogin}}>
@@ -65,6 +74,7 @@ export default function StoreLayout(){
                             <Navigation 
                               sendTriggerRegister={handleTriggerFormRegister} 
                               sendTriggerLogin={handleTriggerFormLogin}
+                              sendTriggerConfirm={handleSendAction}
                             />
                             <Register 
                               sendTriggerLogin={handleTriggerFormLogin} 
@@ -76,6 +86,7 @@ export default function StoreLayout(){
                               sendClose={handleSendCloseLogin} 
                               sendTriggerRegister={handleTriggerFormRegister}
                             />
+                            <ConfirmationForm sendClose={handleSendCloseConfirm} actionData={action} isTriggered={triggerConfirm} sendTriggerConfirm={()=>setTriggerConfirm(true)}/>
                             <div className="my-15 w-full">
                                 <Outlet/>
                                 {message ? (

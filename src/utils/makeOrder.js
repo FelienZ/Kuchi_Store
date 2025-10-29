@@ -23,7 +23,7 @@ export default async function MakeOrder({user, dispatch, orderData}){
       // console.log('berhasil order')
       dispatch({
         type: 'SET_STATUS',
-        status: 'success_order'
+        status: 'success_added'
       })
     }else{
       dispatch({

@@ -16,15 +16,16 @@ async function postOrder(userId, orderData) {
     const product = await verifyOrderItems(orderData)
     const {id, price, qty} = orderData
     const {data, error} = await supabase.from('orders').insert([{user_id: userId, product_id: id, qty: qty, total_price: price}]).select('*')
-    // console.log('Berhasil insert ', data)
     if(error) throw new Error(`[OrderServices::post]: ${error}`)
     if(data){
         const newStock = product.stock - qty
-        // console.log('cek newStock: ', newStock)
         const {error: stockError} = await supabase.from('products').update({stock: newStock}).eq('id', id)
-        // console.log('berhasil update stock')
         if(stockError) throw new Error(`[OrderServices::post, updatestock]: ${error}`)
     }
 }
-
-module.exports ={postOrder}
+async function getAllOrder(userId) {
+    const { data, error } = await supabase.from('orders').select('*').eq('user_id', userId)
+    if(error) throw new Error('Terjadi Error dalam Mendapatkan Data Order')
+    return data
+}
+module.exports ={postOrder, getAllOrder}

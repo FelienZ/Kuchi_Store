@@ -64,7 +64,6 @@ export default function StoreLayout(){
   }
   function handleSendAction(value){
     setTriggerConfirm(true)
-    console.log('cek action:', value)
     setAction(value)
   }
   return(

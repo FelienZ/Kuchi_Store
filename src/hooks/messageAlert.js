@@ -55,5 +55,5 @@ export default function MessageAlert({info, setAlert, dispatch}){
         break;
     }
     info.status ? (dispatch({type: 'RESET_STATUS'})) : ''
-  }, [info.status])
+  }, [info, setAlert, dispatch])
 }

@@ -24,8 +24,8 @@ async function postOrder(userId, orderData) {
     }
 }
 async function getAllOrder(userId) {
-    const { data, error } = await supabase.from('orders').select('*').eq('user_id', userId)
-    if(error) throw new Error('Terjadi Error dalam Mendapatkan Data Order')
+    const { data, error } = await supabase.from('orders').select('*, product: products(id, name, url, price)').eq('user_id', userId)
+    if(error) throw new Error(`[OrderServices::get]: ${error}`)
     return data
 }
 module.exports ={postOrder, getAllOrder}

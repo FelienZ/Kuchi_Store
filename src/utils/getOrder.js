@@ -1,11 +1,5 @@
-export default async function GetOrder({user, dispatch, setOrder, setIsLoading}){
-  if(!user){
-    return dispatch({
-      type: 'SET_STATUS',
-      status:'not_loggedin',
-    })
-  }
-  setIsLoading(true)
+export default async function GetOrder({setOrder, setIsLoading}){
+  setIsLoading?.(true)
   try {
     const response = await fetch('http://localhost:3000/api/orders/getorder', {
       credentials: 'include'
@@ -14,7 +8,7 @@ export default async function GetOrder({user, dispatch, setOrder, setIsLoading})
     if(response.ok){
       setOrder(result.data)
     }
-    setIsLoading(false)
+    setIsLoading?.(false)
   } catch (error) {
     console.error(`[GetOrder]: ${error.message}`)
   }

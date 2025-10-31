@@ -73,8 +73,8 @@ exports.putAuthentication = async(req, res) => {
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             maxAge: 1000 * 60 * 15,
-            secure: false,
-            sameSite: 'lax'
+            secure: true,
+            sameSite: 'none'
         });
         res.status(200).json({status: 'success', message: 'berhasil memperbarui token'})
     } catch (error) {

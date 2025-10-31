@@ -15,7 +15,7 @@ const host = process.env.HOST;
 app.use(express.json()) //json parser
 app.use(express.text({type: 'text/plain'})) //text
 app.use(cookieParser())
-app.use(cors({origin: 'http://localhost:5173', credentials: true}))
+app.use(cors({origin: ['https://kuchi-store.vercel.app/','http://localhost:5173'], credentials: true}))
 
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)

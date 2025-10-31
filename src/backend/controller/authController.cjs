@@ -24,14 +24,16 @@ exports.postAuthentication = async(req, res) => {
             httpOnly: true,
             maxAge: 1000 * 60 * 15, //15menit
             secure: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            path: '/'
         })
         
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: true,
             sameSite: 'none',
-            maxAge: 1000 * 60 * 60 * 24 * 7
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+            path: '/'
         });
 
         res.status(201).json({status: 'success', message: 'Berhasil Terotentikasi', data: {user: userData}})
@@ -74,7 +76,8 @@ exports.putAuthentication = async(req, res) => {
             httpOnly: true,
             maxAge: 1000 * 60 * 15,
             secure: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            path: '/'
         });
         res.status(200).json({status: 'success', message: 'berhasil memperbarui token'})
     } catch (error) {
@@ -90,11 +93,13 @@ exports.deleteAuthentication = async(req, res) => {
         await authServices.verifyRefreshToken(refreshToken)
         await authServices.deleteRefreshToken(refreshToken)
     
-        res.clearCookie('accessToken')
-        res.clearCookie('refreshToken')
+        res.clearCookie('accessToken', {sameSite: 'none', secure: true, path: '/', httpOnly: true})
+        res.clearCookie('refreshToken', {sameSite: 'none', secure: true, path: '/', httpOnly: true})
     
         res.status(200).json({status: 'success', message: 'berhasil menghapus token'})
     } catch (error) {
-        res.status(500).json({status: 'fail', message: `Kesalahan Server: ${error.message}`})
+        res.clearCookie('accessToken', {sameSite: 'none', secure: true, path: '/', httpOnly: true})
+        res.clearCookie('refreshToken', {sameSite: 'none', secure: true, path: '/', httpOnly: true})
+        res.status(500).json({status: 'fail', message: `Kesalahan Server: ${error.message}, force Logout!`})
     }
 }

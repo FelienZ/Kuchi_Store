@@ -1,6 +1,8 @@
+const baseUrl = import.meta.env.VITE_API_URL
+
 export default async function attemptEditAccount({userAccount, setUserAccount, refetchUser, dispatch, setIsLoading, setIsActive}){
   try {
-    const response = await fetch('http://localhost:3000/api/users/editaccount', {
+    const response = await fetch(`${baseUrl}/api/users/editaccount`, {
       credentials: 'include',
       method: 'PUT',
       body: JSON.stringify(userAccount),

@@ -23,14 +23,14 @@ exports.postAuthentication = async(req, res) => {
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             maxAge: 1000 * 60 * 15, //15menit
-            secure: false,
-            sameSite: 'lax'
+            secure: true,
+            sameSite: 'none'
         })
         
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: 'none',
             maxAge: 1000 * 60 * 60 * 24 * 7
         });
 

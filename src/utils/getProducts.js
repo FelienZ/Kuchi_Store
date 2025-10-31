@@ -1,7 +1,9 @@
+const baseUrl = import.meta.env.VITE_API_URL
+
 export default async function getProducts({dispatch, setIsLoading}) {
   setIsLoading?.(true)
   try {
-    const response = await fetch('http://localhost:3000/api/products')
+    const response = await fetch(`${baseUrl}/api/products`)
     const result = await response.json();
     if(result.type === 'success'){
       setIsLoading?.(false)

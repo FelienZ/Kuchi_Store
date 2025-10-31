@@ -1,3 +1,5 @@
+const baseUrl = import.meta.env.VITE_API_URL
+
 export default async function AddWishlist({user, dispatch, id}){
   if(!user){
     return dispatch({
@@ -6,7 +8,7 @@ export default async function AddWishlist({user, dispatch, id}){
     })
   }else{
     try {
-      const response = await fetch('http://localhost:3000/api/wishlists/addwishlist', {
+      const response = await fetch(`${baseUrl}/api/wishlists/addwishlist`, {
         method: 'POST',
         credentials: 'include',
         body: id,

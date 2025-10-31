@@ -1,7 +1,9 @@
+const baseUrl = import.meta.env.VITE_API_URL
+
 export default async function GetOrder({setOrder, setIsLoading}){
   setIsLoading?.(true)
   try {
-    const response = await fetch('http://localhost:3000/api/orders/getorder', {
+    const response = await fetch(`${baseUrl}api/orders/getorder`, {
       credentials: 'include'
     }) 
     const result = await response.json()

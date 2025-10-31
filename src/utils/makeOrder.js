@@ -1,3 +1,5 @@
+const baseUrl = import.meta.env.VITE_API_URL
+
 export default async function MakeOrder({user, dispatch, orderData}){
   if(!user){
     return dispatch({
@@ -12,7 +14,7 @@ export default async function MakeOrder({user, dispatch, orderData}){
     })
   }
   try {
-    const response = await fetch('http://localhost:3000/api/orders/makeorder', {
+    const response = await fetch(`${baseUrl}/api/orders/makeorder`, {
       method: 'POST',
       body:JSON.stringify(orderData),
       headers: {'Content-Type': 'application/json'},

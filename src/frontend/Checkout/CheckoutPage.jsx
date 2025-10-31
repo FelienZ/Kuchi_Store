@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useEffect, useState } from "react";
 import useFetchOrder from "../../hooks/fetchOrder";
 import { ProductReducerContext } from "../../storeContext";
+import CancelOrder from "../../utils/cancelOrder";
 
 export default function CheckoutPage(){
   const [isLoading, setIsLoading] = useState(false)
@@ -23,26 +24,8 @@ export default function CheckoutPage(){
       )
     )
   }
-  async function handleCancelOrder(id){
-    const response = await fetch('http://localhost:3000/api/orders/cancelorder', {
-      method: 'DELETE',
-      body: id,
-      credentials: 'include',
-      headers:{'Content-Type': 'text/plain'}
-    })
-    if(response.ok){
-      await response.json()
-      fetchOrder()
-      return dispatch({
-        type: 'SET_STATUS',
-        status: 'success_cancel'
-      })
-    }else{
-      return dispatch({
-        type: 'SET_STATUS',
-        status: 'fail_cancel'
-      })
-    }
+  function handleCancelOrder(id){
+    CancelOrder({id, fetchOrder, dispatch})
   }
   return(
     isLoading ? (<section className="min-h-screen grid place-content-center">

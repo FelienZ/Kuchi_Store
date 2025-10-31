@@ -1,3 +1,4 @@
+const baseUrl = import.meta.env.VITE_API_URL
 export default async function AttemptLogin({setIsLoading, dispatch, account, handleClose, setUser, setAccount}){
   setIsLoading(true)
   if(account.email.trim() === '' || account.password.trim() === ''){
@@ -10,7 +11,7 @@ export default async function AttemptLogin({setIsLoading, dispatch, account, han
     return
   }
   try {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    const response = await fetch(`${baseUrl}/api/auth/login`, {
       method: 'POST',
       headers: {'Content-Type' : 'application/json'},
       credentials: 'include',

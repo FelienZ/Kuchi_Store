@@ -1,5 +1,7 @@
+const baseUrl = import.meta.env.VITE_API_URL
+
 export async function AttemptLogout({setUser, dispatch}) {
-  const response = await fetch('http://localhost:3000/api/auth/logout',{
+  const response = await fetch(`${baseUrl}/api/auth/logout`,{
     method: 'DELETE',
     credentials: 'include'
   })

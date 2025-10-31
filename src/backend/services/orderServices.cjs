@@ -23,7 +23,6 @@ async function postOrder(userId, orderData) {
     if(matchOrder){
         //update orderQty -> update Stock
         const newQty = matchOrder.qty + qty
-        console.log('cek qty baru: ', newQty)
         const newPrice = newQty * price
         const {error: qtyError} = await supabase.from('orders').update({qty: newQty, total_price: newPrice}).eq('id', matchOrder.id)
         const newStock = product.stock - qty

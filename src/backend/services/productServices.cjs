@@ -6,4 +6,11 @@ async function getProducts() {
     return data;
 }
 
-module.exports = {getProducts}
+async function getProductsbyId(id) {
+    const {data, error} = await supabase.from('products').select('*').eq('id', id).single()
+    if(!data || !data[0]) throw new Error('Produk Tidak Ditemukan')
+    if(error) throw new Error(`[ProductServices::get{id}]: ${error}`)
+    return data[0]
+}
+
+module.exports = {getProducts, getProductsbyId}

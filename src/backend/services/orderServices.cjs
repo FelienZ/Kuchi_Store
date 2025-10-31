@@ -13,7 +13,7 @@ async function verifyOrderItems(orderData) {
 }
 async function checkMatchOrder(userId, orderData) {
     const {id} = orderData
-    const {data} = await supabase.from('orders').select('id, qty').eq('product_id', id).eq('user_id', userId)
+    const {data} = await supabase.from('orders').select('*').eq('product_id', id).eq('user_id', userId)
     return data[0]
 }
 async function postOrder(userId, orderData) {
@@ -45,8 +45,19 @@ async function getAllOrder(userId) {
     if(error) throw new Error(`[OrderServices::get]: ${error}`)
     return data
 }
+async function getOrderById(userId, orderId) {
+    const { data, error } = await supabase.from('orders').select('*, product: products(*)').eq('user_id', userId).eq('id', orderId)
+    if(error) throw new Error(`[OrderServices::get{id}]: ${error}`)
+    return data[0]
+}
 async function deleteOrder(userId, orderId) {
+    const order = await getOrderById(userId, orderId)
+    if(order){
+        const newStock = order.qty + order.product.stock
+        // console.log('cek new Stock: ', newStock)
+        await supabase.from('products').update({stock: newStock}).eq('id', order.product.id)
+    }
     const {error} = await supabase.from('orders').delete('*').eq('user_id', userId).eq('id', orderId)
     if(error) throw new Error(`[OrderServices::delete]: ${error}`)
 }
-module.exports ={postOrder, getAllOrder, deleteOrder}
+module.exports ={postOrder, getAllOrder, deleteOrder, getOrderById}

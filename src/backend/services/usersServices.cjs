@@ -4,11 +4,9 @@ const bcrypt = require('bcrypt')
 async function verifyNewUser(email) {
     const {count, error} = await supabase.from('users').select('email', {count: 'exact', head: true}).eq('email', email)
     if(error){
-        console.log('masuk reg Error')
         throw new Error('Gagal Menambahkan User, Terjadi Kesalahan Server')
     }
     if(count > 0){
-        console.log('masuk reg duplicate')
         throw new Error('Gagal Menambahkan User, Email telah digunakan')
     }
 }
@@ -42,10 +40,8 @@ async function updateUserAccount(userId, newData) {
     if(newPassword !== confirmPassword){
         throw new Error('Password Baru tidak cocok')
     }
-    // console.log('[userServices] newData: ', newData)
     const currentPassword = await supabase.from('users').select('password').eq('id', userId)
     const macthPassword = await bcrypt.compare(oldpassword, currentPassword.data[0].password)
-    // console.log('apakah pw lama valid? ', macthPassword)
     if(!macthPassword){
         throw new Error('Password Lama tidak valid')
     }

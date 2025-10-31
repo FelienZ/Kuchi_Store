@@ -14,7 +14,6 @@ async function verifyUserCredentials(email, password) {
     const { data, error } = await supabase.from('users').select('id, email, password').eq('email', email).single()
     if(error) throw new Error('Kredensial tidak Valid')
     const {id, password: hashedPassword} = data
-    // console.log('cek hashedPassword: ', hashedPassword)
     const matchData = await bcrypt.compare(password, hashedPassword)
     if(!matchData) throw new Error('Kredensial Tidak Valid')
     return id;

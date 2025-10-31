@@ -1,15 +1,30 @@
 import { useContext, useState } from "react"
 import { useParams } from "react-router"
-import { ProductList, ProductReducerContext, UserContext } from "../../storeContext"
+import { ModalContext, ProductList, ProductReducerContext, UserContext } from "../../storeContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark, faMinus, faPlus, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import useFetchWishlist from "../../hooks/fetchWishlist"
+import AddWishlist from "../../utils/addWishlist"
+import { faBookmark as faBookmarkRegular } from "@fortawesome/free-regular-svg-icons"
+import RemoveWishlist from "../../utils/removeWishlist"
+import useFetchProducts from "../../hooks/fetchProducts"
+import MakeOrder from "../../utils/makeOrder"
 
 export default function ProductDetail(){
   const { id } = useParams()
   const product = useContext(ProductList)
   const {user} = useContext(UserContext)
   const dispatch = useContext(ProductReducerContext)
+  const {sendTriggerConfirm} = useContext(ModalContext)
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [order, setOrder] = useState(0);
+  const [wishlist, fetchWishlist] = useFetchWishlist({setIsLoading})
+  const fetchProduct = useFetchProducts({dispatch, setIsLoading})
+
   const matchProduct = product.find(i => i.id === id)
+  const isWishlist = wishlist.some(i => i.product_id === id)
+  
   const mapData = []
   if(matchProduct){
     const data = matchProduct.specifications
@@ -17,39 +32,24 @@ export default function ProductDetail(){
       mapData.push({key, data: data[key]})
     }
   }
-  const [order, setOrder] = useState(0);
-  async function sendBookmark(id) {
-    if(!user){
-      return dispatch({
-        type: 'SET_STATUS',
-        status:'not_loggedin',
-      })
-    }else{
-      try {
-        // console.log('cek id: ', id)
-        const response = await fetch('http://localhost:3000/api/products/addwishlist', {
-          method: 'POST',
-          credentials: 'include',
-          body: id,
-          headers: {'Content-Type' : 'text/plain'}
-        })
-        const result = await response.json()
-        if(result.type === 'success' || response.ok){
-          dispatch({
-            type: 'SET_STATUS',
-            status: 'success_added'
-          })
-        }else{
-          dispatch({
-            type: 'SET_STATUS',
-            status: 'fail_added',
-            message: result.message
-          })  
-        }
-      } catch (error) {
-        console.error(`Kesalahan: ${error.message}`)
+  async function SendBookmark(id) {
+    await AddWishlist({id, dispatch, user})
+    fetchWishlist()
+  }
+  async function DeleteBookmark(id){
+    await RemoveWishlist({id, dispatch})
+    fetchWishlist()
+  }
+  function PostCheckout(item) {
+    const orderData = {id: item.id, qty: order, price: order*item.price}
+    sendTriggerConfirm({
+      command: 'order', 
+      message: 'Apakah Anda Yakin Ingin Order Produk Ini?', 
+      onConfirm: async()=>{
+        await MakeOrder({user, dispatch, orderData})
+        fetchProduct()
       }
-    }
+    })
   }
   return (
     mapData.length? (<section className="min-h-screen grid md:mt-20 md:w-[80%] place-self-center gap-2 md:grid-cols-2 p-3">
@@ -87,7 +87,7 @@ export default function ProductDetail(){
                     <div className="items-detail text-sm flex flex-col gap-3">
                         <p>Kategori: {matchProduct.type}</p>
                         <p>Brand: {matchProduct.specifications.brand}</p>
-                        <p>Stok: {matchProduct.stock}</p>
+                        <p>Stok: {isLoading ? <span className="loading loading-bars loading-xs"></span> : matchProduct.stock}</p>
                     </div>
                     <div className="checkout flex flex-col gap-3">
                         <div className="qty flex max-md:items-end flex-col gap-4">
@@ -97,9 +97,15 @@ export default function ProductDetail(){
                                 <p className="border border-neutral flex items-center justify-center size-8 rounded-sm">{order}</p>
                             <button onClick={()=>{order < matchProduct.stock ? setOrder(order+1): order}} className="btn btn-neutral size-8"><FontAwesomeIcon icon={faPlus}/></button>
                         </div>
-                        <div className="buttons flex w-full gap-3 items-center">
-                            <button onClick={()=>sendBookmark(matchProduct.id)} className="btn btn-outline w-[50%]"><FontAwesomeIcon icon={faBookmark}/>Wishlist</button>
-                            <button className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
+                        <div className="buttons justify-end flex w-full gap-3 items-center">
+                            {isLoading ? (<button className="btn btn-neutral w-fit"><span className="loading loading-bars loading-xs"></span></button>) : (
+                              isWishlist ? (
+                              <button onClick={()=>DeleteBookmark(matchProduct.id)} className="btn btn-neutral w-fit"><FontAwesomeIcon icon={faBookmark}/></button>
+                            ) : (
+                              <button onClick={()=>SendBookmark(matchProduct.id)} className="btn btn-neutral w-fit"><FontAwesomeIcon icon={faBookmarkRegular}/></button>
+                            )
+                            )}
+                            <button onClick={()=>PostCheckout(matchProduct)} className="btn btn-neutral w-[50%]"><FontAwesomeIcon icon={faShoppingCart}/>Beli Sekarang</button>
                         </div>
                         </div>
                     </div>

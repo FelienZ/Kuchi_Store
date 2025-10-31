@@ -20,7 +20,7 @@ export default async function attemptEditProfile({setIsActive, setIsLoading, dis
       setIsActive(false)
     }
   } catch (error) {
-    console.error(`Error at Updating Profile: ${error.message}`)
+    console.error(`[editProfile]: ${error.message}`)
   }
   finally{
     setIsLoading(false)

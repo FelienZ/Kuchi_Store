@@ -20,7 +20,6 @@ exports.postAuthentication = async(req, res) => {
         
         await authServices.addRefreshToken(refreshToken)
         const userData = await usersServices.getUserById(id)
-        // console.log('cek user: ', userData)
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             maxAge: 1000 * 60 * 15, //15menit

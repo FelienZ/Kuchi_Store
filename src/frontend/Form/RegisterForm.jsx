@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react"
 import { ProductReducerContext } from "../../storeContext";
-import ClickedOutside from "../../hooks/Effect/clickedOutside";
+import ClickedOutside from "../../hooks/clickedOutside";
 import AttemptRegister from "../../utils/attemptRegister";
 
 export default function Register({istriggered, sendClose, sendTriggerLogin}){
@@ -21,8 +21,8 @@ export default function Register({istriggered, sendClose, sendTriggerLogin}){
     istriggered === true ? sendClose(false) : ''
   }
 
-  function HandleRegister(payload){
-    AttemptRegister({payload, dispatch, handleClose, setIsLoading})
+  async function HandleRegister(payload){
+    await AttemptRegister({payload, dispatch, handleClose, setIsLoading})
   }
 
   function checkRegister(e){

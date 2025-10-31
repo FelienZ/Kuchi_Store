@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react"
-import ClickedOutside from "../../hooks/Effect/clickedOutside"
+import ClickedOutside from "../../hooks/clickedOutside"
 import { ProductReducerContext, UserContext } from "../../storeContext"
 import attemptEditProfile from "../../utils/editProfile"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -20,9 +20,9 @@ export default function EditProfile({sendClose}){
   const [isActive, setIsActive] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   // console.log('cek profile: ', userProfile)
-  function sendEditProfile(e){
+  async function sendEditProfile(e){
     e.preventDefault()
-    attemptEditProfile({setIsActive, setIsLoading, refetchUser, dispatch, setUserProfile, userProfile})
+    await attemptEditProfile({setIsActive, setIsLoading, refetchUser, dispatch, setUserProfile, userProfile})
     // console.log('cek: ', result)
   }
   ClickedOutside({modalRef, handleClose: sendClose})

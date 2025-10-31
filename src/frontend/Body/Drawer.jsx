@@ -1,10 +1,11 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useContext, useState } from "react";
+import {useContext, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { ProductReducerContext } from "../../storeContext";
 import { updateQueryParams } from "../../utils/queryParams";
 import TechnologiesLogo from "./Technologies";
+import ClickedOutside from "../../hooks/clickedOutside";
 
 export default function Drawer(){
   const price = {
@@ -14,6 +15,7 @@ export default function Drawer(){
   const dispatch = useContext(ProductReducerContext)
   const [filterPrice, setFilterPrice] = useState(price)
   const [searchParams] = useSearchParams()
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate()
   function handleSendFilter(){
     if(filterPrice.min === null && filterPrice.max === null) dispatch({type: 'SET_STATUS', status: 'invalid_filter'})
@@ -22,6 +24,11 @@ export default function Drawer(){
   function handleSendCategories(category){
     updateQueryParams({category}, navigate, searchParams)
   }
+  const filterRef = useRef()
+  function handleClose(){
+    setIsOpen(false)
+  }
+  ClickedOutside({modalRef: filterRef, handleClose})
   return(
         <div className="flex flex-col text-base-300 gap-3">
             <p className="font-bold">Filter Item</p>
@@ -46,8 +53,8 @@ export default function Drawer(){
                 </div>
             </div>
 
-            <div tabIndex={0} className="collapse lg:hidden collapse-arrow border-neutral rounded-none border">
-                <div className="collapse-title font-semibold">Filter</div>
+            <div ref={filterRef} className={`collapse lg:hidden collapse-arrow ${isOpen ? 'collapse-open' : ''} border-neutral rounded-none border`}>
+                <div onClick={()=>setIsOpen((prev) => !prev)} className="collapse-title font-semibold">Filter</div>
                 <div className="collapse-content flex flex-col gap-3 text-sm">
                     <div className="flex flex-col category border border-gray-500 p-4 rounded-sm gap-5">
                         <p className="font-medium">Kategori</p>

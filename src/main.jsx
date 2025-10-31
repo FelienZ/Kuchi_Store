@@ -22,8 +22,8 @@ import ScrollToTop from './hooks/scrollToTop.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UserProvider>
       <BrowserRouter>
+        <UserProvider>
         <ScrollToTop/>
           <Routes>
             <Route path='' element={<StoreLayout/>}>
@@ -53,7 +53,7 @@ createRoot(document.getElementById('root')).render(
               <Route path='*' element={<Notfound/>}/>
             </Route>
           </Routes>
+          </UserProvider>
         </BrowserRouter>
-    </UserProvider>
   </StrictMode>,
 )

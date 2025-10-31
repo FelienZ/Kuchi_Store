@@ -1,6 +1,14 @@
+import { useRef, useState } from "react";
 import { NavLink, Outlet } from "react-router";
+import ClickedOutside from "../../hooks/clickedOutside";
 
 export default function HelpPage(){
+  const collapseRef = useRef()
+  const [isOpen, setIsOpen] = useState(false)
+  function handleClose(){
+    setIsOpen(false)
+  }
+  ClickedOutside({modalRef: collapseRef, handleClose})
   return(
         <section className="my-10 min-h-screen w-[80%] divide-y place-self-center gap-4 flex flex-col">
             <p className="font-bold md:text-2xl py-3">Pusat Informasi</p>
@@ -16,8 +24,8 @@ export default function HelpPage(){
                         <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'services'}><p>Services</p></NavLink>
                     </div>
                 </div>
-                <div tabIndex={0} className="left hidden max-md:collapse collapse-arrow border-gray-400 border max-md:rounded-none">
-                <div className="collapse-title font-bold">Tentang Kami</div>
+                <div ref={collapseRef} className={`md:hidden collapse collapse-arrow border-gray-400 ${isOpen ? 'collapse-open' : ''} border max-md:rounded-none`}>
+                <div onClick={()=>setIsOpen((prev)=> !prev)} className="collapse-title font-bold">Informasi</div>
                 <div className="navigation collapse-content flex flex-col gap-4">
                     <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'help'}><p>Bantuan</p></NavLink>
                     <NavLink className={({isActive}) => isActive ? 'text-lime-500' : ''} to={'about'}><p>Tentang Kami</p></NavLink>

@@ -21,6 +21,9 @@ export default function MessageAlert({info, setAlert, dispatch}){
       case "success_added":
         setAlert({text: 'Berhasil Menambahkan!', type: 'success'});
         break;
+      case "success_cancel" :
+        setAlert({text: 'Berhasil Membatalkan Pesanan!', type: 'success'});
+        break;
 
       case "fetch_fail":
         setAlert({text: 'Gagal Mendapatkan Data!', type: 'fail'});
@@ -40,6 +43,10 @@ export default function MessageAlert({info, setAlert, dispatch}){
       case "fail_added":
         setAlert({text: `Gagal Menambahkan ${info.message??''}!`, type: 'fail'});
         break;
+      case "fail_cancel" :
+        setAlert({text: 'Gagal Membatalkan Pesanan!', type: 'fail'});
+        break;
+      
         //Invalid Auth & Profile
       case "invalid_register":
         setAlert({text: `Data Tidak Valid`, type: 'fail'});

@@ -20,3 +20,14 @@ exports.getOrder = async(req, res) => {
         res.status(400).json({type: 'fail', message: `failed get Order: ${error.message}`})
     }
 }
+
+exports.destroyOrder = async(req, res) => {
+    try {
+        const orderId = req.body
+        const userId = req.user.id
+        await orderServices.deleteOrder(userId, orderId)
+        res.status(200).json({type:'success', message: 'success delete order'})
+    } catch (error) {
+        res.status(404).json({type: 'fail', message: `failed delete Order: ${error.message}`})
+    }
+}

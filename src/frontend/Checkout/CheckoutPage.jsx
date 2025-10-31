@@ -1,11 +1,13 @@
 import { faMinus, faPlus, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useFetchOrder from "../../hooks/fetchOrder";
+import { ProductReducerContext } from "../../storeContext";
 
 export default function CheckoutPage(){
   const [isLoading, setIsLoading] = useState(false)
-  const [order] = useFetchOrder({setIsLoading})
+  const [order, fetchOrder] = useFetchOrder({setIsLoading})
+  const dispatch = useContext(ProductReducerContext)
   const [orderData, setOrderData] = useState(null)
   useEffect(()=> {
     setOrderData([...order])
@@ -21,7 +23,27 @@ export default function CheckoutPage(){
       )
     )
   }
-  // console.log('cek order: ', orderData)
+  async function handleCancelOrder(id){
+    const response = await fetch('http://localhost:3000/api/orders/cancelorder', {
+      method: 'DELETE',
+      body: id,
+      credentials: 'include',
+      headers:{'Content-Type': 'text/plain'}
+    })
+    if(response.ok){
+      await response.json()
+      fetchOrder()
+      return dispatch({
+        type: 'SET_STATUS',
+        status: 'success_cancel'
+      })
+    }else{
+      return dispatch({
+        type: 'SET_STATUS',
+        status: 'fail_cancel'
+      })
+    }
+  }
   return(
     isLoading ? (<section className="min-h-screen grid place-content-center">
                 <span className="loading loading-bars loading-xl text-lime-500"></span>
@@ -60,7 +82,7 @@ export default function CheckoutPage(){
                         <p className="font-bold text-lime-500">{i.total_price.toLocaleString('id-ID',{style:'currency', currency: 'IDR'})}</p>
                       </div>
                       <div className="flex max-xl:w-full justify-center">
-                        <button className="btn btn-neutral btn-outline rounded-full max-md:w-full w-[60%]">Cancel</button>
+                        <button onClick={()=>handleCancelOrder(i.id)} className="btn btn-neutral btn-outline rounded-full max-md:w-full w-[60%]">Cancel</button>
                       </div>
                       </div>
                     </div>

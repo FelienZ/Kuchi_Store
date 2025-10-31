@@ -45,4 +45,8 @@ async function getAllOrder(userId) {
     if(error) throw new Error(`[OrderServices::get]: ${error}`)
     return data
 }
-module.exports ={postOrder, getAllOrder}
+async function deleteOrder(userId, orderId) {
+    const {error} = await supabase.from('orders').delete('*').eq('user_id', userId).eq('id', orderId)
+    if(error) throw new Error(`[OrderServices::delete]: ${error}`)
+}
+module.exports ={postOrder, getAllOrder, deleteOrder}
